@@ -7,7 +7,10 @@ const Menu = () => {
   return (
     <ul className="hidden gap-6 sm:flex">
       <li>
-        <Link href="/" className="flex items-center gap-2 hover:text-pink-300">
+        <Link
+          href="/main"
+          className="flex items-center gap-2 hover:text-pink-300"
+        >
           <AiOutlineHome size={20} />
           ホーム
         </Link>
