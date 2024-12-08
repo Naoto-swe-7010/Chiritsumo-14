@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { addBalance, State } from "@/app/lib/action";
+import { addBalance, AddBalanceFormState } from "@/app/lib/action";
 import confetti from "canvas-confetti";
 
 const AddBalanceForm = () => {
-  const initialState: State = { message: null, errors: {} };
+  const initialState: AddBalanceFormState = { message: null, errors: {} };
   const [state, formAction, isPending] = useActionState(
     addBalance,
     initialState
@@ -25,10 +25,9 @@ const AddBalanceForm = () => {
   }, [state.message]);
 
   return (
-    <form action={formAction} className="space-y-6">
-      <div className="md:flex md:items-start md:gap-4">
-        {/* Title Input */}
-        <div className="flex flex-col md:w-1/2">
+    <form action={formAction} className="space-y-3">
+      <div className="md:flex md:items-center md:gap-4">
+        <div className="mb-2 flex flex-col md:mb-0 md:w-1/2">
           <input
             type="text"
             className="w-full rounded-md border border-gray-600 bg-[#2a273f] p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
@@ -48,8 +47,6 @@ const AddBalanceForm = () => {
               </p>
             ))}
         </div>
-
-        {/* Price Input */}
         <div className="flex flex-col md:w-1/2">
           <input
             type="number"
@@ -72,7 +69,6 @@ const AddBalanceForm = () => {
         </div>
       </div>
 
-      {/* Submit Button */}
       <div className="mx-auto w-[50%]">
         <Button
           disabled={isPending}

@@ -1,0 +1,42 @@
+import React, { Suspense } from "react";
+import Row from "./Row";
+import { prisma } from "../../../../prisma";
+import Loading from "@/app/_components/Loading";
+
+const LogTable = async () => {
+  const logs = await prisma.log.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+  return (
+    <div className="overflow-x-auto">
+      {logs.length > 0 ? (
+        <table className="w-full border-collapse text-left text-sm">
+          <thead>
+            <tr className="bg-black bg-opacity-50">
+              {/* タイトル行の幅を広く */}
+              <th className="w-3/5 p-2 font-semibold text-gray-200 sm:w-1/2">
+                タイトル
+              </th>
+              <th className="w-1/6 p-2 font-semibold text-gray-200">値段</th>
+              <th className="w-1/5 p-2 font-semibold text-gray-200">日時</th>
+              <th className="w-1/6 p-2 font-semibold text-gray-200">
+                アクション
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <Suspense fallback={<Loading />}>
+              {logs.map((log) => (
+                <Row key={log.id} log={log} />
+              ))}
+            </Suspense>
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-center text-gray-500">ログがありません。</p>
+      )}
+    </div>
+  );
+};
+
+export default LogTable;
