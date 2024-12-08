@@ -6,9 +6,6 @@ const Balance = async () => {
   const session = await auth();
 
   try {
-    // 遅延を追加
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     const existingBalance = await prisma.balance.findUnique({
       where: { userId: session!.user!.id },
     });
