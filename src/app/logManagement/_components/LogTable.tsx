@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import Row from "./Row";
 import { prisma } from "../../../../prisma";
 import Loading from "@/app/_components/Loading";
+import RowSkeleton from "./RowSkeleton";
 
 const LogTable = async () => {
   const logs = await prisma.log.findMany({
@@ -25,7 +26,7 @@ const LogTable = async () => {
             </tr>
           </thead>
           <tbody>
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<RowSkeleton />}>
               {logs.map((log) => (
                 <Row key={log.id} log={log} />
               ))}

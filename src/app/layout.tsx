@@ -38,7 +38,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <Header />
-        <div className="mt-[64px] px-[7%] sm:px-[5%]">{children}</div>
+        <div className="min-h-[calc(100vh-132px)] mt-[64px] px-[7%] sm:px-[5%]">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

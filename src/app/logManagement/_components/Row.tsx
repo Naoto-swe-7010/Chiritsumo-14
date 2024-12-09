@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
+import Link from "next/link";
 import React from "react";
 
 // 日付フォーマット関数
@@ -25,8 +26,12 @@ const Row = ({ log }: { log: Log }) => {
       <td className="py-2 p-3 text-base">{formattedDate(log.createdAt)}</td>
       <td className="py-2 p-3">
         <div className="flex flex-col gap-1">
-          <Button className="bg-pink-500 hover:bg-pink-700">✏️</Button>
-          <Button className="bg-gray-300 hover:bg-gray-400">🗑️</Button>
+          <Link href={`/logManagement/edit/${log.id}`}>
+            <Button className="bg-pink-500 hover:bg-pink-700">✏️</Button>
+          </Link>
+          <Link href={`/logManagement/delete/${log.id}`}>
+            <Button className="bg-gray-300 hover:bg-gray-400">🗑️</Button>
+          </Link>
         </div>
       </td>
     </tr>
