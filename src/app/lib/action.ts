@@ -59,6 +59,10 @@ export type UpdateLogFormState = {
   message?: string | null;
 };
 
+export type DeleteLogFormState = {
+  message?: string | null;
+};
+
 export type AddWantedItemFormState = {
   errors?: {
     name?: string[];
@@ -170,6 +174,30 @@ export const updateLog = async (
   } catch (e) {
     return {
       message: "データベースにてログの更新に失敗しました。",
+    };
+  }
+  revalidatePath("/logManagement");
+  redirect("/logManagement");
+};
+
+export const deleteLog = async (id: string, prevState?: DeleteLogFormState) => {
+  const session = await auth();
+  try {
+    await prisma.$transaction(async (prisma) => {
+      const log = await prisma.log.findUnique({ where: { id } });
+
+      // バランス更新
+      await prisma.balance.update({
+        where: { userId: session!.user!.id },
+        data: { balance: { decrement: log!.price } },
+      });
+
+      // ログ削除
+      await prisma.log.delete({ where: { id } });
+    });
+  } catch (e) {
+    return {
+      message: "データベースにてログの削除に失敗しました。",
     };
   }
   revalidatePath("/logManagement");

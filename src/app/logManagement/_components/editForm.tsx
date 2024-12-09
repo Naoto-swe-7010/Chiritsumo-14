@@ -71,6 +71,7 @@ const editForm = ({ log }: { log: Log }) => {
         <Button
           disabled={isPending}
           onClick={(e) => {
+            e.preventDefault();
             router.back();
           }}
           className="bg-gray-500 hover:bg-gray-700"
