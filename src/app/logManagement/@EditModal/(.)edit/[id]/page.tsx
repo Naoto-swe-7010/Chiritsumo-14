@@ -4,12 +4,13 @@ import { prisma } from "../../../../../../prisma";
 import EditForm from "../../../_components/editForm";
 
 const page = async ({
-  params: { id },
+  params,
 }: {
   params: {
     id: string;
   };
 }) => {
+  const id = params.id;
   let log = null;
   try {
     log = await prisma.log.findUnique({

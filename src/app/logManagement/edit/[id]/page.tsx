@@ -1,17 +1,17 @@
 import EditModal from "@/app/_components/EditModal";
 import React from "react";
-import EditForm from "../../_components/editForm";
 import { prisma } from "../../../../../prisma";
+import EditForm from "../../_components/editForm";
 
 const page = async ({
-  params: { id },
+  params,
 }: {
   params: {
     id: string;
   };
 }) => {
-  let log = null; // スコープを広げるために外で宣言
-
+  const id = params.id;
+  let log = null;
   try {
     log = await prisma.log.findUnique({
       where: {
@@ -21,6 +21,7 @@ const page = async ({
   } catch (e) {
     console.error(e);
   }
+
   return (
     <EditModal>
       <h2 className="mb-4 text-lg font-bold">編集</h2>

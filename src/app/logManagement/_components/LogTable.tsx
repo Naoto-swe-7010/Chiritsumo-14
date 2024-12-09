@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import Row from "./Row";
 import { prisma } from "../../../../prisma";
-import Loading from "@/app/_components/Loading";
 import RowSkeleton from "./RowSkeleton";
 
 const LogTable = async () => {

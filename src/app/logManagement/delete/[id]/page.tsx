@@ -4,12 +4,13 @@ import DeleteForm from "@/app/logManagement/_components/deleteForm";
 import { prisma } from "../../../../../prisma";
 
 const page = async ({
-  params: { id },
+  params,
 }: {
   params: {
     id: string;
   };
 }) => {
+  const id = params.id;
   let log = null;
 
   try {

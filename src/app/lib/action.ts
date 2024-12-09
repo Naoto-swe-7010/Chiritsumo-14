@@ -4,7 +4,7 @@ import { z } from "zod";
 import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
 import { revalidatePath } from "next/cache";
-import { url } from "inspector";
+import { redirect } from "next/navigation";
 
 // schema
 const LogSchema = z.object({
@@ -17,6 +17,11 @@ const LogSchema = z.object({
 
 const AddBalanceSchema = LogSchema.omit({
   id: true,
+  userId: true,
+  createdAt: true,
+});
+
+const UpdateLogSchema = LogSchema.omit({
   userId: true,
   createdAt: true,
 });
@@ -39,6 +44,15 @@ const AddWantedItemSchema = WantedItemSchema.omit({
 // State
 export type AddBalanceFormState = {
   errors?: {
+    title?: string[];
+    price?: string[];
+  };
+  message?: string | null;
+};
+
+export type UpdateLogFormState = {
+  errors?: {
+    id?: string[];
     title?: string[];
     price?: string[];
   };
@@ -82,12 +96,17 @@ export const addBalance = async (
   };
 
   try {
-    await prisma.log.create({
-      data: newLog,
-    });
-    await prisma.balance.update({
-      where: { userId: session!.user!.id },
-      data: { balance: { increment: price } },
+    await prisma.$transaction(async (prisma) => {
+      // 新しいログを作成
+      await prisma.log.create({
+        data: newLog,
+      });
+
+      // バランスを更新
+      await prisma.balance.update({
+        where: { userId: session!.user!.id },
+        data: { balance: { increment: price } },
+      });
     });
   } catch (e) {
     return {
@@ -95,10 +114,66 @@ export const addBalance = async (
     };
   }
   revalidatePath("/main");
-
   return {
     message: `残高が追加されました。: ${new Date().toLocaleString()}`,
   };
+};
+
+export const updateLog = async (
+  id: string,
+  prevState?: UpdateLogFormState,
+  formData?: FormData
+) => {
+  const validatedFields = UpdateLogSchema.safeParse({
+    id: id,
+    title: formData?.get("title"),
+    price: parseInt(formData?.get("price") as string),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "フィールドがありません。ログの更新に失敗しました。",
+    };
+  }
+
+  const { title, price } = validatedFields.data;
+
+  const session = await auth();
+
+  const updatedLog = {
+    title: title,
+    price: price,
+  };
+
+  try {
+    await prisma.$transaction(async (prisma) => {
+      const log = await prisma.log.findUnique({ where: { id } });
+
+      // 古い価格を引いて、新しい価格を足す
+      const balanceUpdate = {
+        balance: { increment: price - log!.price },
+      };
+
+      // バランス更新
+      await prisma.balance.update({
+        where: { userId: session!.user!.id },
+        data: balanceUpdate,
+      });
+
+      // ログ更新
+      await prisma.log.update({
+        where: { id },
+        data: updatedLog,
+      });
+    });
+  } catch (e) {
+    return {
+      message: "データベースにてログの更新に失敗しました。",
+    };
+  }
+  revalidatePath("/logManagement");
+  redirect("/logManagement");
 };
 
 export const addWantedItem = async (
