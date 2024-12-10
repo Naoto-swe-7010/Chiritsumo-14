@@ -1,17 +1,15 @@
 "use client";
-import { deleteWantedItem, DeleteWantedItemFormState } from "@/app/lib/action";
+import { deleteWantedItem } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
-import { Log, WantedItem } from "@prisma/client";
+import { WantedItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useActionState } from "react";
 
 const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
-  if (!item) return null;
-  const initialState: DeleteWantedItemFormState = { message: null };
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
   const [state, formAction, isPending] = useActionState(
     deleteWantedItemWithId,
-    initialState
+    null
   );
 
   const router = useRouter();
@@ -19,9 +17,9 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
   return (
     <form action={formAction}>
       <p className="mb-4 text-gray-400">本当にこのアイテムを削除しますか？</p>
-      {state?.message && (
+      {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
-          {state.message}
+          {state}
         </p>
       )}
       <div className="flex justify-end gap-2">

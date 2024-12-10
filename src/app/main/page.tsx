@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import { auth, signOut } from "../../../auth";
+import React from "react";
+import { auth } from "../../../auth";
 import { redirect } from "next/navigation";
 import { prisma } from "../../../prisma";
 import BalanceDisplay from "./_components/BalanceDisplay";

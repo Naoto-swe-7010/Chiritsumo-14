@@ -64,10 +64,6 @@ export type UpdateLogFormState = {
   message?: string | null;
 };
 
-export type DeleteLogFormState = {
-  message?: string | null;
-};
-
 export type AddWantedItemFormState = {
   errors?: {
     name?: string[];
@@ -131,7 +127,7 @@ export const addBalance = async (
         data: { balance: { increment: price } },
       });
     });
-  } catch (e) {
+  } catch {
     return {
       message: "データベースにて残高の追加に失敗しました。",
     };
@@ -190,7 +186,7 @@ export const updateLog = async (
         data: updatedLog,
       });
     });
-  } catch (e) {
+  } catch {
     return {
       message: "データベースにてログの更新に失敗しました。",
     };
@@ -199,7 +195,7 @@ export const updateLog = async (
   redirect("/logManagement");
 };
 
-export const deleteLog = async (id: string, prevState?: DeleteLogFormState) => {
+export const deleteLog = async (id: string, message?: string | null) => {
   const session = await auth();
   try {
     await prisma.$transaction(async (prisma) => {
@@ -215,9 +211,8 @@ export const deleteLog = async (id: string, prevState?: DeleteLogFormState) => {
       await prisma.log.delete({ where: { id } });
     });
   } catch (e) {
-    return {
-      message: "データベースにてログの削除に失敗しました。",
-    };
+    message = "データベースにてログの削除に失敗しました。";
+    return message;
   }
   revalidatePath("/logManagement");
   redirect("/logManagement");
@@ -311,18 +306,14 @@ export const updateWantedItem = async (
   redirect("/wantedItemManagement");
 };
 
-export const deleteWantedItem = async (
-  id: string,
-  prevState?: DeleteWantedItemFormState
-) => {
+export const deleteWantedItem = async (id: string, message?: string | null) => {
   try {
     await prisma.$transaction(async (prisma) => {
       await prisma.wantedItem.delete({ where: { id } });
     });
   } catch (e) {
-    return {
-      message: "データベースにてアイテムの削除に失敗しました。",
-    };
+    message = "データベースにてアイテムの削除に失敗しました。";
+    return message;
   }
   revalidatePath("/wantedItemManagement");
   redirect("/wantedItemManagement");
