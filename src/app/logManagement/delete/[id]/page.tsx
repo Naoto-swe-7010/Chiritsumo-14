@@ -3,14 +3,9 @@ import React from "react";
 import { prisma } from "../../../../../prisma";
 import DeleteLogForm from "@/app/logManagement/_components/DeleteLogForm";
 
-const page = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
-  const id = params.id;
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+
   let log = null;
 
   try {
