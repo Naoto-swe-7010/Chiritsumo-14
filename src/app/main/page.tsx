@@ -8,7 +8,9 @@ import BalanceProgress from "./_components/BalanceProgress";
 
 const page = async () => {
   const session = await auth();
-  !session && redirect("/");
+  if (!session) {
+    redirect("/");
+  }
 
   const userId = session!.user!.id;
 

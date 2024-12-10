@@ -210,7 +210,7 @@ export const deleteLog = async (id: string, message?: string | null) => {
       // ログ削除
       await prisma.log.delete({ where: { id } });
     });
-  } catch (e) {
+  } catch {
     message = "データベースにてログの削除に失敗しました。";
     return message;
   }
@@ -251,7 +251,7 @@ export const addWantedItem = async (
     await prisma.wantedItem.create({
       data: newLog,
     });
-  } catch (e) {
+  } catch {
     return {
       message: "データベースにて欲しいものリストへの追加に失敗しました。",
     };
@@ -297,7 +297,7 @@ export const updateWantedItem = async (
         data: updatedItem,
       });
     });
-  } catch (e) {
+  } catch {
     return {
       message: "データベースにてアイテムの更新に失敗しました。",
     };
@@ -311,7 +311,7 @@ export const deleteWantedItem = async (id: string, message?: string | null) => {
     await prisma.$transaction(async (prisma) => {
       await prisma.wantedItem.delete({ where: { id } });
     });
-  } catch (e) {
+  } catch {
     message = "データベースにてアイテムの削除に失敗しました。";
     return message;
   }

@@ -7,7 +7,9 @@ import Pagination from "./_components/Pagination";
 
 const page = async () => {
   const session = await auth();
-  !session && redirect("/");
+  if (!session) {
+    redirect("/");
+  }
 
   return (
     <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)] pb-10 pt-8">
