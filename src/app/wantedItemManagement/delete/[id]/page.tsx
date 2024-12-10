@@ -1,7 +1,7 @@
 import EditModal from "@/app/_components/EditModal";
 import React from "react";
 import { prisma } from "../../../../../prisma";
-import DeleteLogForm from "@/app/logManagement/_components/DeleteLogForm";
+import DeleteWantedItemForm from "../../_components/DeleteWantedItemForm";
 
 const page = async ({
   params,
@@ -11,10 +11,10 @@ const page = async ({
   };
 }) => {
   const id = params.id;
-  let log = null;
+  let item = null;
 
   try {
-    log = await prisma.log.findUnique({
+    item = await prisma.wantedItem.findUnique({
       where: {
         id: id,
       },
@@ -26,7 +26,7 @@ const page = async ({
   return (
     <EditModal>
       <h2 className="mb-4 text-lg font-bold">削除</h2>
-      <DeleteLogForm log={log!} />
+      <DeleteWantedItemForm item={item!} />
     </EditModal>
   );
 };

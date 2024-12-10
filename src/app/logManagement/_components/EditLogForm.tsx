@@ -5,7 +5,7 @@ import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useActionState } from "react";
 
-const editForm = ({ log }: { log: Log }) => {
+const EditLogForm = ({ log }: { log: Log }) => {
   const initialState: UpdateLogFormState = { message: null, errors: {} };
   const updateLogWithId = updateLog.bind(null, log.id);
   const [state, formAction, isPending] = useActionState(
@@ -64,9 +64,9 @@ const editForm = ({ log }: { log: Log }) => {
         <Button
           disabled={isPending}
           type="submit"
-          className="bg-green-500 hover:bg-green-700"
+          className="bg-green-500 hover:bg-green-700 font-bold"
         >
-          Save
+          保存
         </Button>
         <Button
           disabled={isPending}
@@ -74,13 +74,13 @@ const editForm = ({ log }: { log: Log }) => {
             e.preventDefault();
             router.back();
           }}
-          className="bg-gray-500 hover:bg-gray-700"
+          className="bg-gray-500 hover:bg-gray-700 font-bold"
         >
-          Cancel
+          キャンセル
         </Button>
       </div>
     </form>
   );
 };
 
-export default editForm;
+export default EditLogForm;

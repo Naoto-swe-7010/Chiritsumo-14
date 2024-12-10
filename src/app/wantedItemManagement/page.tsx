@@ -1,6 +1,6 @@
 import React from "react";
 import AddWantedItem from "./_components/AddWantedItem";
-import WantedItemList from "./WantedItemList";
+import WantedItemList from "./_components/WantedItemList";
 
 const page = () => {
   return (

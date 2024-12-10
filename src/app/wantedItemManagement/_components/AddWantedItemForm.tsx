@@ -61,9 +61,9 @@ const AddWantedItemForm = () => {
       <div className="sm:w-auto">
         <Button
           disabled={isPending}
-          className=" sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
+          className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
         >
-          Add
+          追加
         </Button>
       </div>
     </form>

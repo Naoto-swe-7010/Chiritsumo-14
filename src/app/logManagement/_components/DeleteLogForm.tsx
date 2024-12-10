@@ -5,7 +5,7 @@ import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useActionState } from "react";
 
-const DeleteForm = ({ log }: { log: Log }) => {
+const DeleteLogForm = ({ log }: { log: Log }) => {
   if (!log) return null;
   const initialState: DeleteLogFormState = { message: null };
   const deleteLogWithId = deleteLog.bind(null, log.id);
@@ -28,9 +28,9 @@ const DeleteForm = ({ log }: { log: Log }) => {
         <Button
           type="submit"
           disabled={isPending}
-          className="bg-red-500 hover:bg-red-700"
+          className="bg-red-500 hover:bg-red-700 font-bold"
         >
-          YES
+          はい
         </Button>
         <Button
           onClick={(e) => {
@@ -38,13 +38,13 @@ const DeleteForm = ({ log }: { log: Log }) => {
             router.back();
           }}
           disabled={isPending}
-          className="bg-gray-500 hover:bg-gray-700"
+          className="bg-gray-500 hover:bg-gray-700 font-bold"
         >
-          NO
+          いいえ
         </Button>
       </div>
     </form>
   );
 };
 
-export default DeleteForm;
+export default DeleteLogForm;

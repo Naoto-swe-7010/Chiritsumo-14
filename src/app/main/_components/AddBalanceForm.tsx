@@ -72,9 +72,9 @@ const AddBalanceForm = () => {
       <div className="mx-auto w-[50%]">
         <Button
           disabled={isPending}
-          className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
+          className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
         >
-          我慢できた！！
+          我慢できた！
         </Button>
       </div>
     </form>

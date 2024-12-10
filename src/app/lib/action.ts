@@ -41,6 +41,11 @@ const AddWantedItemSchema = WantedItemSchema.omit({
   createdAt: true,
 });
 
+const UpdateWantedItemSchema = WantedItemSchema.omit({
+  userId: true,
+  createdAt: true,
+});
+
 // State
 export type AddBalanceFormState = {
   errors?: {
@@ -69,6 +74,20 @@ export type AddWantedItemFormState = {
     price?: string[];
     url?: string[];
   };
+  message?: string | null;
+};
+
+export type UpdateWantedItemFormState = {
+  errors?: {
+    id?: string[];
+    name?: string[];
+    price?: string[];
+    url?: string[];
+  };
+  message?: string | null;
+};
+
+export type DeleteWantedItemFormState = {
   message?: string | null;
 };
 
@@ -247,4 +266,64 @@ export const addWantedItem = async (
   return {
     message: "欲しいものリストに追加されました。",
   };
+};
+
+export const updateWantedItem = async (
+  id: string,
+  prevState?: UpdateWantedItemFormState,
+  formData?: FormData
+) => {
+  const validatedFields = UpdateWantedItemSchema.safeParse({
+    id: id,
+    name: formData?.get("name"),
+    price: parseInt(formData?.get("price") as string),
+    url: formData?.get("url"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "フィールドがありません。アイテムの更新に失敗しました。",
+    };
+  }
+
+  const { name, price, url } = validatedFields.data;
+
+  const updatedItem = {
+    name: name,
+    price: price,
+    url: url,
+  };
+
+  try {
+    await prisma.$transaction(async (prisma) => {
+      await prisma.wantedItem.update({
+        where: { id },
+        data: updatedItem,
+      });
+    });
+  } catch (e) {
+    return {
+      message: "データベースにてアイテムの更新に失敗しました。",
+    };
+  }
+  revalidatePath("/wantedItemManagement");
+  redirect("/wantedItemManagement");
+};
+
+export const deleteWantedItem = async (
+  id: string,
+  prevState?: DeleteWantedItemFormState
+) => {
+  try {
+    await prisma.$transaction(async (prisma) => {
+      await prisma.wantedItem.delete({ where: { id } });
+    });
+  } catch (e) {
+    return {
+      message: "データベースにてアイテムの削除に失敗しました。",
+    };
+  }
+  revalidatePath("/wantedItemManagement");
+  redirect("/wantedItemManagement");
 };

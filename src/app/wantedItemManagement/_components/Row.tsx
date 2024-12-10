@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { WantedItem } from "@prisma/client";
+import Link from "next/link";
 import React from "react";
 
 const Row = ({ item }: { item: WantedItem }) => {
@@ -28,10 +29,14 @@ const Row = ({ item }: { item: WantedItem }) => {
       <div>
         <div className="flex-col space-y-2">
           <div>
-            <Button className="bg-pink-500 hover:bg-pink-700">✏️</Button>
+            <Link href={`/wantedItemManagement/edit/${item.id}`}>
+              <Button className="bg-pink-500 hover:bg-pink-700">✏️</Button>
+            </Link>
           </div>
           <div>
-            <Button className="bg-gray-300 hover:bg-gray-400">🗑️</Button>
+            <Link href={`/wantedItemManagement/delete/${item.id}`}>
+              <Button className="bg-gray-300 hover:bg-gray-400">🗑️</Button>
+            </Link>
           </div>
         </div>
       </div>

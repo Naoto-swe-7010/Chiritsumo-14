@@ -1,7 +1,7 @@
 import EditModal from "@/app/_components/EditModal";
 import React from "react";
 import { prisma } from "../../../../../prisma";
-import EditForm from "../../_components/editForm";
+import EditLogForm from "../../_components/EditLogForm";
 
 const page = async ({
   params,
@@ -25,7 +25,7 @@ const page = async ({
   return (
     <EditModal>
       <h2 className="mb-4 text-lg font-bold">編集</h2>
-      <EditForm log={log!} />
+      <EditLogForm log={log!} />
     </EditModal>
   );
 };
