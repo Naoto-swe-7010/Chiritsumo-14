@@ -15,7 +15,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   } catch (e) {
     console.error(e);
   }
-
   return (
     <EditModal>
       <h2 className="mb-4 text-lg font-bold">編集</h2>
