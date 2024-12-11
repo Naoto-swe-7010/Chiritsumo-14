@@ -3,7 +3,7 @@ import React from "react";
 import { prisma } from "../../../../../prisma";
 import EditWantedItemForm from "../../_components/EditWantedItemForm";
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   let item = null;
   try {
