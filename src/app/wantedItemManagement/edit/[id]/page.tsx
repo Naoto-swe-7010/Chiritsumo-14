@@ -4,7 +4,7 @@ import { prisma } from "../../../../../prisma";
 import EditWantedItemForm from "../../_components/EditWantedItemForm";
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
   let item = null;
   try {
     item = await prisma.wantedItem.findUnique({

@@ -4,7 +4,7 @@ import { prisma } from "../../../../../prisma";
 import DeleteLogForm from "@/app/logManagement/_components/DeleteLogForm";
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
 
   let log = null;
 

@@ -4,7 +4,7 @@ import { prisma } from "../../../../../prisma";
 import EditLogForm from "../../_components/EditLogForm";
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
   let log = null;
   try {
     log = await prisma.log.findUnique({
