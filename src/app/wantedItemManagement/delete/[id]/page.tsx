@@ -5,6 +5,7 @@ import DeleteWantedItemForm from "../../_components/DeleteWantedItemForm";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
+
   let item = null;
 
   try {
