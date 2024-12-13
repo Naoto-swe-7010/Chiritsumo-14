@@ -2,8 +2,14 @@ import EditModal from "@/app/_components/EditModal";
 import React from "react";
 import { prisma } from "../../../../../prisma";
 import EditWantedItemForm from "../../_components/EditWantedItemForm";
+import { auth } from "../../../../../auth";
+import { redirect } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const session = await auth();
+  if (!session) {
+    redirect("/");
+  }
   const { id } = await params;
   let item = null;
   try {
