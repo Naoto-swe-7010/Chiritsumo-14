@@ -9,7 +9,7 @@ import {
   AddWantedItemSchema,
   UpdateLogSchema,
   UpdateWantedItemSchema,
-} from "./Schema";
+} from "./schema";
 import {
   AddBalanceFormState,
   AddWantedItemFormState,
