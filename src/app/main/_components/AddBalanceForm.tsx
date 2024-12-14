@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { addBalance } from "@/app/lib/action";
-import confetti from "canvas-confetti";
+// import confetti from "canvas-confetti";
 import { useFormState } from "react-dom";
 import { AddBalanceFormState } from "@/app/lib/formState";
 
