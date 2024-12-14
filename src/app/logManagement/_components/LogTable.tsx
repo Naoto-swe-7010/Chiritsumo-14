@@ -7,7 +7,6 @@ import { auth } from "../../../../auth";
 const LogTable = async () => {
   const session = await auth();
   const userId = session!.user!.id;
-  if (!session?.user) return null;
 
   // ログ取得
   const logs = await prisma.log.findMany({
