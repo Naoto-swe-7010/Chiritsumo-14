@@ -11,7 +11,7 @@ const Balance = async () => {
     let existingBalance = await prisma.balance.findUnique({
       where: { userId },
     });
-    // 存在しない場合は新しいレコードを作成
+    // レコードがない場合は新しいレコードを作成
     if (!existingBalance) {
       existingBalance = await prisma.balance.create({
         data: {
