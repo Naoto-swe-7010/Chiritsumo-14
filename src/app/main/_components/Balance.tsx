@@ -4,15 +4,9 @@ import { prisma } from "../../../../prisma";
 
 const Balance = async () => {
   const session = await auth();
-
   const userId = session!.user!.id;
-  if (!userId) {
-    console.error("ユーザーIDが取得できませんでした");
-    return;
-  }
 
   let existingBalance = null;
-
   try {
     // ユーザーの Balance レコードを取得
     existingBalance = await prisma.balance.findUnique({
