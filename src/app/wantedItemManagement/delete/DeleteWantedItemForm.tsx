@@ -8,10 +8,7 @@ import { useFormState } from "react-dom";
 const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
-  const [state, formAction, isPending] = useFormState(
-    deleteWantedItemWithId,
-    null
-  );
+  const [state, formAction] = useFormState(deleteWantedItemWithId, null);
 
   // キャンセルボタン用のルーター
   const router = useRouter();
@@ -25,11 +22,7 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
         </p>
       )}
       <div className="flex justify-end gap-2">
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="bg-red-500 hover:bg-red-700 font-bold"
-        >
+        <Button type="submit" className="bg-red-500 hover:bg-red-700 font-bold">
           はい
         </Button>
         <Button
@@ -37,7 +30,6 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
             e.preventDefault();
             router.back();
           }}
-          disabled={isPending}
           className="bg-gray-500 hover:bg-gray-700 font-bold"
         >
           いいえ

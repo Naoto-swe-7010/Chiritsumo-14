@@ -9,7 +9,7 @@ import { AddBalanceFormState } from "@/app/lib/formState";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useFormState(addBalance, initialState);
+  const [state, formAction] = useFormState(addBalance, initialState);
 
   //   紙吹雪エフェクト
   // useEffect(() => {
@@ -68,10 +68,7 @@ const AddBalanceForm = () => {
       </div>
 
       <div className="mx-auto w-[50%]">
-        <Button
-          disabled={isPending}
-          className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
-        >
+        <Button className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold">
           我慢できた！
         </Button>
       </div>

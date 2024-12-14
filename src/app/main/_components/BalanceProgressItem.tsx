@@ -4,21 +4,12 @@ import { auth } from "../../../../auth";
 import { prisma } from "../../../../prisma";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
+import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
   try {
-    // セッション情報を取得
-    const session = await auth();
-    if (!session || !session.user || !session.user.id) {
-      console.error("セッション情報が取得できませんでした。");
-      return (
-        <div className="text-center text-gray-500">
-          <p>セッション情報が必要です。</p>
-        </div>
-      );
-    }
-
-    const userId = session.user.id;
+    // UserIDを取得
+    const userId = await getSessionAndUserId();
 
     // 残高情報を取得
     const balance = await prisma.balance.findFirst({

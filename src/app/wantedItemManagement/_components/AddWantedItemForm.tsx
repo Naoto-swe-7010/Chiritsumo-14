@@ -6,10 +6,7 @@ import { useFormState } from "react-dom";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useFormState(
-    addWantedItem,
-    initialState
-  );
+  const [state, formAction] = useFormState(addWantedItem, initialState);
   return (
     <form
       action={formAction}
@@ -60,10 +57,7 @@ const AddWantedItemForm = () => {
           </p>
         ))}
       <div className="sm:w-auto">
-        <Button
-          disabled={isPending}
-          className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
-        >
+        <Button className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg">
           追加
         </Button>
       </div>

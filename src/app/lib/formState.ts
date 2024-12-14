@@ -34,7 +34,3 @@ export type UpdateWantedItemFormState = {
   };
   message?: string | null;
 };
-
-export type DeleteWantedItemFormState = {
-  message?: string | null;
-};

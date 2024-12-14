@@ -2,21 +2,12 @@ import React from "react";
 import { auth } from "../../../../auth";
 import { prisma } from "../../../../prisma";
 import BalanceProgressItem from "./BalanceProgressItem";
+import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const BalanceProgress = async () => {
   try {
-    // セッション情報を取得
-    const session = await auth();
-    if (!session || !session.user || !session.user.id) {
-      console.error("セッション情報が取得できませんでした。");
-      return (
-        <div className="text-center text-gray-500">
-          <p>セッション情報が必要です。</p>
-        </div>
-      );
-    }
-
-    const userId = session.user.id;
+    // UserIDを取得
+    const userId = await getSessionAndUserId();
 
     // ほしい物リストを取得
     const wantedItemList = await prisma.wantedItem.findMany({

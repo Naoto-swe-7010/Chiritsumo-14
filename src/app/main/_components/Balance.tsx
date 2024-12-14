@@ -1,18 +1,11 @@
 import React from "react";
-import { auth } from "../../../../auth";
 import { prisma } from "../../../../prisma";
+import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const Balance = async () => {
   try {
-    // セッション情報を取得
-    const session = await auth();
-    // セッションが取得できない場合はエラーを表示
-    if (!session || !session.user || !session.user.id) {
-      console.error("セッション情報が取得できませんでした。");
-      return <div>セッション情報が必要です。</div>;
-    }
-
-    const userId = session.user.id;
+    // UserIDを取得
+    const userId = await getSessionAndUserId();
 
     // ユーザーの Balance レコードを取得
     let existingBalance = await prisma.balance.findUnique({

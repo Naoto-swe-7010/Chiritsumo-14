@@ -3,19 +3,13 @@ import Row from "./Row";
 import { prisma } from "../../../../prisma";
 import RowSkeleton from "./RowSkeleton";
 import { auth } from "../../../../auth";
+import { get } from "http";
+import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const LogTable = async () => {
   try {
-    // セッション情報を取得
-    const session = await auth();
-    if (!session || !session.user || !session.user.id) {
-      console.error("セッション情報が取得できませんでした。");
-      return (
-        <p className="text-center text-gray-500">セッション情報が必要です。</p>
-      );
-    }
-
-    const userId = session.user.id;
+    // UserIDを取得
+    const userId = await getSessionAndUserId();
 
     // ログを取得
     const logs = await prisma.log.findMany({

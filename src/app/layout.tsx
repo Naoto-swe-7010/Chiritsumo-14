@@ -3,17 +3,6 @@ import "./globals.css";
 import Header from "./_header/Header";
 import Footer from "./_footer/Footer";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
-
 export const metadata: Metadata = {
   title: "ちりつも",
   description: "無駄な消費を我慢して欲しい物を手に入れよう！",
@@ -27,6 +16,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: true,
 };
+<meta name="apple-mobile-web-app-capable" content="yes"></meta>;
 
 export default function RootLayout({
   children,

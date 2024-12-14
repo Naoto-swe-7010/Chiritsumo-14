@@ -1,6 +1,5 @@
 "use server";
 
-import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -16,20 +15,7 @@ import {
   UpdateLogFormState,
   UpdateWantedItemFormState,
 } from "./formState";
-
-// セッションの取得とエラーハンドリング
-const getSessionAndUserId = async () => {
-  try {
-    const session = await auth();
-    if (!session || !session.user || !session.user.id) {
-      throw new Error("セッション情報が取得できませんでした。");
-    }
-    return session.user.id;
-  } catch (error) {
-    console.error(error);
-    throw new Error("認証が必要です。");
-  }
-};
+import { getSessionAndUserId } from "./commonFunction";
 
 // 残高追加（ログ作成）
 export const addBalance = async (
@@ -51,6 +37,7 @@ export const addBalance = async (
   }
   const { title, price } = validatedFields.data;
 
+  // DB処理
   try {
     await prisma.$transaction(async (tx) => {
       await tx.log.create({
@@ -90,6 +77,7 @@ export const updateLog = async (
   }
   const { title, price } = validatedFields.data;
 
+  // DB処理
   try {
     await prisma.$transaction(async (tx) => {
       const log = await tx.log.findUnique({
@@ -115,6 +103,7 @@ export const updateLog = async (
 export const deleteLog = async (id: string) => {
   const userId = await getSessionAndUserId();
 
+  // DB処理
   try {
     await prisma.$transaction(async (tx) => {
       const log = await tx.log.delete({
@@ -154,6 +143,7 @@ export const addWantedItem = async (
     };
   }
 
+  // DB処理
   try {
     await prisma.wantedItem.create({
       data: { userId, ...validatedFields.data, createdAt: new Date() },
@@ -187,6 +177,7 @@ export const updateWantedItem = async (
     };
   }
 
+  // DB処理
   try {
     await prisma.wantedItem.update({
       where: { id },
@@ -201,6 +192,7 @@ export const updateWantedItem = async (
 
 // 欲しいものリスト削除
 export const deleteWantedItem = async (id: string) => {
+  // DB処理
   try {
     await prisma.wantedItem.delete({ where: { id } });
   } catch (error) {

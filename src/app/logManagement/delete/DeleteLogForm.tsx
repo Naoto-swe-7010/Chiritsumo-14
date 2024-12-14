@@ -8,7 +8,7 @@ import { useFormState } from "react-dom";
 const DeleteLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく
   const deleteLogWithId = deleteLog.bind(null, log.id);
-  const [state, formAction, isPending] = useFormState(deleteLogWithId, null);
+  const [state, formAction] = useFormState(deleteLogWithId, null);
 
   // キャンセルボタン用のルーター
   const router = useRouter();
@@ -22,11 +22,7 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
         </p>
       )}
       <div className="flex justify-end gap-2">
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="bg-red-500 hover:bg-red-700 font-bold"
-        >
+        <Button type="submit" className="bg-red-500 hover:bg-red-700 font-bold">
           はい
         </Button>
         <Button
@@ -34,7 +30,6 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
             e.preventDefault();
             router.back();
           }}
-          disabled={isPending}
           className="bg-gray-500 hover:bg-gray-700 font-bold"
         >
           いいえ

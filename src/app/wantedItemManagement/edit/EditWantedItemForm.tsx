@@ -7,17 +7,18 @@ import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
-  const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
-
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
-  const [state, formAction, isPending] = useFormState(
+
+  const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
+  const [state, formAction] = useFormState(
     updateWantedItemWithId,
     initialState
   );
 
   // キャンセルボタン用のルーター
   const router = useRouter();
+
   return (
     <form action={formAction}>
       <div className="mb-4">
@@ -83,14 +84,12 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
       </div>
       <div className="flex justify-end gap-2">
         <Button
-          disabled={isPending}
           type="submit"
           className="bg-green-500 hover:bg-green-700 font-bold"
         >
           保存
         </Button>
         <Button
-          disabled={isPending}
           onClick={(e) => {
             e.preventDefault();
             router.back();

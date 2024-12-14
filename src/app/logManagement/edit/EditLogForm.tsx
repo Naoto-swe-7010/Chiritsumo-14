@@ -7,15 +7,15 @@ import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 const EditLogForm = ({ log }: { log: Log }) => {
-  const initialState: UpdateLogFormState = { message: null, errors: {} };
   // プロップスで渡されたログを予め引数にバインドしておく
   const updateLogWithId = updateLog.bind(null, log.id);
-  const [state, formAction, isPending] = useFormState(
-    updateLogWithId,
-    initialState
-  );
+
+  const initialState: UpdateLogFormState = { message: null, errors: {} };
+  const [state, formAction] = useFormState(updateLogWithId, initialState);
+
   // キャンセルボタン用のルーター
   const router = useRouter();
+
   return (
     <form action={formAction}>
       <div className="mb-4">
@@ -64,14 +64,12 @@ const EditLogForm = ({ log }: { log: Log }) => {
       </div>
       <div className="flex justify-end gap-2">
         <Button
-          disabled={isPending}
           type="submit"
           className="bg-green-500 hover:bg-green-700 font-bold"
         >
           保存
         </Button>
         <Button
-          disabled={isPending}
           onClick={(e) => {
             e.preventDefault();
             router.back();

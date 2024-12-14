@@ -1,20 +1,8 @@
+import { formattedDate } from "@/app/lib/commonFunction";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
-
-// 日付フォーマット関数
-const formattedDate = (date: Date): string => {
-  return date
-    .toLocaleString("ja-JP", {
-      year: "2-digit",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    })
-    .replace(/^20/, "");
-};
 
 // テーブルの各ログ（各レコード）
 const Row = ({ log }: { log: Log }) => {
