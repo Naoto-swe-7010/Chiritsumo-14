@@ -1,11 +1,11 @@
 "use client";
 import { addWantedItem, AddWantedItemFormState } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
-import React, { useActionState } from "react";
+import { useFormState } from "react-dom";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useFormState(
     addWantedItem,
     initialState
   );

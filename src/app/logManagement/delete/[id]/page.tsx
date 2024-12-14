@@ -1,16 +1,16 @@
 import EditModal from "@/app/_components/EditModal";
 import React from "react";
 import { prisma } from "../../../../../prisma";
-import DeleteLogForm from "@/app/logManagement/_components/DeleteLogForm";
 import { auth } from "../../../../../auth";
 import { redirect } from "next/navigation";
+import DeleteLogForm from "../DeleteLogForm";
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   const session = await auth();
   if (!session) {
     redirect("/");
   }
-  const { id } = await params;
+  const { id } = params;
 
   let log = null;
 

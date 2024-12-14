@@ -3,12 +3,12 @@ import { updateLog, UpdateLogFormState } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import React, { useActionState } from "react";
+import { useFormState } from "react-dom";
 
 const EditLogForm = ({ log }: { log: Log }) => {
   const initialState: UpdateLogFormState = { message: null, errors: {} };
   const updateLogWithId = updateLog.bind(null, log.id);
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useFormState(
     updateLogWithId,
     initialState
   );

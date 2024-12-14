@@ -3,12 +3,12 @@ import { updateWantedItem, UpdateWantedItemFormState } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
 import { WantedItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import React, { useActionState } from "react";
+import { useFormState } from "react-dom";
 
 const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useFormState(
     updateWantedItemWithId,
     initialState
   );

@@ -1,19 +1,22 @@
 "use client";
-import { deleteLog } from "@/app/lib/action";
+import { deleteWantedItem } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
-import { Log } from "@prisma/client";
+import { WantedItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import React, { useActionState } from "react";
+import { useFormState } from "react-dom";
 
-const DeleteLogForm = ({ log }: { log: Log }) => {
-  const deleteLogWithId = deleteLog.bind(null, log.id);
-  const [state, formAction, isPending] = useActionState(deleteLogWithId, null);
+const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
+  const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
+  const [state, formAction, isPending] = useFormState(
+    deleteWantedItemWithId,
+    null
+  );
 
   const router = useRouter();
 
   return (
     <form action={formAction}>
-      <p className="mb-4 text-gray-400">本当にこのデータを削除しますか？</p>
+      <p className="mb-4 text-gray-400">本当にこのアイテムを削除しますか？</p>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
           {state}
@@ -42,4 +45,4 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
   );
 };
 
-export default DeleteLogForm;
+export default DeleteWantedItemForm;

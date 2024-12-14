@@ -1,17 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
-import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { addBalance, AddBalanceFormState } from "@/app/lib/action";
 import confetti from "canvas-confetti";
+import { useFormState } from "react-dom";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
-    addBalance,
-    initialState
-  );
+  const [state, formAction, isPending] = useFormState(addBalance, initialState);
 
   //   紙吹雪エフェクト
   useEffect(() => {
