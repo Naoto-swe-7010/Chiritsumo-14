@@ -4,14 +4,17 @@ import { UpdateLogFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 const EditLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく
   const updateLogWithId = updateLog.bind(null, log.id);
 
   const initialState: UpdateLogFormState = { message: null, errors: {} };
-  const [state, formAction] = useFormState(updateLogWithId, initialState);
+  const [state, formAction, isPending] = useActionState(
+    updateLogWithId,
+    initialState
+  );
 
   // キャンセルボタン用のルーター
   const router = useRouter();
@@ -66,6 +69,7 @@ const EditLogForm = ({ log }: { log: Log }) => {
         <Button
           type="submit"
           className="bg-green-500 hover:bg-green-700 font-bold"
+          disabled={isPending}
         >
           保存
         </Button>
@@ -75,6 +79,7 @@ const EditLogForm = ({ log }: { log: Log }) => {
             router.back();
           }}
           className="bg-gray-500 hover:bg-gray-700 font-bold"
+          disabled={isPending}
         >
           キャンセル
         </Button>

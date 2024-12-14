@@ -3,12 +3,12 @@ import { deleteLog } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 const DeleteLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく
   const deleteLogWithId = deleteLog.bind(null, log.id);
-  const [state, formAction] = useFormState(deleteLogWithId, null);
+  const [state, formAction, isPending] = useActionState(deleteLogWithId, null);
 
   // キャンセルボタン用のルーター
   const router = useRouter();
@@ -22,7 +22,11 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
         </p>
       )}
       <div className="flex justify-end gap-2">
-        <Button type="submit" className="bg-red-500 hover:bg-red-700 font-bold">
+        <Button
+          type="submit"
+          className="bg-red-500 hover:bg-red-700 font-bold"
+          disabled={isPending}
+        >
           はい
         </Button>
         <Button
@@ -31,6 +35,7 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
             router.back();
           }}
           className="bg-gray-500 hover:bg-gray-700 font-bold"
+          disabled={isPending}
         >
           いいえ
         </Button>

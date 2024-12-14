@@ -4,12 +4,15 @@
 import { Button } from "@/components/ui/button";
 import { addBalance } from "@/app/lib/action";
 // import confetti from "canvas-confetti";
-import { useFormState } from "react-dom";
 import { AddBalanceFormState } from "@/app/lib/formState";
+import { useActionState } from "react";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
-  const [state, formAction] = useFormState(addBalance, initialState);
+  const [state, formAction, isPending] = useActionState(
+    addBalance,
+    initialState
+  );
 
   //   紙吹雪エフェクト
   // useEffect(() => {
@@ -68,7 +71,10 @@ const AddBalanceForm = () => {
       </div>
 
       <div className="mx-auto w-[50%]">
-        <Button className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold">
+        <Button
+          className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
+          disabled={isPending}
+        >
           我慢できた！
         </Button>
       </div>

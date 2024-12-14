@@ -4,14 +4,14 @@ import { UpdateWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
 import { WantedItem } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
 
   const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction] = useFormState(
+  const [state, formAction, isPending] = useActionState(
     updateWantedItemWithId,
     initialState
   );
@@ -86,6 +86,7 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
         <Button
           type="submit"
           className="bg-green-500 hover:bg-green-700 font-bold"
+          disabled={isPending}
         >
           保存
         </Button>
@@ -95,6 +96,7 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
             router.back();
           }}
           className="bg-gray-500 hover:bg-gray-700 font-bold"
+          disabled={isPending}
         >
           キャンセル
         </Button>

@@ -3,8 +3,8 @@ import React from "react";
 import { prisma } from "../../../../../prisma";
 import DeleteWantedItemForm from "../DeleteWantedItemForm";
 
-const page = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
 
   // 削除対象のアイテムを取得
   let item = null;

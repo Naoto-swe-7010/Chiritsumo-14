@@ -2,11 +2,14 @@
 import { addWantedItem } from "@/app/lib/action";
 import { AddWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction] = useFormState(addWantedItem, initialState);
+  const [state, formAction, isPending] = useActionState(
+    addWantedItem,
+    initialState
+  );
   return (
     <form
       action={formAction}
@@ -57,7 +60,10 @@ const AddWantedItemForm = () => {
           </p>
         ))}
       <div className="sm:w-auto">
-        <Button className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg">
+        <Button
+          className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
+          disabled={isPending}
+        >
           追加
         </Button>
       </div>
