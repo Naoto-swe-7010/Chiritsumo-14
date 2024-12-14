@@ -7,8 +7,14 @@ import ProgressBar from "./ProgressBar";
 
 const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
   const session = await auth();
+  const userId = session!.user!.id;
+  if (!userId) {
+    console.error("ユーザーIDが取得できませんでした");
+    return;
+  }
+
   const balance = await prisma.balance.findFirst({
-    where: { userId: session!.user!.id },
+    where: { userId: userId },
   });
 
   return (

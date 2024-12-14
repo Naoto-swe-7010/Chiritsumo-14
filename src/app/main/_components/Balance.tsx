@@ -6,6 +6,11 @@ const Balance = async () => {
   const session = await auth();
 
   const userId = session!.user!.id;
+  if (!userId) {
+    console.error("ユーザーIDが取得できませんでした");
+    return;
+  }
+
   let existingBalance = null;
 
   try {

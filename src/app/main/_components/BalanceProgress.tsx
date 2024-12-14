@@ -5,9 +5,14 @@ import BalanceProgressItem from "./BalanceProgressItem";
 
 const BalanceProgress = async () => {
   const session = await auth();
+  const userId = session!.user!.id;
+  if (!userId) {
+    console.error("ユーザーIDが取得できませんでした");
+    return;
+  }
   // ほしい物リスト取得
   const wantedItemList = await prisma.wantedItem.findMany({
-    where: { userId: session!.user!.id },
+    where: { userId: userId },
   });
   return (
     <div className="flex justify-center p-4 sm:p-6">
