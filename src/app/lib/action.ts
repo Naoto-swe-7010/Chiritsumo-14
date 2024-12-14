@@ -17,17 +17,27 @@ import {
   UpdateWantedItemFormState,
 } from "./formState";
 
-const session = await auth();
-const userId = session!.user!.id!;
-
-// action
+// セッションの取得とエラーハンドリング
+const getSessionAndUserId = async () => {
+  try {
+    const session = await auth();
+    if (!session || !session.user || !session.user.id) {
+      throw new Error("セッション情報が取得できませんでした。");
+    }
+    return session.user.id;
+  } catch (error) {
+    console.error(error);
+    throw new Error("認証が必要です。");
+  }
+};
 
 // 残高追加（ログ作成）
 export const addBalance = async (
   prevState?: AddBalanceFormState,
   formData?: FormData
 ) => {
-  // zodバリデーションチェック
+  const userId = await getSessionAndUserId();
+
   const validatedFields = AddBalanceSchema.safeParse({
     title: formData?.get("title"),
     price: parseInt(formData?.get("price") as string),
@@ -39,30 +49,20 @@ export const addBalance = async (
     };
   }
   const { title, price } = validatedFields.data;
-  const newLog = {
-    userId: userId,
-    title: title,
-    price: price,
-    createdAt: new Date(),
-  };
 
-  // DB更新
   try {
-    await prisma.$transaction(async (prisma) => {
-      // 新しいログを作成
-      await prisma.log.create({
-        data: newLog,
+    await prisma.$transaction(async (tx) => {
+      await tx.log.create({
+        data: { userId, title, price, createdAt: new Date() },
       });
-      // 残高を更新
-      await prisma.balance.update({
-        where: { userId: userId },
+      await tx.balance.update({
+        where: { userId },
         data: { balance: { increment: price } },
       });
     });
-  } catch {
-    return {
-      message: "データベースにて残高の追加に失敗しました。",
-    };
+  } catch (error) {
+    console.error("残高追加中にエラーが発生しました:", error);
+    return { message: "データベースにて残高の追加に失敗しました。" };
   }
   revalidatePath("/main");
 };
@@ -73,9 +73,10 @@ export const updateLog = async (
   prevState?: UpdateLogFormState,
   formData?: FormData
 ) => {
-  // zodバリデーションチェック
+  const userId = await getSessionAndUserId();
+
   const validatedFields = UpdateLogSchema.safeParse({
-    id: id,
+    id,
     title: formData?.get("title"),
     price: parseInt(formData?.get("price") as string),
   });
@@ -86,66 +87,46 @@ export const updateLog = async (
     };
   }
   const { title, price } = validatedFields.data;
-  const updatedLog = {
-    title: title,
-    price: price,
-  };
 
-  // DB更新
   try {
-    await prisma.$transaction(async (prisma) => {
-      // 更新前の価格を取得
-      const log = await prisma.log.findUnique({
+    await prisma.$transaction(async (tx) => {
+      const log = await tx.log.findUnique({
         where: { id },
         select: { price: true },
       });
+      if (!log) throw new Error("指定されたログが見つかりません。");
 
-      if (!log) {
-        throw new Error("指定されたログが見つかりません。");
-      }
-
-      // ログを更新
-      await prisma.log.update({
-        where: { id },
-        data: updatedLog,
-      });
-
-      // バランスを直接計算して更新（更新前の価格との差分をインクリメント）
-      await prisma.balance.update({
+      await tx.log.update({ where: { id }, data: { title, price } });
+      await tx.balance.update({
         where: { userId },
-        data: {
-          balance: { increment: price - log.price },
-        },
+        data: { balance: { increment: price - log.price } },
       });
     });
-  } catch {
-    return {
-      message: "データベースにてログの更新に失敗しました。",
-    };
+  } catch (error) {
+    console.error("ログ更新中にエラーが発生しました:", error);
+    return { message: "データベースにてログの更新に失敗しました。" };
   }
   redirect("/logManagement");
 };
 
 // ログ削除
-export const deleteLog = async (id: string, message?: string | null) => {
-  // DB更新
-  try {
-    await prisma.$transaction(async (prisma) => {
-      // ログを削除しつつ、price を取得
-      const log = await prisma.log.delete({
-        where: { id },
-        select: { price: true }, // price フィールドのみ取得
-      });
+export const deleteLog = async (id: string) => {
+  const userId = await getSessionAndUserId();
 
-      // 残高からデクリメント
-      await prisma.balance.update({
+  try {
+    await prisma.$transaction(async (tx) => {
+      const log = await tx.log.delete({
+        where: { id },
+        select: { price: true },
+      });
+      await tx.balance.update({
         where: { userId },
         data: { balance: { decrement: log.price } },
       });
     });
-  } catch {
-    message = "データベースにてログの削除に失敗しました。";
-    return message;
+  } catch (error) {
+    console.error("ログ削除中にエラーが発生しました:", error);
+    return { message: "データベースにてログの削除に失敗しました。" };
   }
   redirect("/logManagement");
 };
@@ -155,7 +136,8 @@ export const addWantedItem = async (
   prevState?: AddWantedItemFormState,
   formData?: FormData
 ) => {
-  // zodバリデーションチェック
+  const userId = await getSessionAndUserId();
+
   const validatedFields = AddWantedItemSchema.safeParse({
     name: formData?.get("name"),
     price: parseInt(formData?.get("price") as string),
@@ -168,21 +150,13 @@ export const addWantedItem = async (
         "フィールドがありません。欲しいものリストへの追加に失敗しました。",
     };
   }
-  const { name, price, url } = validatedFields.data;
-  const newLog = {
-    userId: userId,
-    name: name,
-    price: price,
-    url: url,
-    createdAt: new Date(),
-  };
 
-  // DB更新
   try {
     await prisma.wantedItem.create({
-      data: newLog,
+      data: { userId, ...validatedFields.data, createdAt: new Date() },
     });
-  } catch {
+  } catch (error) {
+    console.error("欲しいものリスト追加中にエラーが発生しました:", error);
     return {
       message: "データベースにて欲しいものリストへの追加に失敗しました。",
     };
@@ -196,9 +170,8 @@ export const updateWantedItem = async (
   prevState?: UpdateWantedItemFormState,
   formData?: FormData
 ) => {
-  // zodバリデーションチェック
   const validatedFields = UpdateWantedItemSchema.safeParse({
-    id: id,
+    id,
     name: formData?.get("name"),
     price: parseInt(formData?.get("price") as string),
     url: formData?.get("url"),
@@ -209,39 +182,26 @@ export const updateWantedItem = async (
       message: "フィールドがありません。アイテムの更新に失敗しました。",
     };
   }
-  const { name, price, url } = validatedFields.data;
-  const updatedItem = {
-    name: name,
-    price: price,
-    url: url,
-  };
 
-  // DB更新
   try {
-    await prisma.$transaction(async (prisma) => {
-      await prisma.wantedItem.update({
-        where: { id },
-        data: updatedItem,
-      });
+    await prisma.wantedItem.update({
+      where: { id },
+      data: validatedFields.data,
     });
-  } catch {
-    return {
-      message: "データベースにてアイテムの更新に失敗しました。",
-    };
+  } catch (error) {
+    console.error("欲しいものリスト更新中にエラーが発生しました:", error);
+    return { message: "データベースにてアイテムの更新に失敗しました。" };
   }
   redirect("/wantedItemManagement");
 };
 
 // 欲しいものリスト削除
-export const deleteWantedItem = async (id: string, message?: string | null) => {
-  // DB更新
+export const deleteWantedItem = async (id: string) => {
   try {
-    await prisma.$transaction(async (prisma) => {
-      await prisma.wantedItem.delete({ where: { id } });
-    });
-  } catch {
-    message = "データベースにてアイテムの削除に失敗しました。";
-    return message;
+    await prisma.wantedItem.delete({ where: { id } });
+  } catch (error) {
+    console.error("欲しいものリスト削除中にエラーが発生しました:", error);
+    return { message: "データベースにてアイテムの削除に失敗しました。" };
   }
   redirect("/wantedItemManagement");
 };
