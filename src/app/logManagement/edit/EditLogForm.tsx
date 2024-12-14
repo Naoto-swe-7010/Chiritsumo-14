@@ -1,5 +1,6 @@
 "use client";
-import { updateLog, UpdateLogFormState } from "@/app/lib/action";
+import { updateLog } from "@/app/lib/action";
+import { UpdateLogFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";

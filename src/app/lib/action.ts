@@ -1,93 +1,28 @@
 "use server";
 
-import { z } from "zod";
 import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import {
+  AddBalanceSchema,
+  AddWantedItemSchema,
+  UpdateLogSchema,
+  UpdateWantedItemSchema,
+} from "./Schema";
+import {
+  AddBalanceFormState,
+  AddWantedItemFormState,
+  UpdateLogFormState,
+  UpdateWantedItemFormState,
+} from "./formState";
 
-// schema
-const LogSchema = z.object({
-  id: z.string(),
-  userId: z.string(),
-  title: z.string({ invalid_type_error: "タイトルは文字列で入力してください" }),
-  price: z.number({ invalid_type_error: "価格は数値で入力してください" }),
-  createdAt: z.date(),
-});
-
-const AddBalanceSchema = LogSchema.omit({
-  id: true,
-  userId: true,
-  createdAt: true,
-});
-
-const UpdateLogSchema = LogSchema.omit({
-  userId: true,
-  createdAt: true,
-});
-
-const WantedItemSchema = z.object({
-  id: z.string(),
-  userId: z.string(),
-  name: z.string({ invalid_type_error: "商品名は文字列で入力してください" }),
-  price: z.number({ invalid_type_error: "価格は数値で入力してください" }),
-  url: z.string({ invalid_type_error: "URLは文字列で入力してください" }),
-  createdAt: z.date(),
-});
-
-const AddWantedItemSchema = WantedItemSchema.omit({
-  id: true,
-  userId: true,
-  createdAt: true,
-});
-
-const UpdateWantedItemSchema = WantedItemSchema.omit({
-  userId: true,
-  createdAt: true,
-});
-
-// State
-export type AddBalanceFormState = {
-  errors?: {
-    title?: string[];
-    price?: string[];
-  };
-  message?: string | null;
-};
-
-export type UpdateLogFormState = {
-  errors?: {
-    id?: string[];
-    title?: string[];
-    price?: string[];
-  };
-  message?: string | null;
-};
-
-export type AddWantedItemFormState = {
-  errors?: {
-    name?: string[];
-    price?: string[];
-    url?: string[];
-  };
-  message?: string | null;
-};
-
-export type UpdateWantedItemFormState = {
-  errors?: {
-    id?: string[];
-    name?: string[];
-    price?: string[];
-    url?: string[];
-  };
-  message?: string | null;
-};
-
-export type DeleteWantedItemFormState = {
-  message?: string | null;
-};
+const session = await auth();
+const userId = session!.user!.id!;
 
 // action
+
+// 残高追加（ログ作成）
 export const addBalance = async (
   prevState?: AddBalanceFormState,
   formData?: FormData
@@ -106,24 +41,21 @@ export const addBalance = async (
 
   const { title, price } = validatedFields.data;
 
-  const session = await auth();
   const newLog = {
-    userId: session!.user!.id!,
+    userId: userId,
     title: title,
     price: price,
     createdAt: new Date(),
   };
-
   try {
     await prisma.$transaction(async (prisma) => {
       // 新しいログを作成
       await prisma.log.create({
         data: newLog,
       });
-
       // バランスを更新
       await prisma.balance.update({
-        where: { userId: session!.user!.id },
+        where: { userId: userId },
         data: { balance: { increment: price } },
       });
     });
@@ -133,11 +65,9 @@ export const addBalance = async (
     };
   }
   revalidatePath("/main");
-  return {
-    message: `残高が追加されました。: ${new Date().toLocaleString()}`,
-  };
 };
 
+// ログ更新
 export const updateLog = async (
   id: string,
   prevState?: UpdateLogFormState,
@@ -158,8 +88,6 @@ export const updateLog = async (
 
   const { title, price } = validatedFields.data;
 
-  const session = await auth();
-
   const updatedLog = {
     title: title,
     price: price,
@@ -167,23 +95,18 @@ export const updateLog = async (
 
   try {
     await prisma.$transaction(async (prisma) => {
-      const log = await prisma.log.findUnique({ where: { id } });
-
-      // 古い価格を引いて、新しい価格を足す
-      const balanceUpdate = {
-        balance: { increment: price - log!.price },
-      };
-
-      // バランス更新
-      await prisma.balance.update({
-        where: { userId: session!.user!.id },
-        data: balanceUpdate,
-      });
-
-      // ログ更新
-      await prisma.log.update({
+      // ログ更新と同時に古い価格を取得
+      const log = await prisma.log.update({
         where: { id },
         data: updatedLog,
+        select: { price: true }, // 古い価格のみ取得
+      });
+      // バランスを直接計算して更新
+      await prisma.balance.update({
+        where: { userId },
+        data: {
+          balance: { increment: price - log.price },
+        },
       });
     });
   } catch {
@@ -191,33 +114,33 @@ export const updateLog = async (
       message: "データベースにてログの更新に失敗しました。",
     };
   }
-  revalidatePath("/logManagement");
   redirect("/logManagement");
 };
 
+// ログ削除
 export const deleteLog = async (id: string, message?: string | null) => {
-  const session = await auth();
   try {
     await prisma.$transaction(async (prisma) => {
-      const log = await prisma.log.findUnique({ where: { id } });
-
-      // バランス更新
-      await prisma.balance.update({
-        where: { userId: session!.user!.id },
-        data: { balance: { decrement: log!.price } },
+      // ログを削除しつつ、price を取得
+      const log = await prisma.log.delete({
+        where: { id },
+        select: { price: true }, // price フィールドのみ取得
       });
 
-      // ログ削除
-      await prisma.log.delete({ where: { id } });
+      // バランスを減算
+      await prisma.balance.update({
+        where: { userId },
+        data: { balance: { decrement: log.price } },
+      });
     });
   } catch {
     message = "データベースにてログの削除に失敗しました。";
     return message;
   }
-  revalidatePath("/logManagement");
   redirect("/logManagement");
 };
 
+// 欲しいものリスト追加
 export const addWantedItem = async (
   prevState?: AddWantedItemFormState,
   formData?: FormData
@@ -238,9 +161,8 @@ export const addWantedItem = async (
 
   const { name, price, url } = validatedFields.data;
 
-  const session = await auth();
   const newLog = {
-    userId: session!.user!.id!,
+    userId: userId,
     name: name,
     price: price,
     url: url,
@@ -257,12 +179,9 @@ export const addWantedItem = async (
     };
   }
   revalidatePath("/wantedItemManagement");
-
-  return {
-    message: "欲しいものリストに追加されました。",
-  };
 };
 
+// 欲しいものリスト更新
 export const updateWantedItem = async (
   id: string,
   prevState?: UpdateWantedItemFormState,
@@ -302,10 +221,10 @@ export const updateWantedItem = async (
       message: "データベースにてアイテムの更新に失敗しました。",
     };
   }
-  revalidatePath("/wantedItemManagement");
   redirect("/wantedItemManagement");
 };
 
+// 欲しいものリスト削除
 export const deleteWantedItem = async (id: string, message?: string | null) => {
   try {
     await prisma.$transaction(async (prisma) => {
@@ -315,6 +234,5 @@ export const deleteWantedItem = async (id: string, message?: string | null) => {
     message = "データベースにてアイテムの削除に失敗しました。";
     return message;
   }
-  revalidatePath("/wantedItemManagement");
   redirect("/wantedItemManagement");
 };

@@ -1,5 +1,6 @@
 "use client";
-import { updateWantedItem, UpdateWantedItemFormState } from "@/app/lib/action";
+import { updateWantedItem } from "@/app/lib/action";
+import { UpdateWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
 import { WantedItem } from "@prisma/client";
 import { useRouter } from "next/navigation";

@@ -2,24 +2,25 @@
 import React, { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import { addBalance, AddBalanceFormState } from "@/app/lib/action";
+import { addBalance } from "@/app/lib/action";
 import confetti from "canvas-confetti";
 import { useFormState } from "react-dom";
+import { AddBalanceFormState } from "@/app/lib/formState";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
   const [state, formAction, isPending] = useFormState(addBalance, initialState);
 
   //   紙吹雪エフェクト
-  useEffect(() => {
-    if (state.message) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    }
-  }, [state.message]);
+  // useEffect(() => {
+  //   if (state.message) {
+  //     confetti({
+  //       particleCount: 100,
+  //       spread: 70,
+  //       origin: { y: 0.6 },
+  //     });
+  //   }
+  // }, [state.message]);
 
   return (
     <form action={formAction} className="space-y-3">

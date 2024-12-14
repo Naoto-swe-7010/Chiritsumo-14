@@ -1,5 +1,6 @@
 "use client";
-import { addWantedItem, AddWantedItemFormState } from "@/app/lib/action";
+import { addWantedItem } from "@/app/lib/action";
+import { AddWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
 import { useFormState } from "react-dom";
 
