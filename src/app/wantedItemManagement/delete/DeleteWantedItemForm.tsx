@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
+  // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
   const [state, formAction, isPending] = useFormState(
     deleteWantedItemWithId,
     null
   );
 
+  // キャンセルボタン用のルーター
   const router = useRouter();
 
   return (

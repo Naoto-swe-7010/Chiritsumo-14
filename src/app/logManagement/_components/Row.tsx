@@ -16,6 +16,7 @@ const formattedDate = (date: Date): string => {
     .replace(/^20/, "");
 };
 
+// テーブルの各ログ（各レコード）
 const Row = ({ log }: { log: Log }) => {
   return (
     <tr className="border-b border-gray-500 bg-black bg-opacity-30">

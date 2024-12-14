@@ -5,6 +5,8 @@ import EditWantedItemForm from "../EditWantedItemForm";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
+
+  // 編集対象のアイテムを取得
   let item = null;
   try {
     item = await prisma.wantedItem.findUnique({

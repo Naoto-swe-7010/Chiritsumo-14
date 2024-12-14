@@ -1,3 +1,4 @@
+// ログ取得中のスケルトンコンポーネント
 const RowSkeleton = () => {
   return (
     <>

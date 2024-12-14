@@ -37,7 +37,7 @@ const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
             )}
           </div>
           <div>
-            {/* 進捗が100％以上の時のみ、購入ボタンを表示 */}
+            {/* 値段に対する残高の進捗が100％以上の時のみ、購入ボタンを表示 */}
             {balance!.balance / item.price >= 1 && (
               <Button className="bg-pink-500 hover:bg-pink-700">購入</Button>
             )}

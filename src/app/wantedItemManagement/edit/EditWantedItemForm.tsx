@@ -8,12 +8,15 @@ import { useFormState } from "react-dom";
 
 const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
+
+  // プロップスで渡されたアイテムを予め引数にバインドしておく
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
   const [state, formAction, isPending] = useFormState(
     updateWantedItemWithId,
     initialState
   );
 
+  // キャンセルボタン用のルーター
   const router = useRouter();
   return (
     <form action={formAction}>

@@ -9,7 +9,7 @@ const Balance = async () => {
   let existingBalance = null;
 
   try {
-    // ユーザーの Balance レコードを確認
+    // ユーザーの Balance レコードを取得
     existingBalance = await prisma.balance.findUnique({
       where: { userId },
     });

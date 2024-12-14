@@ -4,6 +4,7 @@ import { prisma } from "../../../../prisma";
 import RowSkeleton from "./RowSkeleton";
 
 const LogTable = async () => {
+  // ログ取得
   const logs = await prisma.log.findMany({
     orderBy: { createdAt: "desc" },
   });

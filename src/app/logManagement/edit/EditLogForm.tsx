@@ -8,12 +8,13 @@ import { useFormState } from "react-dom";
 
 const EditLogForm = ({ log }: { log: Log }) => {
   const initialState: UpdateLogFormState = { message: null, errors: {} };
+  // プロップスで渡されたログを予め引数にバインドしておく
   const updateLogWithId = updateLog.bind(null, log.id);
   const [state, formAction, isPending] = useFormState(
     updateLogWithId,
     initialState
   );
-
+  // キャンセルボタン用のルーター
   const router = useRouter();
   return (
     <form action={formAction}>

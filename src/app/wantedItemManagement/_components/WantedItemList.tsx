@@ -3,6 +3,7 @@ import { prisma } from "../../../../prisma";
 import Row from "./Row";
 
 const WantedItemList = async () => {
+  // 欲しいものリストを取得
   const wantedItemList = await prisma.wantedItem.findMany({
     orderBy: { createdAt: "desc" },
   });

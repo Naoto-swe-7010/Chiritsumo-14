@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 
 const DeleteLogForm = ({ log }: { log: Log }) => {
+  // プロップスで渡されたログを予め引数にバインドしておく
   const deleteLogWithId = deleteLog.bind(null, log.id);
   const [state, formAction, isPending] = useFormState(deleteLogWithId, null);
 
+  // キャンセルボタン用のルーター
   const router = useRouter();
 
   return (

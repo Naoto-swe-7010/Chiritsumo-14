@@ -6,8 +6,8 @@ import DeleteWantedItemForm from "../DeleteWantedItemForm";
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
+  // 削除対象のアイテムを取得
   let item = null;
-
   try {
     item = await prisma.wantedItem.findUnique({
       where: {

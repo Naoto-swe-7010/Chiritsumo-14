@@ -5,6 +5,7 @@ import BalanceProgressItem from "./BalanceProgressItem";
 
 const BalanceProgress = async () => {
   const session = await auth();
+  // ほしい物リスト取得
   const wantedItemList = await prisma.wantedItem.findMany({
     where: { userId: session!.user!.id },
   });

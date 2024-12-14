@@ -1,6 +1,7 @@
 import { Balance, WantedItem } from "@prisma/client";
 import React from "react";
 
+// 欲しいものリストの各アイテムの値段に対する残高の進捗をプログレスバーで可視化
 const ProgressBar = ({
   item,
   balance,

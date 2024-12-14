@@ -18,6 +18,7 @@ const AccountInfo = ({ session }: { session: Session }) => {
       ) : (
         ""
       )}
+      {/* Googleアカウントの名前を表示 */}
       <span className="hidden font-medium sm:block">{session.user!.name}</span>
       <LogOutLink />
     </div>

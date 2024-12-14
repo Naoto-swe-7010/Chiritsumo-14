@@ -6,8 +6,8 @@ import DeleteLogForm from "../DeleteLogForm";
 const page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
+  // 削除対象のログを取得
   let log = null;
-
   try {
     log = await prisma.log.findUnique({
       where: {
