@@ -38,6 +38,7 @@ export const addBalance = async (
 ) => {
   const userId = await getSessionAndUserId();
 
+  // zodバリデーションチェック
   const validatedFields = AddBalanceSchema.safeParse({
     title: formData?.get("title"),
     price: parseInt(formData?.get("price") as string),
@@ -75,6 +76,7 @@ export const updateLog = async (
 ) => {
   const userId = await getSessionAndUserId();
 
+  // zodバリデーションチェック
   const validatedFields = UpdateLogSchema.safeParse({
     id,
     title: formData?.get("title"),
@@ -138,6 +140,7 @@ export const addWantedItem = async (
 ) => {
   const userId = await getSessionAndUserId();
 
+  // zodバリデーションチェック
   const validatedFields = AddWantedItemSchema.safeParse({
     name: formData?.get("name"),
     price: parseInt(formData?.get("price") as string),
@@ -170,6 +173,7 @@ export const updateWantedItem = async (
   prevState?: UpdateWantedItemFormState,
   formData?: FormData
 ) => {
+  // zodバリデーションチェック
   const validatedFields = UpdateWantedItemSchema.safeParse({
     id,
     name: formData?.get("name"),
