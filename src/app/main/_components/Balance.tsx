@@ -6,7 +6,6 @@ const Balance = async () => {
   try {
     // セッション情報を取得
     const session = await auth();
-
     // セッションが取得できない場合はエラーを表示
     if (!session || !session.user || !session.user.id) {
       console.error("セッション情報が取得できませんでした。");
