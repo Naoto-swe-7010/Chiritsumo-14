@@ -21,7 +21,7 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
       <p className="mb-4 text-gray-400">本当にこのアイテムを削除しますか？</p>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
-          {state}
+          {state.message}
         </p>
       )}
       <div className="flex justify-end gap-2">
