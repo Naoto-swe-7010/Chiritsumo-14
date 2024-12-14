@@ -3,9 +3,9 @@
 
 import { Button } from "@/components/ui/button";
 import { addBalance } from "@/app/lib/action";
-// import confetti from "canvas-confetti";
+import confetti from "canvas-confetti";
 import { AddBalanceFormState } from "@/app/lib/formState";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
@@ -14,16 +14,16 @@ const AddBalanceForm = () => {
     initialState
   );
 
-  //   紙吹雪エフェクト
-  // useEffect(() => {
-  //   if (state.message) {
-  //     confetti({
-  //       particleCount: 100,
-  //       spread: 70,
-  //       origin: { y: 0.6 },
-  //     });
-  //   }
-  // }, [state.message]);
+  // 紙吹雪エフェクト
+  useEffect(() => {
+    if (state.message) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    }
+  }, [state.message]);
 
   return (
     <form action={formAction} className="space-y-3">

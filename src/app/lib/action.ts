@@ -53,6 +53,7 @@ export const addBalance = async (
     return { message: "データベースにて残高の追加に失敗しました。" };
   }
   revalidatePath("/main");
+  return { message: "残高を追加しました。" };
 };
 
 // ログ更新
