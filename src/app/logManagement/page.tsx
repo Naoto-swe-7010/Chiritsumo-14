@@ -1,16 +1,9 @@
 import React from "react";
-import { redirect } from "next/navigation";
 
-import { auth } from "../../../auth";
 import LogTable from "./_components/LogTable";
 import Pagination from "./_components/Pagination";
 
 const page = async () => {
-  const session = await auth();
-  if (!session) {
-    redirect("/");
-  }
-
   return (
     <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)] pb-10 pt-8">
       <div>
