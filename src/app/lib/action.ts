@@ -54,7 +54,7 @@ export const addBalance = async (
   }
   revalidatePath("/main");
 
-  return { message: `残高を追加しました。${new Date().toString} ` };
+  return { message: `残高を追加しました。${Math.random()} ` };
 };
 
 // ログ更新
