@@ -1,7 +1,4 @@
 import React from "react";
-import { auth } from "../../../auth";
-import { redirect } from "next/navigation";
-import { prisma } from "../../../prisma";
 import BalanceDisplay from "./_components/BalanceDisplay";
 import AddBalance from "./_components/AddBalance";
 import BalanceProgress from "./_components/BalanceProgress";
