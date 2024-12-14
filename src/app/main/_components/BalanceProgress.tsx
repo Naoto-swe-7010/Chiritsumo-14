@@ -1,5 +1,4 @@
 import React from "react";
-import { auth } from "../../../../auth";
 import { prisma } from "../../../../prisma";
 import BalanceProgressItem from "./BalanceProgressItem";
 import { getSessionAndUserId } from "@/app/lib/commonFunction";

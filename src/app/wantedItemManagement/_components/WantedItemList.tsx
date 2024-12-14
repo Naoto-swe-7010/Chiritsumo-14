@@ -1,7 +1,6 @@
 import React from "react";
 import { prisma } from "../../../../prisma";
 import Row from "./Row";
-import { auth } from "../../../../auth";
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const WantedItemList = async () => {

@@ -2,8 +2,6 @@ import React, { Suspense } from "react";
 import Row from "./Row";
 import { prisma } from "../../../../prisma";
 import RowSkeleton from "./RowSkeleton";
-import { auth } from "../../../../auth";
-import { get } from "http";
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 const LogTable = async () => {

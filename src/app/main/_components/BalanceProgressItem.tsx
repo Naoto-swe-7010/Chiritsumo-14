@@ -1,6 +1,5 @@
 import { WantedItem } from "@prisma/client";
 import React from "react";
-import { auth } from "../../../../auth";
 import { prisma } from "../../../../prisma";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
