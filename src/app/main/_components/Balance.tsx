@@ -5,18 +5,31 @@ import { prisma } from "../../../../prisma";
 const Balance = async () => {
   const session = await auth();
 
+  const userId = session!.user!.id;
+  let existingBalance = null;
+
   try {
-    const existingBalance = await prisma.balance.findUnique({
-      where: { userId: session!.user!.id },
+    // ユーザーの Balance レコードを確認
+    existingBalance = await prisma.balance.findUnique({
+      where: { userId },
     });
 
+    // 存在しない場合は新しいレコードを作成し、それをexistingBalanceに格納
     if (!existingBalance) {
-      throw new Error("Balance レコードが見つかりませんでした。");
+      existingBalance = await prisma.balance.create({
+        data: {
+          userId: userId!,
+          balance: 0,
+        },
+      });
     }
-    return <div>{existingBalance.balance}</div>;
   } catch (error) {
-    console.error("Balance レコードの取得中にエラーが発生しました:", error);
+    console.error(
+      "Balanceテーブルの取得または作成中にエラーが発生しました:",
+      error
+    );
   }
+  return <div>{existingBalance!.balance}</div>;
 };
 
 export default Balance;
