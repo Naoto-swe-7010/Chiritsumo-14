@@ -1,10 +1,15 @@
 import React from "react";
 import { prisma } from "../../../../prisma";
 import Row from "./Row";
+import { auth } from "../../../../auth";
 
 const WantedItemList = async () => {
+  const session = await auth();
+  const userId = session!.user!.id;
+
   // 欲しいものリストを取得
   const wantedItemList = await prisma.wantedItem.findMany({
+    where: { userId },
     orderBy: { createdAt: "desc" },
   });
   return (

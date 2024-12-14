@@ -2,10 +2,14 @@ import React, { Suspense } from "react";
 import Row from "./Row";
 import { prisma } from "../../../../prisma";
 import RowSkeleton from "./RowSkeleton";
+import { auth } from "../../../../auth";
 
 const LogTable = async () => {
+  const session = await auth();
+  const userId = session!.user!.id;
   // ログ取得
   const logs = await prisma.log.findMany({
+    where: { userId },
     orderBy: { createdAt: "desc" },
   });
   return (
