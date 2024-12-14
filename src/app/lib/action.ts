@@ -95,12 +95,22 @@ export const updateLog = async (
 
   try {
     await prisma.$transaction(async (prisma) => {
-      // ログ更新と同時に古い価格を取得
-      const log = await prisma.log.update({
+      // 更新前の価格を取得
+      const log = await prisma.log.findUnique({
+        where: { id },
+        select: { price: true },
+      });
+
+      if (!log) {
+        throw new Error("指定されたログが見つかりません。");
+      }
+
+      // ログを更新
+      await prisma.log.update({
         where: { id },
         data: updatedLog,
-        select: { price: true }, // 古い価格のみ取得
       });
+
       // バランスを直接計算して更新
       await prisma.balance.update({
         where: { userId },
