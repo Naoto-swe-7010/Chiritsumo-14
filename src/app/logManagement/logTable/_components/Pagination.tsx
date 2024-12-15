@@ -3,19 +3,13 @@ import React from "react";
 import Link from "next/link";
 
 const Pagination = ({
-  totalLogs,
+  totalPages,
   page,
 }: {
-  totalLogs: number;
+  totalPages: number;
   page: string;
 }) => {
   const currentPage = parseInt(page);
-
-  // 1ページあたりの表示件数
-  const logsPerPage = 10;
-
-  // 総ページ数を計算
-  const totalPages = Math.ceil(totalLogs / logsPerPage);
 
   // ページネーションリンクを生成
   const paginationLinks = Array.from({ length: totalPages }, (_, index) => {

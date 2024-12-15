@@ -1,11 +1,10 @@
 "use client";
-// import React, { useEffect } from "react";
-
-import { Button } from "@/components/ui/button";
-import { addBalance } from "@/app/lib/action";
-import confetti from "canvas-confetti";
-import { AddBalanceFormState } from "@/app/lib/formState";
 import { useActionState, useEffect } from "react";
+import confetti from "canvas-confetti";
+import { Button } from "@/components/ui/button";
+
+import { addBalance } from "@/app/lib/action";
+import { AddBalanceFormState } from "@/app/lib/formState";
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 
 const AddBalanceForm = () => {

@@ -1,10 +1,11 @@
 "use client";
-import LoadingSpinner from "@/app/_components/LoadingSpinner";
-import { deleteLog } from "@/app/lib/action";
-import { Button } from "@/components/ui/button";
-import { Log } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Log } from "@prisma/client";
+
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
+import { deleteLog } from "@/app/lib/action";
 
 const DeleteLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく

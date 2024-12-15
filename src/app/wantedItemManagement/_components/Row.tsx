@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { WantedItem } from "@prisma/client";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import { WantedItem } from "@prisma/client";
+import { Button } from "@/components/ui/button";
 
 const Row = ({ item }: { item: WantedItem }) => {
   return (

@@ -1,8 +1,9 @@
-import { formattedDate } from "@/app/lib/commonFunction";
-import { Button } from "@/components/ui/button";
-import { Log } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
+import { Log } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+
+import { formattedDate } from "@/app/lib/commonFunction";
 
 // テーブルの各ログ（各レコード）
 const Row = ({ log }: { log: Log }) => {

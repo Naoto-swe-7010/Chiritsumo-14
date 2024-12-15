@@ -1,7 +1,8 @@
-import EditModal from "@/app/_components/EditModal";
 import React from "react";
+
 import { prisma } from "../../../../../prisma";
 import PurchaseForm from "../PurchaseForm";
+import Modal from "@/app/_components/Modal";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -19,17 +20,17 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   } catch (error) {
     console.error("エラーが発生しました:", error);
     return (
-      <EditModal>
+      <Modal>
         <div className="text-center text-red-500">
           <p>アイテムの取得中にエラーが発生しました。</p>
           <p>再度お試しください。</p>
         </div>
-      </EditModal>
+      </Modal>
     );
   }
 
   return (
-    <EditModal>
+    <Modal>
       <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">購入</h2>
       <div className="rounded border border-gray-300 bg-gray-900 p-4 shadow-md">
         <div className="flex items-start gap-3">
@@ -54,7 +55,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="mt-6">
         <PurchaseForm item={item} />
       </div>
-    </EditModal>
+    </Modal>
   );
 };
 

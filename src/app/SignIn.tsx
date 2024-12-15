@@ -1,6 +1,7 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { TbMountain } from "react-icons/tb";
+
 import { signIn } from "../../auth";
 
 const SignIn = () => {

@@ -1,11 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+import { Log } from "@prisma/client";
+
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { updateLog } from "@/app/lib/action";
 import { UpdateLogFormState } from "@/app/lib/formState";
-import { Button } from "@/components/ui/button";
-import { Log } from "@prisma/client";
-import { useRouter } from "next/navigation";
-import { useActionState } from "react";
 
 const EditLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく

@@ -1,4 +1,5 @@
 import React from "react";
+
 import Menu from "./_components/Menu";
 import CopyRight from "./_components/CopyRight";
 import { auth } from "../../../auth";

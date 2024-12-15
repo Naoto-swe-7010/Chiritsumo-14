@@ -1,7 +1,8 @@
 import React from "react";
-import BalanceDisplay from "./_components/BalanceDisplay";
-import AddBalance from "./_components/AddBalance";
-import BalanceProgress from "./_components/BalanceProgress";
+
+import BalanceDisplay from "./_components/_BalanceDisplay/BalanceDisplay";
+import AddBalance from "./_components/_AddBalance/AddBalance";
+import BalanceProgress from "./_components/_BalanceProgress/BalanceProgress";
 
 const page = async () => {
   return (

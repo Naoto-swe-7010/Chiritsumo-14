@@ -1,14 +1,16 @@
 import React, { Suspense } from "react";
-import RowSkeleton from "../../_components/RowSkeleton";
+
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
 import { prisma } from "../../../../../prisma";
-import Row from "../../_components/Row";
-import Pagination from "../../_components/Pagination";
+import Row from "../_components/Row";
+import Pagination from "../_components/Pagination";
+import RowSkeleton from "../_components/RowSkeleton";
 
 const page = async ({ params }: { params: Promise<{ page: string }> }) => {
   // ページ番号を取得し、数値に変換
   const { page } = await params;
   const pageNumber = parseInt(page, 10) || 1; // デフォルトで1ページ目
+
   // 1ページあたりの表示件数
   const pageSize = 10;
 
@@ -16,9 +18,11 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
     // UserIDを取得
     const userId = await getSessionAndUserId();
 
+    // ユーザーのログの総数と１ページあたりの表示件数から総ページ数を計算（ページネーション用）
     const totalLogs = await prisma.log.count({
       where: { userId },
     });
+    const totalPages = Math.ceil(totalLogs / pageSize);
 
     // ログを取得（ページ数に応じてスキップ件数を設定）
     const logs = await prisma.log.findMany({
@@ -63,7 +67,7 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
                     </Suspense>
                   </tbody>
                 </table>
-                <Pagination totalLogs={totalLogs} page={page} />
+                <Pagination totalPages={totalPages} page={page} />
               </div>
             ) : (
               <p className="text-center text-gray-500">ログがありません。</p>

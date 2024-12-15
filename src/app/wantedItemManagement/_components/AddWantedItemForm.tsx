@@ -1,9 +1,10 @@
 "use client";
+import { useActionState } from "react";
+import { Button } from "@/components/ui/button";
+
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { addWantedItem } from "@/app/lib/action";
 import { AddWantedItemFormState } from "@/app/lib/formState";
-import { Button } from "@/components/ui/button";
-import { useActionState } from "react";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };

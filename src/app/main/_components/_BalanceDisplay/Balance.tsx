@@ -1,6 +1,7 @@
 import React from "react";
-import { prisma } from "../../../../prisma";
+
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
+import { prisma } from "../../../../../prisma";
 
 const Balance = async () => {
   try {
