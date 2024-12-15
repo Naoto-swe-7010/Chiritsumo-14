@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 
 const Error = () => {
   return (
@@ -15,12 +14,12 @@ const Error = () => {
       {/* ボタン群 */}
       <div className="flex flex-col sm:flex-row gap-4">
         {/* メインページに戻るボタン */}
-        <Link
-          href="/"
+        <button
+          onClick={() => signOut()}
           className="px-6 py-3 bg-pink-500 rounded-lg font-bold hover:bg-pink-700 transition duration-300"
         >
-          ログイン
-        </Link>
+          ログイン画面に戻る
+        </button>
       </div>
     </div>
   );

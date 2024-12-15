@@ -1,7 +1,6 @@
 import React from "react";
 import { prisma } from "../../../../prisma";
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
-import Value from "./BalanceValue";
 
 const Balance = async () => {
   try {
@@ -23,7 +22,7 @@ const Balance = async () => {
     }
     // 取得した残高を表示
     return <div>{existingBalance.balance}</div>;
-  } catch (error) {
+  } catch {
     console.error("Balanceテーブルの取得または作成中にエラーが発生しました:");
   }
 };
