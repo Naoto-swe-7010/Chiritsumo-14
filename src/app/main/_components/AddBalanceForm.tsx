@@ -6,6 +6,7 @@ import { addBalance } from "@/app/lib/action";
 import confetti from "canvas-confetti";
 import { AddBalanceFormState } from "@/app/lib/formState";
 import { useActionState, useEffect } from "react";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
@@ -75,7 +76,11 @@ const AddBalanceForm = () => {
           className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
           disabled={isPending}
         >
-          我慢できた！
+          {isPending ? (
+            <LoadingSpinner size={24} color="white" />
+          ) : (
+            "我慢できた！"
+          )}
         </Button>
       </div>
     </form>

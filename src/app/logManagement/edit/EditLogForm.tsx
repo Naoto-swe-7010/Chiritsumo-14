@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { updateLog } from "@/app/lib/action";
 import { UpdateLogFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
@@ -71,7 +72,7 @@ const EditLogForm = ({ log }: { log: Log }) => {
           className="bg-green-500 hover:bg-green-700 font-bold"
           disabled={isPending}
         >
-          保存
+          {isPending ? <LoadingSpinner size={18} color="white" /> : "保存"}
         </Button>
         <Button
           onClick={(e) => {

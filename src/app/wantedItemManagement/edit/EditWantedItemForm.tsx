@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { updateWantedItem } from "@/app/lib/action";
 import { UpdateWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
@@ -88,7 +89,7 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
           className="bg-green-500 hover:bg-green-700 font-bold"
           disabled={isPending}
         >
-          保存
+          {isPending ? <LoadingSpinner size={18} color="white" /> : "保存"}
         </Button>
         <Button
           onClick={(e) => {

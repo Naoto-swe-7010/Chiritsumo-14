@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { addWantedItem } from "@/app/lib/action";
 import { AddWantedItemFormState } from "@/app/lib/formState";
 import { Button } from "@/components/ui/button";
@@ -61,10 +62,10 @@ const AddWantedItemForm = () => {
         ))}
       <div className="sm:w-auto">
         <Button
-          className=" font-bold sm:w-auto bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
+          className=" font-bold sm:w-[68px] bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg"
           disabled={isPending}
         >
-          追加
+          {isPending ? <LoadingSpinner size={24} color="white" /> : "追加"}
         </Button>
       </div>
     </form>

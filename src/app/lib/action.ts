@@ -53,7 +53,6 @@ export const addBalance = async (
     return { message: "データベースにて残高の追加に失敗しました。" };
   }
   revalidatePath("/main");
-
   return { message: `残高を追加しました。${Math.random()} ` };
 };
 
@@ -98,7 +97,7 @@ export const updateLog = async (
     console.error("ログ更新中にエラーが発生しました:", error);
     return { message: "データベースにてログの更新に失敗しました。" };
   }
-  redirect("/logManagement");
+  redirect("/logManagement/logTable/1");
 };
 
 // ログ削除
@@ -121,7 +120,7 @@ export const deleteLog = async (id: string) => {
     console.error("ログ削除中にエラーが発生しました:", error);
     return { message: "データベースにてログの削除に失敗しました。" };
   }
-  redirect("/logManagement");
+  redirect("/logManagement/logTable/1");
 };
 
 // 欲しいものリスト追加

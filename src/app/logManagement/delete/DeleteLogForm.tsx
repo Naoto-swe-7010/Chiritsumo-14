@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { deleteLog } from "@/app/lib/action";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
@@ -27,7 +28,7 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
           className="bg-red-500 hover:bg-red-700 font-bold"
           disabled={isPending}
         >
-          はい
+          {isPending ? <LoadingSpinner size={18} color="white" /> : "はい"}
         </Button>
         <Button
           onClick={(e) => {

@@ -17,7 +17,7 @@ const Menu = () => {
       </li>
       <li className="flex flex-col items-center">
         <Link
-          href="/logManagement"
+          href="/logManagement/logTable/1"
           className="flex flex-col items-center text-white hover:text-pink-500"
         >
           <AiOutlineUnorderedList size={22} />
