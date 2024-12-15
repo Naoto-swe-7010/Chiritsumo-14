@@ -192,6 +192,30 @@ export const updateWantedItem = async (
   redirect("/wantedItemManagement");
 };
 
+// 欲しいものリスト購入
+export const purchaseWantedItem = async (id: string) => {
+  const userId = await getSessionAndUserId();
+
+  // DB処理
+  try {
+    await prisma.$transaction(async (tx) => {
+      const buyWantedItem = await tx.wantedItem.delete({
+        where: { id },
+        select: { price: true },
+      });
+      await tx.balance.update({
+        where: { userId },
+        data: { balance: { decrement: buyWantedItem.price } },
+      });
+    });
+  } catch (error) {
+    console.error("欲しいものリスト購入中にエラーが発生しました:", error);
+    return { message: "データベースにてアイテムの購入に失敗しました。" };
+  }
+  revalidatePath("/wantedItemManagement");
+  redirect("/main");
+};
+
 // 欲しいものリスト削除
 export const deleteWantedItem = async (id: string) => {
   // DB処理

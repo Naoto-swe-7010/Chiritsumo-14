@@ -4,6 +4,7 @@ import { prisma } from "../../../../prisma";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
 import { getSessionAndUserId } from "@/app/lib/commonFunction";
+import Link from "next/link";
 
 const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
   try {
@@ -52,7 +53,11 @@ const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
             <div>
               {/* 値段に対する残高の進捗が100％以上の時のみ、購入ボタンを表示 */}
               {balance.balance / item.price >= 1 && (
-                <Button className="bg-pink-500 hover:bg-pink-700">購入</Button>
+                <Link href={`/main/purchaseWantedItem/${item.id}`}>
+                  <Button className="bg-pink-500 hover:bg-pink-700">
+                    購入
+                  </Button>
+                </Link>
               )}
             </div>
           </div>
