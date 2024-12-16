@@ -11,7 +11,7 @@ const SignIn = () => {
       <h1 className="mb-3 text-4xl font-bold sm:text-5xl md:text-6xl">
         ちり<span className="text-pink-500">つも</span>
       </h1>
-      <h3 className="mb-6 text-lg sm:text-xl md:text-2xl">
+      <h3 className="mb-6 text-lg sm:text-xl md:text-2xl font-bold">
         <div className="inline-block">無駄づかいを我慢して</div>
         <div className="inline-block">欲しいものを手に入れよう！</div>
       </h3>
