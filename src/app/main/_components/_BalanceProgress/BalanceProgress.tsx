@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import {
   getSessionAndUserId,
   getWantedItemList,
 } from "@/app/lib/commonFunction";
 import BalanceProgressItem from "./BalanceProgressItem";
+import Loading from "@/app/_components/Loading";
 
 const BalanceProgress = async () => {
   try {
@@ -21,16 +22,18 @@ const BalanceProgress = async () => {
               欲しい物リスト進捗
             </span>
           </h2>
-          {wantedItemList && wantedItemList.length > 0 ? (
-            wantedItemList.map((item) => (
-              <BalanceProgressItem key={item.id} item={item} />
-            ))
-          ) : (
-            <div className="text-center text-gray-500">
-              <p>欲しい物リストが空です。</p>
-              <p>欲しい物ページからアイテムを追加してください。</p>
-            </div>
-          )}
+          <Suspense fallback={<Loading />}>
+            {wantedItemList && wantedItemList.length > 0 ? (
+              wantedItemList.map((item) => (
+                <BalanceProgressItem key={item.id} item={item} />
+              ))
+            ) : (
+              <div className="text-center text-gray-500">
+                <p>欲しい物リストが空です。</p>
+                <p>欲しい物ページからアイテムを追加してください。</p>
+              </div>
+            )}
+          </Suspense>
         </div>
       </div>
     );

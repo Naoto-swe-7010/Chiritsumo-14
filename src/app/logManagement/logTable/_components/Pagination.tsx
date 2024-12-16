@@ -1,76 +1,21 @@
-"use client";
 import React from "react";
-import Link from "next/link";
+import PaginationUI from "./PaginationUI";
+import { prisma } from "../../../../../prisma";
+import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
-const Pagination = ({
-  totalPages,
-  page,
-}: {
-  totalPages: number;
-  page: string;
-}) => {
-  const currentPage = parseInt(page);
+// 1ページあたりの表示件数
+const pageSize = 10;
 
-  // ページネーションリンクを生成
-  const paginationLinks = Array.from({ length: totalPages }, (_, index) => {
-    const page = index + 1; // ページ番号 (1-based index)
-    const isActive = page === currentPage; // 現在のページかどうかを判定
-    return (
-      <li key={page} className="inline-block mx-1">
-        <Link
-          href={`/logManagement/logTable/${page}`}
-          className={`px-3 py-1 rounded ${
-            isActive
-              ? "bg-pink-500 text-white" // 現在のページはピンク背景＋白文字
-              : "text-gray-400 hover:text-white hover:bg-gray-600"
-          }`}
-        >
-          {page}
-        </Link>
-      </li>
-    );
+const Pagination = async ({ page }: { page: string }) => {
+  // UserIDを取得
+  const userId = await getSessionAndUserId();
+  // ユーザーのログの総数と１ページあたりの表示件数から総ページ数を計算（ページネーション用）
+  const totalLogs = await prisma.log.count({
+    where: { userId },
   });
+  const totalPages = Math.ceil(totalLogs / pageSize);
 
-  return (
-    <nav className="mt-4">
-      <ul className="flex justify-center items-center list-none p-0 m-0">
-        {/* Back ボタン */}
-        <li className="mx-2">
-          {currentPage > 1 ? (
-            <Link
-              href={`/logManagement/logTable/${currentPage - 1}`}
-              className="text-gray-400 hover:text-white hover:bg-gray-600 px-3 py-1 rounded"
-            >
-              &lt; Back
-            </Link>
-          ) : (
-            <span className="text-gray-500 px-3 py-1 rounded opacity-50 pointer-events-none">
-              &lt; Back
-            </span>
-          )}
-        </li>
-
-        {/* ページ番号 */}
-        {paginationLinks}
-
-        {/* Next ボタン */}
-        <li className="mx-2">
-          {currentPage < totalPages ? (
-            <Link
-              href={`/logManagement/logTable/${currentPage + 1}`}
-              className="text-gray-400 hover:text-white hover:bg-gray-600 px-3 py-1 rounded"
-            >
-              Next &gt;
-            </Link>
-          ) : (
-            <span className="text-gray-500 px-3 py-1 rounded opacity-50 pointer-events-none">
-              Next &gt;
-            </span>
-          )}
-        </li>
-      </ul>
-    </nav>
-  );
+  return <PaginationUI totalPages={totalPages} page={page} />;
 };
 
 export default Pagination;
