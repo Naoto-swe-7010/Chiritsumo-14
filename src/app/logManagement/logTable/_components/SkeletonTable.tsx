@@ -16,7 +16,10 @@ export const SkeletonTable = () => {
         </thead>
         <tbody>
           {Array.from({ length: 15 }).map((_, index) => (
-            <tr className="border-b border-gray-500 bg-black bg-opacity-30">
+            <tr
+              key={index}
+              className="border-b border-gray-500 bg-black bg-opacity-30"
+            >
               <td className="max-w-xs break-words py-3 px-3 text-base sm:max-w-full">
                 <div className="h-5 w-2/3 animate-pulse bg-gray-700"></div>
               </td>
