@@ -4,7 +4,6 @@ import {
   getSessionAndUserId,
   getWantedItemList,
 } from "@/app/lib/commonFunction";
-import { prisma } from "../../../../../prisma";
 import BalanceProgressItem from "./BalanceProgressItem";
 
 const BalanceProgress = async () => {

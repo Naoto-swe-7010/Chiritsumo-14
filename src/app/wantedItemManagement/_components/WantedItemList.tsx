@@ -1,6 +1,5 @@
 import React from "react";
 
-import { prisma } from "../../../../prisma";
 import Row from "./Row";
 import {
   getSessionAndUserId,
