@@ -1,18 +1,18 @@
 import React from "react";
 
-import { getSessionAndUserId } from "@/app/lib/commonFunction";
+import {
+  getSessionAndUserId,
+  getWantedItemList,
+} from "@/app/lib/commonFunction";
 import { prisma } from "../../../../../prisma";
 import BalanceProgressItem from "./BalanceProgressItem";
 
 const BalanceProgress = async () => {
   try {
-    // UserIDを取得
+    // UserID取得
     const userId = await getSessionAndUserId();
-
-    // ほしい物リストを取得
-    const wantedItemList = await prisma.wantedItem.findMany({
-      where: { userId },
-    });
+    // 欲しい物リスト取得
+    const wantedItemList = await getWantedItemList(userId);
 
     return (
       <div className="flex justify-center p-4 sm:p-6">

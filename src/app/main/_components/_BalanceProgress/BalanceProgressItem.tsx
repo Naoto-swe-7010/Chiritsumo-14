@@ -3,19 +3,15 @@ import Link from "next/link";
 import { WantedItem } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 
-import { getSessionAndUserId } from "@/app/lib/commonFunction";
-import { prisma } from "../../../../../prisma";
+import { getBalance, getSessionAndUserId } from "@/app/lib/commonFunction";
 import ProgressBar from "./ProgressBar";
 
 const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
   try {
-    // UserIDを取得
+    // UserID取得
     const userId = await getSessionAndUserId();
-
-    // 残高情報を取得
-    const balance = await prisma.balance.findFirst({
-      where: { userId },
-    });
+    // 残高情報取得
+    const balance = await getBalance(userId);
 
     if (!balance) {
       console.error("残高情報が取得できませんでした。");

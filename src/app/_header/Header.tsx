@@ -3,10 +3,10 @@ import React from "react";
 import Title from "./_components/Title";
 import Menu from "./_components/Menu";
 import AccountInfo from "./_components/AccountInfo";
-import { auth } from "../../../auth";
+import { getSession } from "../lib/commonFunction";
 
 const Header = async () => {
-  const session = await auth();
+  const session = await getSession();
 
   return (
     <header className="fixed left-0 top-0 z-10 w-full bg-gray-800 px-[4%] text-white">

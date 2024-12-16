@@ -18,19 +18,22 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
     // UserIDを取得
     const userId = await getSessionAndUserId();
 
-    // ユーザーのログの総数と１ページあたりの表示件数から総ページ数を計算（ページネーション用）
-    const totalLogs = await prisma.log.count({
-      where: { userId },
-    });
+    // 並行データフェッチ
+    const [totalLogs, logs] = await Promise.all([
+      // 総ログ数を取得
+      prisma.log.count({
+        where: { userId },
+      }),
+      // ログのリストを取得
+      prisma.log.findMany({
+        where: { userId },
+        orderBy: { createdAt: "desc" },
+        skip: (pageNumber - 1) * pageSize,
+        take: pageSize,
+      }),
+    ]);
+    // 総ログ数から総ページ数を計算
     const totalPages = Math.ceil(totalLogs / pageSize);
-
-    // ログを取得（ページ数に応じてスキップ件数を設定）
-    const logs = await prisma.log.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
-      skip: (pageNumber - 1) * pageSize,
-      take: pageSize,
-    });
 
     return (
       <div>

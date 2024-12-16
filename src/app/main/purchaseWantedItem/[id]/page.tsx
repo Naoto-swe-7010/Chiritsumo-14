@@ -13,7 +13,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     item = await prisma.wantedItem.findUnique({
       where: { id },
     });
-
     if (!item) {
       throw new Error("指定されたアイテムが見つかりませんでした。");
     }

@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 
-import { auth } from "../../auth";
 import SignIn from "./SignIn";
+import { getSession } from "./lib/commonFunction";
 
 export default async function Home() {
-  const session = await auth();
+  const session = await getSession();
 
   if (session) {
     redirect("/main");
