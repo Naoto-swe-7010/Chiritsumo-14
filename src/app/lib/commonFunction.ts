@@ -1,6 +1,7 @@
+import { cache } from "react";
+
 import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
-import { unstable_cache } from "next/cache";
 
 // 日付フォーマット関数
 export const formattedDate = (date: Date): string => {
@@ -18,12 +19,12 @@ export const formattedDate = (date: Date): string => {
 // 非同期（ReactCacheにてメモ化）///////////////////////////////////
 
 // Sessionの取得
-export const getSession = unstable_cache(async () => {
+export const getSession = cache(async () => {
   return auth();
 });
 
 // UserIDの取得
-export const getSessionAndUserId = unstable_cache(async () => {
+export const getSessionAndUserId = cache(async () => {
   try {
     const session = await getSession();
     if (!session || !session.user || !session.user.id) {
@@ -37,7 +38,7 @@ export const getSessionAndUserId = unstable_cache(async () => {
 });
 
 // Balanceレコードの取得(存在しない場合は新規作成)
-export const getBalance = unstable_cache(async (userId: string) => {
+export const getBalance = cache(async (userId: string) => {
   let balance = await prisma.balance.findUnique({
     where: { userId },
   });
@@ -53,7 +54,7 @@ export const getBalance = unstable_cache(async (userId: string) => {
 });
 
 // 欲しいものリストの取得
-export const getWantedItemList = unstable_cache(async (userId: string) => {
+export const getWantedItemList = cache(async (userId: string) => {
   return prisma.wantedItem.findMany({
     where: { userId },
     orderBy: { createdAt: "desc" },
