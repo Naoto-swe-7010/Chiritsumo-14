@@ -1,7 +1,7 @@
 import React from "react";
-// import { Suspense } from "react";
+import { Suspense } from "react";
 import List from "./List";
-// import SkeletonList from "./SkeletonList";
+import SkeletonList from "./SkeletonList";
 
 const WantedItemList = async () => {
   return (
@@ -9,10 +9,9 @@ const WantedItemList = async () => {
       <h2 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
         欲しい物リスト
       </h2>
-      {/* Static Rendering(Data Cacheあり)にしたためSuspenseは不要 */}
-      {/* <Suspense fallback={<SkeletonList />}> */}
-      <List />
-      {/* </Suspense> */}
+      <Suspense fallback={<SkeletonList />}>
+        <List />
+      </Suspense>
     </div>
   );
 };
