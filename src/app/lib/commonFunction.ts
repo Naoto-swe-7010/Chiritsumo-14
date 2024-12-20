@@ -17,7 +17,7 @@ export const formattedDate = (date: Date): string => {
     .replace(/^20/, "");
 };
 
-// 非同期///////////////////////////////////
+// 非同期（全てユーザに紐づくデータ取得のためDynamic Rendering）///////////////////////////////////
 
 // Sessionの取得
 export const getSession = cache(async () => {
@@ -39,22 +39,20 @@ export const getSessionAndUserId = cache(async () => {
 });
 
 // Balanceレコードの取得(存在しない場合は新規作成)
-export const getBalance = cache(
-  unstable_cache(async (userId: string) => {
-    let balance = await prisma.balance.findUnique({
-      where: { userId },
+export const getBalance = cache(async (userId: string) => {
+  let balance = await prisma.balance.findUnique({
+    where: { userId },
+  });
+  if (!balance) {
+    balance = await prisma.balance.create({
+      data: {
+        userId,
+        balance: 0,
+      },
     });
-    if (!balance) {
-      balance = await prisma.balance.create({
-        data: {
-          userId,
-          balance: 0,
-        },
-      });
-    }
-    return balance;
-  })
-);
+  }
+  return balance;
+});
 
 // ログの取得
 export const getLog = cache(
@@ -69,11 +67,9 @@ export const getLog = cache(
 );
 
 // 欲しいものリストの取得
-export const getWantedItemList = cache(
-  unstable_cache(async (userId: string) => {
-    return prisma.wantedItem.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
-    });
-  })
-);
+export const getWantedItemList = cache(async (userId: string) => {
+  return prisma.wantedItem.findMany({
+    where: { userId },
+    orderBy: { createdAt: "desc" },
+  });
+});
