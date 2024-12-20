@@ -4,8 +4,8 @@ import { prisma } from "../../../../../prisma";
 import PurchaseForm from "../PurchaseForm";
 import Modal from "@/app/_components/Modal";
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const page = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   // 削除対象のログを取得
   let item = null;

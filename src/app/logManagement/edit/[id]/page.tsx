@@ -4,8 +4,8 @@ import { prisma } from "../../../../../prisma";
 import EditLogForm from "../EditLogForm";
 import Modal from "@/app/_components/Modal";
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const page = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   // 編集対象のログを取得
   let log = null;

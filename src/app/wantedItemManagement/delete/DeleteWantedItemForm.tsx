@@ -1,8 +1,8 @@
 "use client";
-import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { WantedItem } from "@prisma/client";
 import { Button } from "@/components/ui/button";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { deleteWantedItem } from "@/app/lib/action";
@@ -10,7 +10,7 @@ import { deleteWantedItem } from "@/app/lib/action";
 const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     deleteWantedItemWithId,
     null
   );

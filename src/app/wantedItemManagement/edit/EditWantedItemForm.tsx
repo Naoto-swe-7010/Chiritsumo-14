@@ -1,8 +1,8 @@
 "use client";
-import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { WantedItem } from "@prisma/client";
 import { Button } from "@/components/ui/button";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { updateWantedItem } from "@/app/lib/action";
@@ -13,7 +13,7 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
 
   const initialState: UpdateWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     updateWantedItemWithId,
     initialState
   );

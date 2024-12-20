@@ -1,6 +1,6 @@
 "use client";
-import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { addWantedItem } from "@/app/lib/action";
@@ -8,7 +8,7 @@ import { AddWantedItemFormState } from "@/app/lib/formState";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     addWantedItem,
     initialState
   );

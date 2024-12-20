@@ -1,7 +1,8 @@
 "use client";
-import { useActionState, useEffect } from "react";
+import { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import { addBalance } from "@/app/lib/action";
 import { AddBalanceFormState } from "@/app/lib/formState";
@@ -9,7 +10,7 @@ import LoadingSpinner from "@/app/_components/LoadingSpinner";
 
 const AddBalanceForm = () => {
   const initialState: AddBalanceFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     addBalance,
     initialState
   );

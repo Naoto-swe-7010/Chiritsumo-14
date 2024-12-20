@@ -4,8 +4,8 @@ import { prisma } from "../../../../../prisma";
 import EditWantedItemForm from "../EditWantedItemForm";
 import Modal from "@/app/_components/Modal";
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const page = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   // 編集対象のアイテムを取得
   let item = null;

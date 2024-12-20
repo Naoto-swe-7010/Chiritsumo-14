@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Log } from "@prisma/client";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { updateLog } from "@/app/lib/action";
@@ -13,7 +13,7 @@ const EditLogForm = ({ log }: { log: Log }) => {
   const updateLogWithId = updateLog.bind(null, log.id);
 
   const initialState: UpdateLogFormState = { message: null, errors: {} };
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     updateLogWithId,
     initialState
   );

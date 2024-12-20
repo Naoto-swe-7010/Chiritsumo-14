@@ -1,15 +1,15 @@
 "use client";
-import React, { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { WantedItem } from "@prisma/client";
 import { Button } from "@/components/ui/button";
+import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import { purchaseWantedItem } from "@/app/lib/action";
 
 const PurchaseForm = ({ item }: { item: WantedItem }) => {
   // プロップスで渡されたログを予め引数にバインドしておく
   const purchaseWantedItemWithId = purchaseWantedItem.bind(null, item.id);
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction, isPending] = useActionStateCompat(
     purchaseWantedItemWithId,
     null
   );
