@@ -2,7 +2,6 @@ import { cache } from "react";
 
 import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
-import { unstable_cache } from "next/cache";
 
 // 日付フォーマット関数
 export const formattedDate = (date: Date): string => {
