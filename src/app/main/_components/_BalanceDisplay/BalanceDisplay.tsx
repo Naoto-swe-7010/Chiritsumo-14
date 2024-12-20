@@ -1,5 +1,6 @@
-import React, { Suspense } from "react";
-import Loading from "@/app/_components/Loading";
+import React from "react";
+// import { Suspense } from "react";
+// import Loading from "@/app/_components/Loading";
 import Balance from "./Balance";
 
 const BalanceDisplay = async () => {

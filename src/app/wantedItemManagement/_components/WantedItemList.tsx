@@ -1,6 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
+// import { Suspense } from "react";
 import List from "./List";
-import SkeletonList from "./SkeletonList";
+// import SkeletonList from "./SkeletonList";
 
 const WantedItemList = async () => {
   return (
