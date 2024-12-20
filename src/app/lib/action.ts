@@ -97,6 +97,7 @@ export const updateLog = async (
     console.error("ログ更新中にエラーが発生しました:", error);
     return { message: "データベースにてログの更新に失敗しました。" };
   }
+  revalidatePath("/main");
   redirect("/logManagement/logTable/1");
 };
 
@@ -120,6 +121,7 @@ export const deleteLog = async (id: string) => {
     console.error("ログ削除中にエラーが発生しました:", error);
     return { message: "データベースにてログの削除に失敗しました。" };
   }
+  revalidatePath("/main");
   redirect("/logManagement/logTable/1");
 };
 
@@ -188,6 +190,7 @@ export const updateWantedItem = async (
     console.error("欲しいものリスト更新中にエラーが発生しました:", error);
     return { message: "データベースにてアイテムの更新に失敗しました。" };
   }
+  revalidatePath("/wantedItemManagement");
   redirect("/wantedItemManagement");
 };
 
@@ -211,6 +214,7 @@ export const purchaseWantedItem = async (id: string) => {
     console.error("欲しいものリスト購入中にエラーが発生しました:", error);
     return { message: "データベースにてアイテムの購入に失敗しました。" };
   }
+  revalidatePath("/main");
   redirect("/main");
 };
 
@@ -223,5 +227,6 @@ export const deleteWantedItem = async (id: string) => {
     console.error("欲しいものリスト削除中にエラーが発生しました:", error);
     return { message: "データベースにてアイテムの削除に失敗しました。" };
   }
+  revalidatePath("/wantedItemManagement");
   redirect("/wantedItemManagement");
 };

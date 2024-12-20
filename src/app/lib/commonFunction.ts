@@ -2,6 +2,7 @@ import { cache } from "react";
 
 import { auth } from "../../../auth";
 import { prisma } from "../../../prisma";
+import { unstable_cache } from "next/cache";
 
 // 日付フォーマット関数
 export const formattedDate = (date: Date): string => {
@@ -16,7 +17,7 @@ export const formattedDate = (date: Date): string => {
     .replace(/^20/, "");
 };
 
-// 非同期（ReactCacheにてメモ化）///////////////////////////////////
+// 非同期///////////////////////////////////
 
 // Sessionの取得
 export const getSession = cache(async () => {
@@ -38,25 +39,41 @@ export const getSessionAndUserId = cache(async () => {
 });
 
 // Balanceレコードの取得(存在しない場合は新規作成)
-export const getBalance = cache(async (userId: string) => {
-  let balance = await prisma.balance.findUnique({
-    where: { userId },
-  });
-  if (!balance) {
-    balance = await prisma.balance.create({
-      data: {
-        userId,
-        balance: 0,
-      },
+export const getBalance = cache(
+  unstable_cache(async (userId: string) => {
+    let balance = await prisma.balance.findUnique({
+      where: { userId },
+    });
+    if (!balance) {
+      balance = await prisma.balance.create({
+        data: {
+          userId,
+          balance: 0,
+        },
+      });
+    }
+    return balance;
+  })
+);
+
+// ログの取得
+export const getLog = cache(
+  async (userId: string, pageNumber: number, pageSize: number) => {
+    return prisma.log.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+      skip: (pageNumber - 1) * pageSize,
+      take: pageSize,
     });
   }
-  return balance;
-});
+);
 
 // 欲しいものリストの取得
-export const getWantedItemList = cache(async (userId: string) => {
-  return prisma.wantedItem.findMany({
-    where: { userId },
-    orderBy: { createdAt: "desc" },
-  });
-});
+export const getWantedItemList = cache(
+  unstable_cache(async (userId: string) => {
+    return prisma.wantedItem.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+    });
+  })
+);

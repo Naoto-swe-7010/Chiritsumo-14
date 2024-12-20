@@ -1,8 +1,7 @@
 import React from "react";
-import { prisma } from "../../../../../prisma";
-import { getSessionAndUserId } from "@/app/lib/commonFunction";
 
 import Row from "./Row";
+import { getLog, getSessionAndUserId } from "@/app/lib/commonFunction";
 
 // 1ページあたりの表示件数
 const pageSize = 10;
@@ -13,12 +12,7 @@ const Table = async ({ page }: { page: string }) => {
   // UserIDを取得
   const userId = await getSessionAndUserId();
   // ログを取得（ページ数に応じてスキップ件数を設定）
-  const logs = await prisma.log.findMany({
-    where: { userId },
-    orderBy: { createdAt: "desc" },
-    skip: (pageNumber - 1) * pageSize,
-    take: pageSize,
-  });
+  const logs = await getLog(userId, pageNumber, pageSize);
   return (
     <div>
       {logs && logs.length > 0 ? (

@@ -8,9 +8,10 @@ const WantedItemList = async () => {
       <h2 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
         欲しい物リスト
       </h2>
-      <Suspense fallback={<SkeletonList />}>
-        <List />
-      </Suspense>
+      {/* Static Rendering(Data Cacheあり)にしたためSuspenseは不要 */}
+      {/* <Suspense fallback={<SkeletonList />}> */}
+      <List />
+      {/* </Suspense> */}
     </div>
   );
 };
