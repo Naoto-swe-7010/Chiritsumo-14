@@ -22,6 +22,7 @@ const AddBalanceForm = () => {
   // 残高追加（ログ作成）成功時の処理
   useEffect(() => {
     if (state.message) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       // 紙吹雪エフェクト
       confetti({
         particleCount: 100,
