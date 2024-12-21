@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@/components/ui/button";
 import { useActionStateCompat } from "@strozw/use-action-state-compat";
@@ -15,19 +15,25 @@ const AddBalanceForm = () => {
     initialState
   );
 
-  // 紙吹雪エフェクト
+  // Submit時のFormクリア用
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // 残高追加（ログ作成）成功時の処理
   useEffect(() => {
     if (state.message) {
+      // 紙吹雪エフェクト
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
       });
+      // Formクリア
+      formRef.current?.reset();
     }
   }, [state.message]);
 
   return (
-    <form action={formAction} className="space-y-3">
+    <form action={formAction} ref={formRef} className="space-y-3">
       <div className="md:flex md:items-center md:gap-4">
         <div className="mb-2 flex flex-col md:mb-0 md:w-1/2">
           <input

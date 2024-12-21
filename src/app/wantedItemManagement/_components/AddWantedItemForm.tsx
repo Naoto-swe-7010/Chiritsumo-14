@@ -5,6 +5,7 @@ import { useActionStateCompat } from "@strozw/use-action-state-compat";
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { addWantedItem } from "@/app/lib/action";
 import { AddWantedItemFormState } from "@/app/lib/formState";
+import { useEffect, useRef } from "react";
 
 const AddWantedItemForm = () => {
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
@@ -12,9 +13,22 @@ const AddWantedItemForm = () => {
     addWantedItem,
     initialState
   );
+
+  // Submit時のFormクリア用
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // 欲しいものリストへの追加成功時の処理
+  useEffect(() => {
+    if (state.message) {
+      // Formクリア
+      formRef.current?.reset();
+    }
+  }, [state.message]);
+
   return (
     <form
       action={formAction}
+      ref={formRef}
       className="mb-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap"
     >
       <div className="flex-1">

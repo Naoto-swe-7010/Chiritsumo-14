@@ -156,6 +156,9 @@ export const addWantedItem = async (
     };
   }
   revalidatePath("/wantedItemManagement");
+  return {
+    message: `欲しいものリストにアイテムを追加しました。${Math.random()} `,
+  };
 };
 
 // 欲しいものリスト更新
