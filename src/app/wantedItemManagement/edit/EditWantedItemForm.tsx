@@ -9,6 +9,7 @@ import { updateWantedItem } from "@/app/lib/action";
 import { UpdateWantedItemFormState } from "@/app/lib/formState";
 
 const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
+  // ServerActions × useActionStateCompat
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
 

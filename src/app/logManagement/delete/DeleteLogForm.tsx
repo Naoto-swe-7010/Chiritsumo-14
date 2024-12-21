@@ -8,6 +8,7 @@ import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { deleteLog } from "@/app/lib/action";
 
 const DeleteLogForm = ({ log }: { log: Log }) => {
+  // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
   const deleteLogWithId = deleteLog.bind(null, log.id);
   const [state, formAction, isPending] = useActionStateCompat(

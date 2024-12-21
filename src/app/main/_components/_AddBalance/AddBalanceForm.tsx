@@ -9,6 +9,7 @@ import { AddBalanceFormState } from "@/app/lib/formState";
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
 
 const AddBalanceForm = () => {
+  // ServerActions × useActionStateCompat
   const initialState: AddBalanceFormState = { message: null, errors: {} };
   const [state, formAction, isPending] = useActionStateCompat(
     addBalance,

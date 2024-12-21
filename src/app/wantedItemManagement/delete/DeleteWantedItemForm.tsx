@@ -8,6 +8,7 @@ import LoadingSpinner from "@/app/_components/LoadingSpinner";
 import { deleteWantedItem } from "@/app/lib/action";
 
 const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
+  // ServerActions × useActionStateCompat
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
   const [state, formAction, isPending] = useActionStateCompat(

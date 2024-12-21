@@ -7,6 +7,7 @@ import { useActionStateCompat } from "@strozw/use-action-state-compat";
 import { purchaseWantedItem } from "@/app/lib/action";
 
 const PurchaseForm = ({ item }: { item: WantedItem }) => {
+  // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
   const purchaseWantedItemWithId = purchaseWantedItem.bind(null, item.id);
   const [state, formAction, isPending] = useActionStateCompat(

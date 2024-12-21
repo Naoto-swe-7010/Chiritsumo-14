@@ -8,6 +8,7 @@ import { AddWantedItemFormState } from "@/app/lib/formState";
 import { useEffect, useRef } from "react";
 
 const AddWantedItemForm = () => {
+  // ServerActions × useActionStateCompat
   const initialState: AddWantedItemFormState = { message: null, errors: {} };
   const [state, formAction, isPending] = useActionStateCompat(
     addWantedItem,

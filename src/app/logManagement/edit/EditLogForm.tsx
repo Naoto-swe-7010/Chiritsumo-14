@@ -9,6 +9,7 @@ import { updateLog } from "@/app/lib/action";
 import { UpdateLogFormState } from "@/app/lib/formState";
 
 const EditLogForm = ({ log }: { log: Log }) => {
+  // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
   const updateLogWithId = updateLog.bind(null, log.id);
 
