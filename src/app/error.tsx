@@ -1,28 +1,29 @@
 "use client";
 import React from "react";
-import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const Error = () => {
+const ErrorPage = ({ error, reset }: { error: Error; reset: () => void }) => {
+  const router = useRouter();
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b  text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b text-white">
       {/* エラーメッセージ */}
       <h1 className="text-5xl font-bold mb-6">エラーが発生しました</h1>
       <p className="text-lg mb-8">
-        予期しない問題が発生しました。ログインし直してください。
+        予期しない問題が発生しました。もう一度操作をお試しください。
       </p>
-
       {/* ボタン群 */}
       <div className="flex flex-col sm:flex-row gap-4">
-        {/* メインページに戻るボタン */}
+        {/* ホームページに戻るボタン */}
         <button
-          onClick={() => signOut()}
-          className="px-6 py-3 bg-pink-500 rounded-lg font-bold hover:bg-pink-700 transition duration-300"
+          onClick={() => router.push("/")}
+          className="px-6 py-3 bg-blue-500 rounded-lg font-bold hover:bg-blue-700 transition duration-300"
         >
-          ログイン画面に戻る
+          ホームに戻る
         </button>
       </div>
     </div>
   );
 };
 
-export default Error;
+export default ErrorPage;
