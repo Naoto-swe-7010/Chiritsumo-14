@@ -1,4 +1,4 @@
-// State
+// エラーメッセージ格納用の型定義
 export type AddBalanceFormState = {
   errors?: {
     title?: string[];

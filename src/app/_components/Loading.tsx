@@ -1,5 +1,6 @@
 import React from "react";
 
+// SuspenseのFallbackUI
 const Loading = () => {
   return (
     <div

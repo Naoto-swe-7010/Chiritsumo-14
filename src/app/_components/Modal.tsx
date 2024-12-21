@@ -1,3 +1,4 @@
+// 編集/削除ページにて使用
 const Modal = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 sm:p-6">

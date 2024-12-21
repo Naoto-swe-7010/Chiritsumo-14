@@ -17,7 +17,7 @@ import {
 } from "./formState";
 import { getSessionAndUserId } from "./commonFunction";
 
-// 残高追加（ログ作成）
+// 残高追加（ログ作成）////////////////////////////////////////////////////
 export const addBalance = async (
   prevState?: AddBalanceFormState,
   formData?: FormData
@@ -56,7 +56,7 @@ export const addBalance = async (
   return { message: `残高を追加しました。${Math.random()} ` };
 };
 
-// ログ更新
+// ログ更新 ////////////////////////////////////////////////////
 export const updateLog = async (
   id: string,
   prevState?: UpdateLogFormState,
@@ -100,7 +100,7 @@ export const updateLog = async (
   redirect("/logManagement/logTable/1");
 };
 
-// ログ削除
+// ログ削除 ////////////////////////////////////////////////////
 export const deleteLog = async (id: string) => {
   const userId = await getSessionAndUserId();
 
@@ -123,7 +123,7 @@ export const deleteLog = async (id: string) => {
   redirect("/logManagement/logTable/1");
 };
 
-// 欲しいものリスト追加
+// 欲しいものリスト追加 ////////////////////////////////////////////////////
 export const addWantedItem = async (
   prevState?: AddWantedItemFormState,
   formData?: FormData
@@ -161,7 +161,7 @@ export const addWantedItem = async (
   };
 };
 
-// 欲しいものリスト更新
+// 欲しいものリスト更新 ////////////////////////////////////////////////////
 export const updateWantedItem = async (
   id: string,
   prevState?: UpdateWantedItemFormState,
@@ -194,7 +194,7 @@ export const updateWantedItem = async (
   redirect("/wantedItemManagement");
 };
 
-// 欲しいものリスト購入
+// 欲しいものリスト購入 ////////////////////////////////////////////////////
 export const purchaseWantedItem = async (id: string) => {
   const userId = await getSessionAndUserId();
 
@@ -217,7 +217,7 @@ export const purchaseWantedItem = async (id: string) => {
   redirect("/main");
 };
 
-// 欲しいものリスト削除
+// 欲しいものリスト削除 ////////////////////////////////////////////////////
 export const deleteWantedItem = async (id: string) => {
   // DB処理
   try {

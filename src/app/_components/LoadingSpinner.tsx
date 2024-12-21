@@ -1,5 +1,6 @@
 import React from "react";
 
+// SuspenseのFallbackUI
 const LoadingSpinner = ({
   size = 20,
   color = "border-white",

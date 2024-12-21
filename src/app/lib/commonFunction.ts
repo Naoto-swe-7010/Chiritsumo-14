@@ -16,7 +16,7 @@ export const formattedDate = (date: Date): string => {
     .replace(/^20/, "");
 };
 
-// 非同期（全てユーザに紐づくデータ取得のためDynamic Rendering）///////////////////////////////////
+// データ取得（全てユーザに紐づくデータ取得のためDynamic Rendering）///////////////////////////////////
 
 // Sessionの取得
 export const getSession = cache(async () => {
