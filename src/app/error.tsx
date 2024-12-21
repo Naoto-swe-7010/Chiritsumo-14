@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const ErrorPage = ({ error, reset }: { error: Error; reset: () => void }) => {
+const ErrorPage = () => {
   const router = useRouter();
 
   return (
