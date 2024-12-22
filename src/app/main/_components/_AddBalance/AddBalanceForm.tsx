@@ -84,11 +84,11 @@ const AddBalanceForm = () => {
           className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
           disabled={isPending}
         >
-          {isPending ? (
+          {isPending ? 
             <LoadingSpinner size={24} color="white" />
-          ) : (
+           : 
             "我慢できた！"
-          )}
+          }
         </Button>
       </div>
     </form>

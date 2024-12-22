@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useActionStateCompat } from "@strozw/use-action-state-compat";
 
 import { purchaseWantedItem } from "@/app/lib/action";
+import LoadingSpinner from "@/app/_components/LoadingSpinner";
 
 const PurchaseForm = ({ item }: { item: WantedItem }) => {
   // ServerActions × useActionStateCompat
@@ -32,7 +33,7 @@ const PurchaseForm = ({ item }: { item: WantedItem }) => {
           className="bg-pink-500 hover:bg-pink-700 font-bold"
           disabled={isPending}
         >
-          はい
+          {isPending ? <LoadingSpinner /> : "はい"}
         </Button>
         <Button
           onClick={(e) => {
