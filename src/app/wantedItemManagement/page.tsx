@@ -1,6 +1,6 @@
 import React from "react";
 
-import AddWantedItem from "./_components/AddWantedItem";
+import AddWantedItem from "./_components/_AddWantedItem/AddWantedItem";
 import WantedItemList from "./_components/WantedItemList";
 const page = async () => {
   return (

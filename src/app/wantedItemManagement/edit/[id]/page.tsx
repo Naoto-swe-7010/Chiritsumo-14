@@ -1,7 +1,7 @@
 import React from "react";
 
 import { prisma } from "../../../../../prisma";
-import EditWantedItemForm from "../EditWantedItemForm";
+import EditWantedItemForm from "../_components/EditWantedItemForm";
 import Modal from "@/app/_components/Modal";
 
 const page = async ({ params }: { params: { id: string } }) => {

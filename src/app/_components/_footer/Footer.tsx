@@ -1,8 +1,8 @@
 import React from "react";
 
-import Menu from "./_components/Menu";
-import CopyRight from "./_components/CopyRight";
-import { getSession } from "../lib/commonFunction";
+import Menu from "./Menu";
+import CopyRight from "./CopyRight";
+import { getSession } from "@/app/lib/commonFunction";
 
 const Footer = async () => {
   const session = await getSession();

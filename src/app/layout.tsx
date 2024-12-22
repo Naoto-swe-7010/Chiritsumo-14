@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Header from "./_header/Header";
-import Footer from "./_footer/Footer";
+import Header from "./_components/_header/Header";
+import Footer from "./_components/_footer/Footer";
 
 export const metadata: Metadata = {
   title: "ちりつも",

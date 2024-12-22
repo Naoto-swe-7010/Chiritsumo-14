@@ -1,7 +1,7 @@
 import React from "react";
 
 import { prisma } from "../../../../../prisma";
-import DeleteWantedItemForm from "../DeleteWantedItemForm";
+import DeleteWantedItemForm from "../_components/DeleteWantedItemForm";
 import Modal from "@/app/_components/Modal";
 
 const page = async ({ params }: { params: { id: string } }) => {

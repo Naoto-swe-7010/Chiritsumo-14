@@ -1,9 +1,10 @@
 import React from "react";
 
-import Title from "./_components/Title";
-import Menu from "./_components/Menu";
-import AccountInfo from "./_components/AccountInfo";
-import { getSession } from "../lib/commonFunction";
+import AccountInfo from "./AccountInfo";
+import { getSession } from "@/app/lib/commonFunction";
+import Title from "./Title";
+import Menu from "./Menu";
+
 
 const Header = async () => {
   const session = await getSession();

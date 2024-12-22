@@ -1,6 +1,6 @@
 import React from "react";
 import { prisma } from "../../../../../prisma";
-import DeleteLogForm from "../DeleteLogForm";
+import DeleteLogForm from "../_components/DeleteLogForm";
 import Modal from "@/app/_components/Modal";
 
 const page = async ({ params }: { params: { id: string } }) => {
