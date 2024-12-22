@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react'
 import { FaCheckCircle } from 'react-icons/fa';
 
-const page = () => {
+const PostPurchase = () => {
 
     useEffect(() => {
         // 紙吹雪エフェクト
@@ -40,4 +40,4 @@ const page = () => {
   )
 }
 
-export default page
+export default PostPurchase
