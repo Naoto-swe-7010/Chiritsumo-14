@@ -33,7 +33,6 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
           placeholder="商品名"
           required
-          aria-describedby="name-error"
         />
         {state?.errors?.name &&
           state.errors.name.map((error: string) => (
@@ -55,7 +54,6 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
           placeholder="値段"
           required
-          aria-describedby="price-error"
         />
         {state?.errors?.price &&
           state.errors.price.map((error: string) => (
@@ -76,7 +74,6 @@ const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
           defaultValue={item.url?.toString()}
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
           placeholder="https://example.com"
-          aria-describedby="url-error"
         />
         {state?.errors?.url &&
           state.errors.url.map((error: string) => (

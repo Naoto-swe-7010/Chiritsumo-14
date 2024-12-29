@@ -33,7 +33,6 @@ const EditLogForm = ({ log }: { log: Log }) => {
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
           placeholder="タイトル"
           required
-          aria-describedby="title-error"
         />
         {state?.errors?.title &&
           state.errors.title.map((error: string) => (
@@ -55,7 +54,6 @@ const EditLogForm = ({ log }: { log: Log }) => {
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
           placeholder="値段"
           required
-          aria-describedby="price-error"
         />
         {state?.errors?.price &&
           state.errors.price.map((error: string) => (

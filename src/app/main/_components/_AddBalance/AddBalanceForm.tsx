@@ -44,7 +44,6 @@ const AddBalanceForm = () => {
             name="title"
             placeholder="我慢したものを入力"
             required
-            aria-describedby="title-error"
           />
           {state?.errors?.title &&
             state.errors.title.map((error: string) => (
@@ -64,7 +63,6 @@ const AddBalanceForm = () => {
             name="price"
             placeholder="節約できた額を入力"
             required
-            aria-describedby="price-error"
           />
           {state?.errors?.price &&
             state.errors.price.map((error: string) => (
