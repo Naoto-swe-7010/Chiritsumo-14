@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className="bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <Header />
         <div className="min-h-[calc(100vh-132px)] mt-[64px] px-[7%] sm:px-[5%]">
