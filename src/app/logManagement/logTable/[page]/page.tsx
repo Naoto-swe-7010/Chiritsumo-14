@@ -1,12 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense } from 'react'
 
-import Table from "../_components/Table";
-import Pagination from "../_components/Pagination";
-import { SkeletonTable } from "../_components/SkeletonTable";
+import Table from '../_components/Table'
+import Pagination from '../_components/Pagination'
+import { SkeletonTable } from '../_components/SkeletonTable'
+import { getSession } from '@/app/lib/commonFunction'
+import { redirect } from 'next/navigation'
 
 const page = async ({ params }: { params: Promise<{ page: string }> }) => {
+  // 認証チェック
+  const session = await getSession()
+  if (!session) {
+    redirect('/')
+  }
   // ページ番号を取得
-  const { page } = await params;
+  const { page } = await params
 
   return (
     <div>
@@ -18,13 +25,13 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
           <Suspense fallback={<SkeletonTable />}>
             <Table page={page} />
           </Suspense>
-          <Suspense fallback={""}>
+          <Suspense fallback={''}>
             <Pagination page={page} />
           </Suspense>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page
