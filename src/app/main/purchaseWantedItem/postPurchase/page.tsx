@@ -1,11 +1,10 @@
-'use client'
 import Modal from '@/app/_components/Modal'
 import { getSession } from '@/app/lib/commonFunction'
-import confetti from 'canvas-confetti'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
+import Confetti from '../_components/Confetti'
 
 const PostPurchase = async () => {
   // 認証チェック
@@ -13,16 +12,6 @@ const PostPurchase = async () => {
   if (!session) {
     redirect('/')
   }
-
-  useEffect(() => {
-    // 紙吹雪エフェクト
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#e7ff30', '#ffffff', '#a2a70b', '#000000'],
-    })
-  }, [])
 
   return (
     <Modal>
@@ -43,6 +32,8 @@ const PostPurchase = async () => {
           </Link>
         </div>
       </div>
+      {/* 紙吹雪エフェクト */}
+      <Confetti />
     </Modal>
   )
 }
