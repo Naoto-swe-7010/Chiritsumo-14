@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
 // SuspenseのFallbackUI
 const LoadingSpinner = ({
   size = 20,
-  color = "border-white",
+  color = 'border-white',
 }: {
-  size?: number;
-  color?: string;
+  size?: number
+  color?: string
 }) => {
   return (
     <div
@@ -15,8 +15,8 @@ const LoadingSpinner = ({
         width: `${size}px`,
         height: `${size}px`,
       }}
-    ></div>
-  );
-};
+      role="loading"></div>
+  )
+}
 
-export default LoadingSpinner;
+export default LoadingSpinner
