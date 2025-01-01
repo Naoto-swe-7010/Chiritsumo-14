@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-
 import Menu from './Menu'
 
 describe('Menu', () => {
@@ -10,18 +9,19 @@ describe('Menu', () => {
     expect(navElement).toBeInTheDocument()
   })
 
-  // ナビゲーションメニューの全メニューアイテムのレンダリング確認
+  // すべてのメニュー項目のレンダリング確認
   it('renders all menu items', () => {
     render(<Menu />)
     const homeLink = screen.getByRole('link', { name: /ホーム/i })
     const logLink = screen.getByRole('link', { name: /ログ/i })
     const wantedItemLink = screen.getByRole('link', { name: /欲しい物/i })
+
     expect(homeLink).toBeInTheDocument()
     expect(logLink).toBeInTheDocument()
     expect(wantedItemLink).toBeInTheDocument()
   })
 
-  // ナビゲーションメニューの全メニューアイテムのhref属性確認
+  // 各リンクのhref属性の確認
   it('has correct href attributes', () => {
     render(<Menu />)
     const homeLink = screen.getByRole('link', { name: /ホーム/i })
@@ -33,7 +33,7 @@ describe('Menu', () => {
     expect(wantedItemLink).toHaveAttribute('href', '/wantedItemManagement')
   })
 
-  // アイコンのレンダリング確認
+  //   アイコンのレンダリング確認
   it('renders all icons', () => {
     render(<Menu />)
 

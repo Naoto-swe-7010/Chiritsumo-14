@@ -1,19 +1,19 @@
-import Link from "next/link";
-import React from "react";
-import { TbMountain } from "react-icons/tb";
+import Link from 'next/link'
+import React from 'react'
+import { TbMountain } from 'react-icons/tb'
 
 const Title = () => {
   return (
-    <div>
-      <Link href="/main" className="flex items-center gap-2">
+    <header>
+      <Link
+        href="/main"
+        className="flex items-center gap-2"
+        aria-label="メインページに移動">
         <TbMountain size={35} data-testid="icon" />
-        <span className="text-3xl font-bold">
-          ちり
-          <span className="text-pink-500">つも</span>
-        </span>
+        <h1 className="text-3xl font-bold text-pink-500">ちりつも</h1>
       </Link>
-    </div>
-  );
-};
+    </header>
+  )
+}
 
-export default Title;
+export default Title

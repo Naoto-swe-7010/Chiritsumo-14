@@ -11,7 +11,7 @@ const Menu = () => {
           <Link
             href="/main"
             className="flex flex-col items-center text-white hover:text-pink-500">
-            <AiOutlineHome size={22} />
+            <AiOutlineHome size={22} data-testid="icon-home" />
             <span>ホーム</span>
           </Link>
         </li>
@@ -19,7 +19,7 @@ const Menu = () => {
           <Link
             href="/logManagement/logTable/1"
             className="flex flex-col items-center text-white hover:text-pink-500">
-            <AiOutlineUnorderedList size={22} />
+            <AiOutlineUnorderedList size={22} data-testid="icon-log" />
             <span>ログ</span>
           </Link>
         </li>
@@ -27,7 +27,7 @@ const Menu = () => {
           <Link
             href="/wantedItemManagement"
             className="flex flex-col items-center text-white hover:text-pink-500">
-            <BsBookmarkHeart size={22} />
+            <BsBookmarkHeart size={22} data-testid="icon-wanted-item" />
             <span>欲しい物</span>
           </Link>
         </li>
