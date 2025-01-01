@@ -1,9 +1,9 @@
-import Link from "next/link";
-import React from "react";
-import { Log } from "@prisma/client";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link'
+import React from 'react'
+import { Log } from '@prisma/client'
+import { Button } from '@/components/ui/button'
 
-import { formattedDate } from "@/app/lib/commonFunction";
+import { formattedDate } from '@/app/lib/commonFunction'
 
 // テーブルの各ログ（各レコード）
 const Row = ({ log }: { log: Log }) => {
@@ -13,19 +13,29 @@ const Row = ({ log }: { log: Log }) => {
         {log.title}
       </td>
       <td className="py-2 p-3 text-base">{log.price}</td>
-      <td className="py-2 p-3 text-base">{formattedDate(log.createdAt)}</td>
+      <td className="py-2 p-3 text-base">
+        {formattedDate(log.createdAt)}
+      </td>
       <td className="py-2 p-3">
         <div className="flex flex-col gap-1">
           <Link href={`/logManagement/edit/${log.id}`}>
-            <Button className="bg-pink-500 hover:bg-pink-700">✏️</Button>
+            <Button
+              className="bg-pink-500 hover:bg-pink-700"
+              aria-label="編集">
+              ✏️
+            </Button>
           </Link>
           <Link href={`/logManagement/delete/${log.id}`}>
-            <Button className="bg-gray-300 hover:bg-gray-400">🗑️</Button>
+            <Button
+              className="bg-gray-300 hover:bg-gray-400"
+              aria-label="削除">
+              🗑️
+            </Button>
           </Link>
         </div>
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default Row;
+export default Row
