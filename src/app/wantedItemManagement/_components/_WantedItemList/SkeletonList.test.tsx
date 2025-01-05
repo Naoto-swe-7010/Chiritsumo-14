@@ -3,9 +3,9 @@ import '@testing-library/jest-dom'
 import SkeletonList from './SkeletonList'
 
 describe('SkeletonList Component', () => {
-  test('renders the correct number of skeleton items', () => {
+  test('スケルトンUIのレンダリング確認', () => {
     render(<SkeletonList />)
-    // article タグが 5 つレンダリングされていることを確認
+    // articleタグが5つレンダリングされているか
     const skeletonItems = screen.getAllByRole('article')
     expect(skeletonItems).toHaveLength(5)
   })

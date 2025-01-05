@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import Menu from "./Menu";
-import CopyRight from "./CopyRight";
-import { getSession } from "@/app/lib/commonFunction";
+import Menu from './Menu'
+import CopyRight from './CopyRight'
+import { getSession } from '@/app/lib/commonFunction'
 
 const Footer = async () => {
-  const session = await getSession();
+  const session = await getSession()
   return (
     <footer className="fixed bottom-0 left-0 w-full bg-gray-800 text-white sm:relative sm:px-[4%] sm:py-6">
       {/* モバイルメニュー */}
@@ -15,7 +15,7 @@ const Footer = async () => {
       )}
       <CopyRight />
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react'
 import CopyRight from './CopyRight'
 
 describe('CopyRight Component', () => {
-  // コピーライトが正しい年でレンダリングされているか確認
-  it('renders the copyright text', () => {
+  it('コピーライトが正しい年でレンダリングされているか確認', () => {
     render(<CopyRight />)
     const footerElement = screen.getByRole('region', {
       name: 'コピーライト',

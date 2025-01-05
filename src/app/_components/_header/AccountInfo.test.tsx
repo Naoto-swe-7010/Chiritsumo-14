@@ -12,8 +12,7 @@ const mockSession: Session = {
 }
 
 describe('AccountInfo', () => {
-  // プロフィール画像が存在する場合のレンダリング確認
-  it('renders user image when session.user.image is present', () => {
+  it('プロフィール画像が存在する場合のレンダリング確認', () => {
     render(<AccountInfo session={mockSession} />)
     const userImage = screen.getByRole('img')
     expect(userImage).toBeInTheDocument()
@@ -23,8 +22,7 @@ describe('AccountInfo', () => {
     )
   })
 
-  // プロフィール画像が存在しない場合のレンダリング確認(表示されないことを確認)
-  it('renders null when session.user.image is not present', () => {
+  it('プロフィール画像が存在しない場合のレンダリング確認(表示されないことを確認)', () => {
     const mockSessionWithoutImage = {
       ...mockSession,
       user: {
@@ -37,8 +35,7 @@ describe('AccountInfo', () => {
     expect(userImage).toBeNull()
   })
 
-  //   ユーザ名のレンダリング確認
-  it('renders user name', () => {
+  it('ユーザ名のレンダリング確認', () => {
     render(<AccountInfo session={mockSession} />)
     const userName = screen.getByText('Test User')
     expect(userName).toBeInTheDocument()

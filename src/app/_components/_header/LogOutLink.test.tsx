@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import LogOutLink from './LogOutLink'
 
 describe('LogOutLink', () => {
-  it('renders the logout link with ', () => {
+  it('ログアウトリンクのレンダリング確認 ', () => {
     render(<LogOutLink />)
     // アイコンが正しく表示されていることを確認
     const iconElement = screen.getByTestId('icon')

@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { SkeletonTable } from './SkeletonTable'
 
 describe('SkeletonTable Component', () => {
-  // テーブルヘッダーとスケルトン15行が正しくレンダリングされるかを確認
-  it('renders a table with 15 rows', () => {
+  it('テーブルヘッダーとスケルトン15行が正しくレンダリングされるかを確認', () => {
     render(<SkeletonTable />)
 
     // テーブルヘッダーの確認

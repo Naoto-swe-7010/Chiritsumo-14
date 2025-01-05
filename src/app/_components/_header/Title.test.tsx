@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import Title from './Title'
 
 describe('Title', () => {
-  it('renders the title with the correct text', () => {
+  it('タイトルのレンダリング確認', () => {
     render(<Title />)
     // アイコンが正しく表示されていることを確認
     const iconElement = screen.getByTestId('icon')

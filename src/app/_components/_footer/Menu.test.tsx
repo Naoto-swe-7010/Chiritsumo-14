@@ -3,15 +3,13 @@ import { render, screen } from '@testing-library/react'
 import Menu from './Menu'
 
 describe('Menu', () => {
-  // ナビゲーションメニューのレンダリング確認
-  it('renders the menu', () => {
+  it('ナビゲーションメニューのレンダリング確認', () => {
     render(<Menu />)
     const navElement = screen.getByRole('navigation')
     expect(navElement).toBeInTheDocument()
   })
 
-  // ナビゲーションメニューの全メニューアイテムのレンダリング確認
-  it('renders all menu items', () => {
+  it('ナビゲーションメニューの全メニューアイテムのレンダリング確認', () => {
     render(<Menu />)
     const homeLink = screen.getByRole('link', { name: /ホーム/i })
     const logLink = screen.getByRole('link', { name: /ログ/i })
@@ -21,8 +19,7 @@ describe('Menu', () => {
     expect(wantedItemLink).toBeInTheDocument()
   })
 
-  // ナビゲーションメニューの全メニューアイテムのhref属性確認
-  it('has correct href attributes', () => {
+  it('ナビゲーションメニューの全メニューアイテムのhref属性確認', () => {
     render(<Menu />)
     const homeLink = screen.getByRole('link', { name: /ホーム/i })
     const logLink = screen.getByRole('link', { name: /ログ/i })
@@ -33,8 +30,7 @@ describe('Menu', () => {
     expect(wantedItemLink).toHaveAttribute('href', '/wantedItemManagement')
   })
 
-  // アイコンのレンダリング確認
-  it('renders all icons', () => {
+  it('アイコンのレンダリング確認', () => {
     render(<Menu />)
 
     const homeIcon = screen.getByTestId('icon-home')
