@@ -3,7 +3,11 @@ import Modal from './Modal'
 
 describe('Modal', () => {
   it('ModalとChildrenのレンダリング確認', () => {
-    render(<Modal children={<div>Test</div>} />)
+    render(
+      <Modal>
+        <div>Test</div>
+      </Modal>,
+    )
 
     const modal = screen.getByRole('dialog')
     expect(modal).toBeInTheDocument()
