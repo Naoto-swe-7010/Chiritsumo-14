@@ -93,13 +93,29 @@ describe('メインページ', () => {
       ).toBeVisible()
       // 欲しい物アイテムの進捗率が正しく増える（5000 / 20000 * 100)
       await expect(page.getByText('25%')).toBeVisible()
+
+      // もう１件送信
+      await page.getByPlaceholder('我慢したものを入力').click()
+      await page.getByPlaceholder('我慢したものを入力').fill('スタバ')
+      await page.getByPlaceholder('節約できた額を入力').click()
+      await page.getByPlaceholder('節約できた額を入力').fill('350')
+      await page.getByRole('button', { name: '我慢できた！' }).click()
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toBeVisible()
+      await expect(page.getByText('27%')).toBeVisible()
+
       // ログページにログが作成される
       await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // １件目
       await expect(page.getByText('飲み会')).toBeVisible()
       await expect(page.getByText(5000)).toBeVisible()
+      // ２件目
+      await expect(page.getByText('スタバ')).toBeVisible()
+      await expect(page.getByText(350)).toBeVisible()
     })
 
-    test('フォーム送信失敗時（バリデーションエラー）', async () => {
+    test('フォーム送信失敗時（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/main')
       // 空のままフォームを送信
@@ -109,11 +125,35 @@ describe('メインページ', () => {
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
     })
+
+    test('フォーム送信失敗時（タイトル→バリデーションエラー）', async () => {
+      // ページ遷移
+      await page.goto('http://localhost:3000/main')
+      // 金額のみ入力
+      await page.getByPlaceholder('節約できた額を入力').click()
+      await page.getByPlaceholder('節約できた額を入力').fill('5000')
+      await page.getByRole('button', { name: '我慢できた！' }).click()
+      // 残高は0円のまま
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toHaveText('0')
+    })
+
+    test('フォーム送信失敗時（金額→バリデーションエラー）', async () => {
+      // ページ遷移
+      await page.goto('http://localhost:3000/main')
+      // タイトルのみ入力
+      await page.getByPlaceholder('我慢したものを入力').click()
+      await page.getByPlaceholder('我慢したものを入力').fill('飲み会')
+      await page.getByRole('button', { name: '我慢できた！' }).click()
+      // 残高は0円のまま
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toHaveText('0')
+    })
   })
 
   describe('欲しい物購入', () => {
-    test.beforeEach(async () => {})
-
     test('購入処理', async () => {
       // 残高に50000追加
       await prisma.balance.update({
@@ -142,10 +182,12 @@ describe('メインページ', () => {
       await page.getByRole('button', { name: 'ホームに戻る' }).click()
       // ホームに遷移したか
       await page.goto('http://localhost:3000/main')
+      // 欲しい物リストにアイテムがないか
+      await expect(page.getByText('Nintendo Switch')).not.toBeVisible()
       // 残高が元の50000から購入アイテム代20000を引いた、30000になっているか
       await expect(
         page.getByRole('heading', { name: 'balance' }),
-      ).toBeVisible()
+      ).toHaveText('30000')
     })
   })
 })
