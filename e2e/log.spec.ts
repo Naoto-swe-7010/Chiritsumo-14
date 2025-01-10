@@ -72,14 +72,12 @@ describe('ログページ', () => {
 
     //////////////////////////////////////////////////////////////
   })
-
   test.afterEach(async () => {
     // ブラウザコンテキストを閉じる
     await context.close()
 
     await dbReset()
   })
-
   describe('ログ編集', () => {
     test('編集成功', async () => {
       // ページ遷移
@@ -113,7 +111,6 @@ describe('ログページ', () => {
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('3000')
     })
-
     test('編集失敗（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/logManagement/logTable/1')
@@ -136,7 +133,6 @@ describe('ログページ', () => {
         'http://localhost:3000/logManagement/edit/testId',
       )
     })
-
     test('編集失敗（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/logManagement/logTable/1')
@@ -159,7 +155,6 @@ describe('ログページ', () => {
         'http://localhost:3000/logManagement/edit/testId',
       )
     })
-
     test('編集失敗（金額→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/logManagement/logTable/1')
@@ -183,7 +178,6 @@ describe('ログページ', () => {
       )
     })
   })
-
   describe('ログ削除', () => {
     test('削除成功', async () => {
       // ページ遷移

@@ -68,14 +68,12 @@ describe('メインページ', () => {
     })
     //////////////////////////////////////////////////////////////
   })
-
   test.afterEach(async () => {
     // ブラウザコンテキストを閉じる
     await context.close()
 
     await dbReset()
   })
-
   describe('フォーム送信', () => {
     test('フォーム送信成功時', async () => {
       // ページ遷移
@@ -114,7 +112,6 @@ describe('メインページ', () => {
       await expect(page.getByText('スタバ')).toBeVisible()
       await expect(page.getByText(350)).toBeVisible()
     })
-
     test('フォーム送信失敗時（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/main')
@@ -125,7 +122,6 @@ describe('メインページ', () => {
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
     })
-
     test('フォーム送信失敗時（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/main')
@@ -138,7 +134,6 @@ describe('メインページ', () => {
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
     })
-
     test('フォーム送信失敗時（金額→バリデーションエラー）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/main')
@@ -152,7 +147,6 @@ describe('メインページ', () => {
       ).toHaveText('0')
     })
   })
-
   describe('欲しい物購入', () => {
     test('購入処理', async () => {
       // 残高に50000追加
