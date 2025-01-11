@@ -30,10 +30,9 @@ const dbReset = async () => {
   ])
 }
 
-describe('ログページ', () => {
+describe('欲しい物リストページ', () => {
   test.beforeEach(async ({ browser }) => {
     // ブラウザ準備 ///////////////////////////////////////////////
-
     // 新しいブラウザコンテキストを作成
     context = await browser.newContext()
     // Google認証用のCookieを保存
@@ -47,22 +46,20 @@ describe('ログページ', () => {
     ])
     // 新しいページを作成
     page = await context.newPage()
-
     // データ準備 ///////////////////////////////////////////////
     // 残高：0円
     // ログ: 0件
     // 欲しい物リスト：0件
-
     await dbReset()
     //////////////////////////////////////////////////////////////
   })
   test.afterEach(async () => {
     // ブラウザコンテキストを閉じる
     await context.close()
-
+    // DBをリセット
     await dbReset()
   })
-  describe('フォーム送信', () => {
+  describe('フォーム送信（アイテム追加）', () => {
     test('フォーム送信成功時（URLあり）', async () => {
       // ページ遷移
       await page.goto('http://localhost:3000/wantedItemManagement')
@@ -74,14 +71,16 @@ describe('ログページ', () => {
         .type('https://example.com')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
-      // アイテムが追加され表示されていること
-      // 商品名
-      await expect(page.getByText('Refaドライヤー')).toBeVisible()
-      // 価格
-      await expect(page.getByText('Price: ¥30000')).toBeVisible()
-      // 詳細リンク
+      // アイテムが最上列に追加され表示されていること
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 商品名の確認
+      await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー')
+      // 価格の確認
+      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000')
+      // 詳細リンクの確認
       await expect(
-        page.getByRole('link', { name: '詳細を見る' }),
+        firstArticle.locator('a:has-text("詳細を見る")'),
       ).toHaveAttribute('href', 'https://example.com')
     })
     test('フォーム送信成功時（URLなし）', async () => {
@@ -94,14 +93,16 @@ describe('ログページ', () => {
       await page.getByPlaceholder('https://example.com').type('')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
-      // アイテムが追加され表示されていること
-      // 商品名
-      await expect(page.getByText('Refaドライヤー')).toBeVisible()
-      // 価格
-      await expect(page.getByText('Price: ¥30000')).toBeVisible()
-      // 詳細リンクは表示されない
+      // アイテムが最上列に追加され表示されていること
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 商品名の確認
+      await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー')
+      // 価格の確認
+      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000')
+      // 詳細リンクの確認
       await expect(
-        page.getByRole('link', { name: '詳細を見る' }),
+        firstArticle.locator('a:has-text("詳細を見る")'),
       ).not.toBeVisible()
     })
     test('フォーム送信失敗時（商品名→バリデーションエラー）', async () => {
@@ -111,8 +112,10 @@ describe('ログページ', () => {
       await page.getByPlaceholder('価格').type('30000')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
-      // 欲しい物リストに追加されていないことを価格の表示で確認
-      await expect(page.getByText('Price: ¥30000')).not.toBeVisible()
+      // アイテムがリストに追加されていないことをarticleの有無で確認
+      await expect(
+        page.locator('article:nth-of-type(1)'),
+      ).not.toBeVisible()
     })
     test('フォーム送信失敗時（価格→バリデーションエラー）', async () => {
       // ページ遷移
@@ -121,8 +124,10 @@ describe('ログページ', () => {
       await page.getByPlaceholder('商品名').type('Refaドライヤー')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
-      // 欲しい物リストに追加されていないことを商品名の表示で確認
-      await expect(page.getByText('Refaドライヤー')).not.toBeVisible()
+      // アイテムがリストに追加されていないことをarticleの有無で確認
+      await expect(
+        page.locator('article:nth-of-type(1)'),
+      ).not.toBeVisible()
     })
   })
   describe('アイテム編集', () => {
@@ -164,13 +169,18 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement',
       )
+      // 最上列のアイテムが編集されていること
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
       // 商品名が変更されているか
-      await expect(page.getByText('Panasonicドライヤー')).toBeVisible()
+      await expect(firstArticle.locator('h3')).toHaveText(
+        'Panasonicドライヤー',
+      )
       // 価格が変更されているか
-      await expect(page.getByText('Price: ¥20000')).toBeVisible()
-      // URLが変更されているか
+      await expect(firstArticle.locator('p')).toHaveText('Price: ¥20000')
+      // 詳細リンクが変更されているか
       await expect(
-        page.getByRole('link', { name: '詳細を見る' }),
+        firstArticle.locator('a:has-text("詳細を見る")'),
       ).toHaveAttribute('href', 'https://example2.com')
     })
     test('編集成功（URLあり→なし）', async () => {
@@ -203,9 +213,12 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement',
       )
-      // 詳細リンクが表示されていないか
+      // 最上列のアイテムから詳細リンクが消えているか
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 詳細リンクの確認
       await expect(
-        page.getByRole('link', { name: '詳細を見る' }),
+        firstArticle.locator('a:has-text("詳細を見る")'),
       ).not.toBeVisible()
     })
     test('編集成功（URLなし→あり）', async () => {
@@ -240,9 +253,12 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement',
       )
-      // 詳細リンクが表示されているか
+      // 最上列のアイテムに詳細リンクが表示されているか
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 詳細リンクの確認
       await expect(
-        page.getByRole('link', { name: '詳細を見る' }),
+        firstArticle.locator('a:has-text("詳細を見る")'),
       ).toHaveAttribute('href', 'https://example.com')
     })
     test('編集失敗（商品名→バリデーションエラー）', async () => {
@@ -275,6 +291,19 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement/edit/testId',
       )
+      // 欲しい物リストページに遷移
+      await page.goto('http://localhost:3000/wantedItemManagement')
+      // 最上列のアイテムが編集されていないこと
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 商品名が変更されていないか
+      await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー')
+      // 価格が変更されていないか
+      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000')
+      // 詳細リンクが変更されていないか
+      await expect(
+        firstArticle.locator('a:has-text("詳細を見る")'),
+      ).toHaveAttribute('href', 'https://example.com')
     })
     test('編集失敗（価格→バリデーションエラー）', async () => {
       // 欲しい物リストにアイテムを追加
@@ -306,6 +335,19 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement/edit/testId',
       )
+      // 欲しい物リストページに遷移
+      await page.goto('http://localhost:3000/wantedItemManagement')
+      // 最上列のアイテムが編集されていないこと
+      // 1行目のarticleを取得
+      const firstArticle = page.locator('article:nth-of-type(1)')
+      // 商品名が変更されていないか
+      await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー')
+      // 価格が変更されていないか
+      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000')
+      // 詳細リンクが変更されていないか
+      await expect(
+        firstArticle.locator('a:has-text("詳細を見る")'),
+      ).toHaveAttribute('href', 'https://example.com')
     })
   })
   describe('アイテム削除', () => {
@@ -336,8 +378,10 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement',
       )
-      // 欲しい物リストにアイテムが表示されていないか
-      await expect(page.getByText('Refaドライヤー')).not.toBeVisible()
+      // ほしい物リストからアイテムが削除されていることをarticleの有無で確認
+      await expect(
+        page.locator('article:nth-of-type(1)'),
+      ).not.toBeVisible()
     })
   })
 })

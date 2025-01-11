@@ -33,7 +33,6 @@ const dbReset = async () => {
 describe('ログページ', () => {
   test.beforeEach(async ({ browser }) => {
     // ブラウザ準備 ///////////////////////////////////////////////
-
     // 新しいブラウザコンテキストを作成
     context = await browser.newContext()
     // Google認証用のCookieを保存
@@ -47,19 +46,15 @@ describe('ログページ', () => {
     ])
     // 新しいページを作成
     page = await context.newPage()
-
     // データ準備 ///////////////////////////////////////////////
     // 残高：5000円
     // ログ: 1件 (飲み会：5000円)
     // 欲しい物リスト：0件
-
     await dbReset()
-
     await prisma.balance.update({
       where: { userId: 'cm5nvvavn0000u5jqdeqvsi5l' },
       data: { balance: 5000 },
     })
-
     await prisma.log.create({
       data: {
         id: 'testId',
@@ -69,13 +64,12 @@ describe('ログページ', () => {
         createdAt: new Date(),
       },
     })
-
     //////////////////////////////////////////////////////////////
   })
   test.afterEach(async () => {
     // ブラウザコンテキストを閉じる
     await context.close()
-
+    // DBをリセット
     await dbReset()
   })
   describe('ログ編集', () => {
@@ -88,10 +82,10 @@ describe('ログページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/edit/testId',
       )
-      //   タイトル編集
+      // タイトル編集
       await page.getByPlaceholder('タイトル').click()
       await page.getByPlaceholder('タイトル').fill('飲み会2次会')
-      //  金額編集
+      // 金額編集
       await page.getByPlaceholder('値段').click()
       await page.getByPlaceholder('値段').fill('3000')
       // 保存ボタン押下
@@ -101,12 +95,20 @@ describe('ログページ', () => {
         'http://localhost:3000/logManagement/logTable/1',
       )
       // タイトルが変更されているか
-      await expect(page.getByText('飲み会2次会')).toBeVisible()
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)',
+        ),
+      ).toHaveText('飲み会2次会')
       // 金額が変更されているか
-      await expect(page.getByText(3000)).toBeVisible()
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)',
+        ),
+      ).toHaveText('3000')
       // ホームに遷移
       await page.goto('http://localhost:3000/main')
-      // 残高が正しく変更されているか
+      // 残高が正しく変更されているか（差額の-2000円されているか）
       await expect(
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('3000')
@@ -128,10 +130,30 @@ describe('ログページ', () => {
       await page.getByPlaceholder('値段').fill('')
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click()
-      //   ホームに遷移しない
+      // ログページに遷移しない
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/edit/testId',
       )
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // タイトルが変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)',
+        ),
+      ).toHaveText('飲み会')
+      // 金額が変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)',
+        ),
+      ).toHaveText('5000')
+      // ホームに遷移
+      await page.goto('http://localhost:3000/main')
+      // 残高が変更されていないか
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toHaveText('5000')
     })
     test('編集失敗（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
@@ -150,10 +172,30 @@ describe('ログページ', () => {
       await page.getByPlaceholder('値段').fill('3000')
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click()
-      //   ホームに遷移しない
+      // ログページに遷移しない
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/edit/testId',
       )
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // タイトルが変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)',
+        ),
+      ).toHaveText('飲み会')
+      // 金額が変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)',
+        ),
+      ).toHaveText('5000')
+      // ホームに遷移
+      await page.goto('http://localhost:3000/main')
+      // 残高が変更されていないか
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toHaveText('5000')
     })
     test('編集失敗（金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -172,10 +214,30 @@ describe('ログページ', () => {
       await page.getByPlaceholder('値段').fill('')
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click()
-      //   ホームに遷移しない
+      // ログページに遷移しない
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/edit/testId',
       )
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // タイトルが変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)',
+        ),
+      ).toHaveText('飲み会')
+      // 金額が変更されていないか
+      await expect(
+        page.locator(
+          'table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)',
+        ),
+      ).toHaveText('5000')
+      // ホームに遷移
+      await page.goto('http://localhost:3000/main')
+      // 残高が変更されていないか
+      await expect(
+        page.getByRole('heading', { name: 'balance' }),
+      ).toHaveText('5000')
     })
   })
   describe('ログ削除', () => {
@@ -184,22 +246,21 @@ describe('ログページ', () => {
       await page.goto('http://localhost:3000/logManagement/logTable/1')
       // 削除ボタンを押下
       await page.getByRole('button', { name: '削除' }).click()
-      //   削除確認ページに遷移したか
+      // 削除確認ページに遷移したか
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/delete/testId',
       )
       // はい（削除）ボタンを押下
       await page.getByRole('button', { name: 'はい' }).click()
-      //   ログページに遷移したか
+      // ログページに遷移したか
       await expect(page).toHaveURL(
         'http://localhost:3000/logManagement/logTable/1',
       )
-      //   ログが削除されたか
-      await expect(page.getByText('飲み会')).not.toBeVisible()
-      await expect(page.getByText('5000')).not.toBeVisible()
-
+      // ログが削除されたか
+      await expect(page.getByText('ログがありません。')).toBeVisible()
       // ホームに遷移
       await page.goto('http://localhost:3000/main')
+      // 残高が正しく変更されているか（差額の-5000円されて0円になっているか）
       await expect(
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')

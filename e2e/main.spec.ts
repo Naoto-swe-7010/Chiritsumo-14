@@ -33,7 +33,6 @@ const dbReset = async () => {
 describe('メインページ', () => {
   test.beforeEach(async ({ browser }) => {
     // ブラウザ準備 ///////////////////////////////////////////////
-
     // 新しいブラウザコンテキストを作成
     context = await browser.newContext()
     // Google認証用のCookieを保存
@@ -47,14 +46,11 @@ describe('メインページ', () => {
     ])
     // 新しいページを作成
     page = await context.newPage()
-
     // データ準備 ///////////////////////////////////////////////
     // 残高：0円
     // ログ: 0件
     // 欲しい物リスト：１件（Nintendo Switch）
-
     await dbReset()
-
     // 欲しい物リストにアイテムを用意
     await prisma.wantedItem.create({
       data: {
@@ -71,7 +67,7 @@ describe('メインページ', () => {
   test.afterEach(async () => {
     // ブラウザコンテキストを閉じる
     await context.close()
-
+    // DBをリセット
     await dbReset()
   })
   describe('フォーム送信', () => {
@@ -88,10 +84,9 @@ describe('メインページ', () => {
       // 残高が正しく増える（5000円）
       await expect(
         page.getByRole('heading', { name: 'balance' }),
-      ).toBeVisible()
+      ).toHaveText('5000')
       // 欲しい物アイテムの進捗率が正しく増える（5000 / 20000 * 100)
       await expect(page.getByText('25%')).toBeVisible()
-
       // もう１件送信
       await page.getByPlaceholder('我慢したものを入力').click()
       await page.getByPlaceholder('我慢したものを入力').fill('スタバ')
@@ -100,17 +95,35 @@ describe('メインページ', () => {
       await page.getByRole('button', { name: '我慢できた！' }).click()
       await expect(
         page.getByRole('heading', { name: 'balance' }),
-      ).toBeVisible()
+      ).toHaveText('5350')
       await expect(page.getByText('27%')).toBeVisible()
-
       // ログページにログが作成される
+      // ページ遷移
       await page.goto('http://localhost:3000/logManagement/logTable/1')
-      // １件目
-      await expect(page.getByText('飲み会')).toBeVisible()
-      await expect(page.getByText(5000)).toBeVisible()
-      // ２件目
-      await expect(page.getByText('スタバ')).toBeVisible()
-      await expect(page.getByText(350)).toBeVisible()
+      // テーブルの行数を取得
+      const rowCount = await page.locator('table > tbody > tr').count()
+      // １件目のログが最終行にあるか
+      await expect(
+        page.locator(
+          `table > tbody > tr:nth-of-type(${rowCount}) > td:nth-of-type(1)`,
+        ),
+      ).toHaveText('飲み会')
+      await expect(
+        page.locator(
+          `table > tbody > tr:nth-of-type(${rowCount}) > td:nth-of-type(2)`,
+        ),
+      ).toHaveText('5000')
+      // ２件目のログが最終行の一つ上にあるか
+      await expect(
+        page.locator(
+          `table > tbody > tr:nth-of-type(${rowCount - 1}) > td:nth-of-type(1)`,
+        ),
+      ).toHaveText('スタバ')
+      await expect(
+        page.locator(
+          `table > tbody > tr:nth-of-type(${rowCount - 1}) > td:nth-of-type(2)`,
+        ),
+      ).toHaveText('350')
     })
     test('フォーム送信失敗時（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -121,6 +134,10 @@ describe('メインページ', () => {
       await expect(
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // ログが作成されていない
+      await expect(page.getByText('ログがありません。')).toBeVisible()
     })
     test('フォーム送信失敗時（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
@@ -133,6 +150,10 @@ describe('メインページ', () => {
       await expect(
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // ログが作成されていない
+      await expect(page.getByText('ログがありません。')).toBeVisible()
     })
     test('フォーム送信失敗時（金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -145,6 +166,10 @@ describe('メインページ', () => {
       await expect(
         page.getByRole('heading', { name: 'balance' }),
       ).toHaveText('0')
+      // ログページに遷移
+      await page.goto('http://localhost:3000/logManagement/logTable/1')
+      // ログが作成されていない
+      await expect(page.getByText('ログがありません。')).toBeVisible()
     })
   })
   describe('欲しい物購入', () => {
