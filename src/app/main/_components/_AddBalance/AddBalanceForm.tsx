@@ -1,38 +1,38 @@
-"use client";
-import { useEffect, useRef } from "react";
-import confetti from "canvas-confetti";
-import { Button } from "@/components/ui/button";
-import { useActionStateCompat } from "@strozw/use-action-state-compat";
+'use client'
+import { useEffect, useRef } from 'react'
+import confetti from 'canvas-confetti'
+import { Button } from '@/components/ui/button'
+import { useActionStateCompat } from '@strozw/use-action-state-compat'
 
-import { addBalance } from "@/app/lib/action";
-import { AddBalanceFormState } from "@/app/lib/formState";
-import LoadingSpinner from "@/app/_components/LoadingSpinner";
+import { addBalance } from '@/app/lib/action'
+import { AddBalanceFormState } from '@/app/lib/formState'
+import LoadingSpinner from '@/app/_components/LoadingSpinner'
 
 const AddBalanceForm = () => {
   // ServerActions × useActionStateCompat
-  const initialState: AddBalanceFormState = { message: null, errors: {} };
+  const initialState: AddBalanceFormState = { message: null, errors: {} }
   const [state, formAction, isPending] = useActionStateCompat(
     addBalance,
-    initialState
-  );
+    initialState,
+  )
 
   // Submit時のFormクリア用
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null)
 
   // 残高追加（ログ作成）成功時の処理
   useEffect(() => {
     if (state.message) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       // 紙吹雪エフェクト
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-      });
+      })
       // Formクリア
-      formRef.current?.reset();
+      formRef.current?.reset()
     }
-  }, [state.message]);
+  }, [state.message])
 
   return (
     <form action={formAction} ref={formRef} className="space-y-3">
@@ -50,8 +50,7 @@ const AddBalanceForm = () => {
               <p
                 className="mt-2 text-sm text-red-500"
                 id="title-error"
-                key={error}
-              >
+                key={error}>
                 {error}
               </p>
             ))}
@@ -69,8 +68,7 @@ const AddBalanceForm = () => {
               <p
                 className="mt-2 text-sm text-red-500"
                 id="price-error"
-                key={error}
-              >
+                key={error}>
                 {error}
               </p>
             ))}
@@ -80,17 +78,14 @@ const AddBalanceForm = () => {
       <div className="mx-auto w-[50%]">
         <Button
           className="bg-pink-500 hover:bg-pink-700 h-[50px] w-full text-lg font-bold"
-          disabled={isPending}
-        >
-          {isPending ? 
+          disabled={isPending}>
+          {isPending ?
             <LoadingSpinner size={24} color="white" />
-           : 
-            "我慢できた！"
-          }
+          : '我慢できた！'}
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default AddBalanceForm;
+export default AddBalanceForm
