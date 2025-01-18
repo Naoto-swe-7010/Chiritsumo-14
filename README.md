@@ -36,10 +36,149 @@ IDE：Visual Studio Code
 認証：Next.Auth<br>
 ORM：Prisma<br>
 DB：PostgreSQL(Supabase)<br>
+テスト：Vitest, React Testing Library, Playwright<br>
 パッケージ管理：npm<br>
 ソースコード管理：GitHub<br>
-テスト：Vitest, React Testing Library, Playwright<br>
+デプロイ：Vercel<br>
 その他：zod, canvas-confetti, use-action-state-compat<br>
+
+## システム構成図
+
+![alt text](README/System.jpg)<br>
+
+## DB構成
+
+このアプリケーションは、PostgreSQLをデータベースとして使用しています。以下は、Prisma Schemaに基づいたデータベース構成の詳細です。
+
+---
+
+### **1. User（ユーザー）**
+
+| フィールド名    | 型          | 制約                | 説明                     |
+| --------------- | ----------- | ------------------- | ------------------------ |
+| `id`            | `String`    | 主キー、`cuid()`    | ユーザーID               |
+| `name`          | `String?`   | 任意                | ユーザー名               |
+| `email`         | `String`    | 一意                | メールアドレス           |
+| `emailVerified` | `DateTime?` | 任意                | メールアドレスの確認日時 |
+| `image`         | `String?`   | 任意                | ユーザー画像のURL        |
+| `createdAt`     | `DateTime`  | デフォルト: `now()` | 作成日時                 |
+| `updatedAt`     | `DateTime`  | 自動更新            | 更新日時                 |
+
+**リレーション**:
+
+- **accounts**: `Account[]` - ユーザーのアカウント情報
+- **sessions**: `Session[]` - ユーザーのセッション情報
+- **Authenticator**: `Authenticator[]` - WebAuthnの情報（オプション）
+- **Balance**: `Balance[]` - ユーザーの残高情報
+- **Log**: `Log[]` - ユーザーの記録情報
+- **WantedItem**: `WantedItem[]` - ユーザーの欲しい物リスト
+
+---
+
+### **2. Account（アカウント）**
+
+| フィールド名        | 型         | 制約                | 説明                     |
+| ------------------- | ---------- | ------------------- | ------------------------ |
+| `userId`            | `String`   | 外部キー            | ユーザーID               |
+| `type`              | `String`   | 必須                | アカウント種別           |
+| `provider`          | `String`   | 必須                | プロバイダー名           |
+| `providerAccountId` | `String`   | 必須、一意          | プロバイダーアカウントID |
+| `createdAt`         | `DateTime` | デフォルト: `now()` | 作成日時                 |
+| `updatedAt`         | `DateTime` | 自動更新            | 更新日時                 |
+
+**リレーション**:
+
+- **user**: `User` - ユーザー情報（親）
+
+---
+
+### **3. Session（セッション）**
+
+| フィールド名   | 型         | 制約                | 説明               |
+| -------------- | ---------- | ------------------- | ------------------ |
+| `sessionToken` | `String`   | 一意                | セッショントークン |
+| `userId`       | `String`   | 外部キー            | ユーザーID         |
+| `expires`      | `DateTime` | 必須                | 有効期限           |
+| `createdAt`    | `DateTime` | デフォルト: `now()` | 作成日時           |
+| `updatedAt`    | `DateTime` | 自動更新            | 更新日時           |
+
+**リレーション**:
+
+- **user**: `User` - ユーザー情報（親）
+
+---
+
+### **4. VerificationToken（認証トークン）**
+
+| フィールド名 | 型         | 制約   | 説明             |
+| ------------ | ---------- | ------ | ---------------- |
+| `identifier` | `String`   | 主キー | トークンの識別子 |
+| `token`      | `String`   | 必須   | 認証トークン     |
+| `expires`    | `DateTime` | 必須   | 有効期限         |
+
+---
+
+### **5. Authenticator（認証情報 - WebAuthn対応）**
+
+| フィールド名        | 型         | 制約                | 説明                     |
+| ------------------- | ---------- | ------------------- | ------------------------ |
+| `credentialID`      | `String`   | 主キー、一意        | クレデンシャルID         |
+| `userId`            | `String`   | 外部キー            | ユーザーID               |
+| `providerAccountId` | `String`   | 必須                | プロバイダーアカウントID |
+| `createdAt`         | `DateTime` | デフォルト: `now()` | 作成日時                 |
+
+---
+
+### **6. Balance（残高）**
+
+| フィールド名 | 型       | 制約             | 説明       |
+| ------------ | -------- | ---------------- | ---------- |
+| `id`         | `String` | 主キー、`cuid()` | 残高ID     |
+| `userId`     | `String` | 外部キー、一意   | ユーザーID |
+| `balance`    | `Int`    | デフォルト: `0`  | 現在の残高 |
+
+**リレーション**:
+
+- **user**: `User` - ユーザー情報（親）
+
+---
+
+### **7. Log（記録）**
+
+| フィールド名 | 型         | 制約                | 説明       |
+| ------------ | ---------- | ------------------- | ---------- |
+| `id`         | `String`   | 主キー、`cuid()`    | ログID     |
+| `userId`     | `String`   | 外部キー            | ユーザーID |
+| `title`      | `String`   | 必須                | タイトル   |
+| `price`      | `Int`      | 必須                | 金額       |
+| `createdAt`  | `DateTime` | デフォルト: `now()` | 作成日時   |
+
+**リレーション**:
+
+- **user**: `User` - ユーザー情報（親）
+
+---
+
+### **8. WantedItem（欲しい物リスト）**
+
+| フィールド名 | 型         | 制約                | 説明       |
+| ------------ | ---------- | ------------------- | ---------- |
+| `id`         | `String`   | 主キー、`cuid()`    | 欲しい物ID |
+| `userId`     | `String`   | 外部キー            | ユーザーID |
+| `name`       | `String`   | 必須                | 商品名     |
+| `price`      | `Int`      | 必須                | 金額       |
+| `url`        | `String?`  | 任意                | 商品のURL  |
+| `createdAt`  | `DateTime` | デフォルト: `now()` | 作成日時   |
+
+**リレーション**:
+
+- **user**: `User` - ユーザー情報（親）
+
+---
+
+### **ER図**
+
+![alt text](README/ER図.png)<br>
 
 ## 機能説明
 
