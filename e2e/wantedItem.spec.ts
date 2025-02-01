@@ -64,11 +64,11 @@ describe('欲しい物リストページ', () => {
       // ページ遷移
       await page.goto('http://localhost:3000/wantedItemManagement')
       //   フォーム入力
-      await page.getByPlaceholder('商品名').type('Refaドライヤー')
-      await page.getByPlaceholder('価格').type('30000')
+      await page.getByPlaceholder('商品名').fill('Refaドライヤー')
+      await page.getByPlaceholder('価格').fill('30000')
       await page
         .getByPlaceholder('https://example.com')
-        .type('https://example.com')
+        .fill('https://example.com')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
       // アイテムが最上列に追加され表示されていること
@@ -87,10 +87,10 @@ describe('欲しい物リストページ', () => {
       // ページ遷移
       await page.goto('http://localhost:3000/wantedItemManagement')
       // フォーム入力
-      await page.getByPlaceholder('商品名').type('Refaドライヤー')
-      await page.getByPlaceholder('価格').type('30000')
+      await page.getByPlaceholder('商品名').fill('Refaドライヤー')
+      await page.getByPlaceholder('価格').fill('30000')
       // URLは空欄で送信
-      await page.getByPlaceholder('https://example.com').type('')
+      await page.getByPlaceholder('https://example.com').fill('')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
       // アイテムが最上列に追加され表示されていること
@@ -109,7 +109,7 @@ describe('欲しい物リストページ', () => {
       // ページ遷移
       await page.goto('http://localhost:3000/wantedItemManagement')
       // 価格のみ入力
-      await page.getByPlaceholder('価格').type('30000')
+      await page.getByPlaceholder('価格').fill('30000')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
       // アイテムがリストに追加されていないことをarticleの有無で確認
@@ -121,7 +121,7 @@ describe('欲しい物リストページ', () => {
       // ページ遷移
       await page.goto('http://localhost:3000/wantedItemManagement')
       // 商品名のみ入力
-      await page.getByPlaceholder('商品名').type('Refaドライヤー')
+      await page.getByPlaceholder('商品名').fill('Refaドライヤー')
       // 送信
       await page.getByRole('button', { name: '追加' }).click()
       // アイテムがリストに追加されていないことをarticleの有無で確認

@@ -2,7 +2,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
-const Error = () => {
+const GlobalError = () => {
   const router = useRouter()
 
   return (
@@ -25,4 +25,4 @@ const Error = () => {
   )
 }
 
-export default Error
+export default GlobalError
