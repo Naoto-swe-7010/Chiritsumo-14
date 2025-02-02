@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 const CtaSection = () => {
   return (
-    <section className="py-40">
+    <section className="pt-20 pb-52 md:py-40">
       <div className="container mx-auto px-4 flex flex-col items-center justify-center">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
           <span className="text-white">さあ、</span>
