@@ -5,7 +5,7 @@ import { signIn } from '../../../../auth'
 
 const Main = () => {
   return (
-    <div className="min-h-[calc(60vh)] flex flex-col items-center justify-center px-4 py- text-center">
+    <div className="min-h-[calc(100vh-132px)] flex flex-col items-center justify-center px-4 text-center">
       <TbMountain
         className="size-[200px] md:size-[280px]"
         data-testid="icon"
