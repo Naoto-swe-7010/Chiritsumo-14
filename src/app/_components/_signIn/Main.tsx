@@ -7,7 +7,7 @@ const Main = () => {
   return (
     <div className="min-h-[calc(60vh)] flex flex-col items-center justify-center px-4 py- text-center">
       <TbMountain
-        className="size-[200px] md:size-[320px]"
+        className="size-[200px] md:size-[280px]"
         data-testid="icon"
       />
       <h1 className="mb-3 text-4xl font-bold sm:text-5xl md:text-6xl text-pink-600">
