@@ -4,7 +4,7 @@ import Main from './_components/_signIn/Main'
 
 const SignIn = () => {
   return (
-    <div>
+    <div className="">
       <Main />
       <Features />
       <HowToUse />

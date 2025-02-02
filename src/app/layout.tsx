@@ -43,11 +43,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <body className="bg-gradient-to-b from-[#100b26] to-[#090416] text-white">
         <Header />
-        <div className="min-h-[calc(100vh-132px)] mt-[64px] px-[7%] sm:px-[5%]">
-          {children}
-        </div>
+        <div className="mt-[64px] px-[7%] sm:px-[5%]">{children}</div>
         <Footer />
       </body>
     </html>

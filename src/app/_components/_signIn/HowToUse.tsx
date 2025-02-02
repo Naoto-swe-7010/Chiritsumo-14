@@ -28,7 +28,7 @@ const HowToUse = () => {
           <span className="text-pink-400">ちりつも</span>
           <span className="text-white">の使い方</span>
         </h2>
-        <div className="space-y-20">
+        <div className="space-y-32 md:space-y-20">
           {steps.map((step, index) => (
             <div
               key={index}
@@ -37,10 +37,10 @@ const HowToUse = () => {
               <div
                 className={`flex-1 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                 <div className="max-w-xl mx-auto">
-                  <h3 className="text-2xl font-bold text-white mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
                     Step {index + 1}：{step.title}
                   </h3>
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
                     {step.description}
                   </p>
                 </div>
