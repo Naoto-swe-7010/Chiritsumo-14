@@ -5,7 +5,7 @@ import Main from './_components/_signIn/Main'
 
 const SignIn = () => {
   return (
-    <div className="">
+    <div>
       <Main />
       <Features />
       <HowToUse />
