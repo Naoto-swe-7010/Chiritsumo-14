@@ -26,7 +26,7 @@ const Features = () => {
               <LuList className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">
-              欲しいものリスト
+              欲しい物リスト
             </h3>
             <p className="text-gray-300">
               欲しい物を登録して、節約の目的を明確にします。「このアイテムを買うために節約を頑張る！」という思いが継続をサポートします。
