@@ -6,7 +6,7 @@ import { describe } from 'node:test'
 // await prisma.session.create({
 //   data: {
 //     sessionToken: 'dummy',
-//     userId: 'cm6ndzbl90000jp0378sffuww',
+//     userId: 'cm6npti6z0000u5dctdbljjxi',
 //     expires: new Date(new Date().getTime() + 86400),
 //   },
 // })
@@ -18,14 +18,14 @@ let page: any // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
+      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
       data: { balance: 0 },
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
+      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
+      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
     }),
   ])
 }
@@ -52,13 +52,13 @@ describe('ログページ', () => {
     // 欲しい物リスト：0件
     await dbReset()
     await prisma.balance.update({
-      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
+      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
       data: { balance: 5000 },
     })
     await prisma.log.create({
       data: {
         id: 'testId',
-        userId: 'cm6ndzbl90000jp0378sffuww',
+        userId: 'cm6npti6z0000u5dctdbljjxi',
         title: '飲み会',
         price: 5000,
         createdAt: new Date(),
