@@ -4,15 +4,15 @@ import { FcGoogle } from 'react-icons/fc'
 
 const CtaSection = () => {
   return (
-    <section className="py-20">
+    <section className="py-40">
       <div className="container mx-auto px-4 flex flex-col items-center justify-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">
           <span className="text-white">さあ、</span>
           <span className="text-pink-400">始めましょう</span>
         </h2>
-        <h3 className="text-xl text-gray-300 mb-12 text-center">
+        <h3 className="text-xl text-gray-300 mt-8 mb-12 text-center md:text-3xl">
           <div className="inline-block">無駄づかいを我慢して</div>
-          <div className="inline-block">欲しいものを手に入れよう</div>
+          <div className="inline-block">欲しいものを手に入れよう！</div>
         </h3>
         <form
           action={async () => {
