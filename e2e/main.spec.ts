@@ -18,14 +18,14 @@ let page: any // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm5nvvavn0000u5jqdeqvsi5l' },
+      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
       data: { balance: 0 },
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm5nvvavn0000u5jqdeqvsi5l' },
+      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm5nvvavn0000u5jqdeqvsi5l' },
+      where: { userId: 'cm6ndzbl90000jp0378sffuww' },
     }),
   ])
 }
@@ -59,7 +59,7 @@ describe('メインページ', () => {
         price: 20000,
         name: 'Nintendo Switch',
         url: 'https://example.com',
-        userId: 'cm5nvvavn0000u5jqdeqvsi5l',
+        userId: 'cm6ndzbl90000jp0378sffuww',
       },
     })
     //////////////////////////////////////////////////////////////
@@ -176,7 +176,7 @@ describe('メインページ', () => {
     test('購入処理', async () => {
       // 残高に50000追加
       await prisma.balance.update({
-        where: { userId: 'cm5nvvavn0000u5jqdeqvsi5l' },
+        where: { userId: 'cm6ndzbl90000jp0378sffuww' },
         data: { balance: 50000 },
       })
       // ページ遷移
