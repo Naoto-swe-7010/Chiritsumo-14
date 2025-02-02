@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { prisma } from '../prisma'
 import { describe } from 'node:test'
 
-// // あらかじめSessionテーブルにテストユーザと紐づくレコードを作成しておく
+// // あらかじめSessionテーブルに以下レコードを手動で作成しておく。
 // await prisma.session.create({
 //   data: {
 //     sessionToken: 'dummy',
