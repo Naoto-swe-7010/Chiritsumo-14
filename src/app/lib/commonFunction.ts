@@ -65,7 +65,7 @@ export const getLog = cache(
   },
 )
 
-// 欲しいものリストの取得
+// 欲しい物リストの取得
 export const getWantedItemList = cache(async (userId: string) => {
   return prisma.wantedItem.findMany({
     where: { userId },

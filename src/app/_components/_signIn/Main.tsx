@@ -15,7 +15,7 @@ const Main = () => {
       </h1>
       <h3 className="mb-6 text-lg sm:text-xl md:text-4xl md:my-10 font-bold">
         <div className="inline-block">無駄づかいを我慢して</div>
-        <div className="inline-block">欲しいものを手に入れよう</div>
+        <div className="inline-block">欲しい物を手に入れよう</div>
       </h3>
       <form
         action={async () => {

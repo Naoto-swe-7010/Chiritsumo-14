@@ -12,7 +12,7 @@ const CtaSection = () => {
         </h2>
         <h3 className="text-xl text-gray-300 mt-8 mb-12 text-center md:text-3xl">
           <div className="inline-block">無駄づかいを我慢して</div>
-          <div className="inline-block">欲しいものを手に入れよう！</div>
+          <div className="inline-block">欲しい物を手に入れよう！</div>
         </h3>
         <form
           action={async () => {
