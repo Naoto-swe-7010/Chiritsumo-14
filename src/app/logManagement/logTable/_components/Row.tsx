@@ -12,7 +12,7 @@ const Row = ({ log }: { log: Log }) => {
       <td className="max-w-xs break-words py-2 px-3 text-base sm:max-w-full">
         {log.title}
       </td>
-      <td className="py-2 p-3 text-base">{log.price}</td>
+      <td className="py-2 p-3 text-base">{log.price.toLocaleString()}</td>
       <td className="py-2 p-3 text-base">
         {formattedDate(log.createdAt)}
       </td>

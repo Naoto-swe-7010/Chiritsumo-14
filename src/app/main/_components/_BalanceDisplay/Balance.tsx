@@ -9,7 +9,7 @@ const Balance = async () => {
     const balance = await getBalance(userId)
 
     // 取得した残高を表示
-    return <h1 aria-label="balance">{balance.balance}</h1>
+    return <h1 aria-label="balance">{balance.balance.toLocaleString()}</h1>
   } catch {
     console.error(
       'Balanceテーブルの取得または作成中にエラーが発生しました:',

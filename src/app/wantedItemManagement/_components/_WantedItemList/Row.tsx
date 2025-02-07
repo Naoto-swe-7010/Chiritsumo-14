@@ -17,7 +17,7 @@ const Row = ({ item }: { item: WantedItem }) => {
               {item.name}
             </h3>
             <p className="text-sm text-gray-300 sm:text-base">
-              Price: ¥{item.price}
+              Price: ¥{item.price.toLocaleString()}
             </p>
           </div>
           {item.url && (
