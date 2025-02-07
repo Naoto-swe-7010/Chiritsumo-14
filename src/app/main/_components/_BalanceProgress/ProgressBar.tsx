@@ -15,12 +15,12 @@ const ProgressBar = ({
         max="1"
         value={balance!.balance / item.price}
         className="w-full"></progress>
-      <p className="text-sm sm:text-base">
+      <p className="text-xs sm:text-base">
         {Math.max(
           0,
           Math.min(Math.round((balance!.balance / item.price) * 100), 100),
         )}
-        %
+        %{/* あと{item.price - balance!.balance}円 */}
       </p>
     </div>
   )
