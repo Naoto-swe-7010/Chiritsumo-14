@@ -30,7 +30,7 @@ const Table = async ({ page }: { page: string }) => {
                 <th className="w-1/5 p-2 font-semibold text-gray-200">
                   日時
                 </th>
-                <th className="w-1/6 p-2 font-semibold text-gray-200">
+                <th className="text-[10px] sm:text-sm w-1/6 p-2 font-semibold text-gray-200">
                   アクション
                 </th>
               </tr>

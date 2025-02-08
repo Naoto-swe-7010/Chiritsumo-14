@@ -20,7 +20,7 @@ export const SkeletonTable = () => {
           </th>
           <th
             scope="col"
-            className="w-1/6 p-2 font-semibold text-gray-200">
+            className=" text-[10px] sm:text-sm w-1/6 p-2 font-semibold text-gray-200">
             アクション
           </th>
         </tr>
