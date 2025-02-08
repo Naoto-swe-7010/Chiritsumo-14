@@ -10,14 +10,14 @@ const Row = ({ item }: { item: WantedItem }) => {
       aria-labelledby={`wanted-item-${item.id}`}>
       <div className="flex-1">
         <div>
-          <div className="flex items-end gap-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-1 sm:gap-3 mb-2">
             <h3
               id={`wanted-item-${item.id}`}
               className="text-lg font-semibold text-gray-100">
               {item.name}
             </h3>
             <p className="text-sm text-gray-300 sm:text-base">
-              Price: ¥{item.price.toLocaleString()}
+              ¥{item.price.toLocaleString()}
             </p>
           </div>
           {item.url && (

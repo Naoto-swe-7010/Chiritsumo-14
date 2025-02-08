@@ -13,7 +13,9 @@ const Features = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-gray-900 p-8 rounded-2xl">
-            <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
+            <div
+              data-testid="feature-icon"
+              className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
               <PiPiggyBank className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">節約管理</h3>
@@ -22,7 +24,9 @@ const Features = () => {
             </p>
           </div>
           <div className="bg-gray-900 p-8 rounded-2xl">
-            <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
+            <div
+              data-testid="feature-icon"
+              className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
               <LuList className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">
@@ -33,7 +37,9 @@ const Features = () => {
             </p>
           </div>
           <div className="bg-gray-900 p-8 rounded-2xl">
-            <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
+            <div
+              data-testid="feature-icon"
+              className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-6">
               <BsGraphUpArrow className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">進捗管理</h3>

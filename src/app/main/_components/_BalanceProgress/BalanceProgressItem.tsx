@@ -29,12 +29,12 @@ const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
         <div>
           <div className="flex justify-between">
             <div>
-              <div className="flex items-end gap-2 sm:gap-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end gap-1 sm:gap-3">
                 <h3 className="text-lg font-semibold">{item.name}</h3>
                 <p className="text-sm text-gray-500 sm:text-base">
-                  Price: ¥{item.price.toLocaleString()}{' '}
+                  ¥{item.price.toLocaleString()}{' '}
                   <span className="text-xs">
-                    (あと
+                    (残り
                     {(item.price - balance!.balance).toLocaleString()}円)
                   </span>
                 </p>
