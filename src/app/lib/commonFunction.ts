@@ -19,12 +19,12 @@ export const formattedDate = (date: Date): string => {
 // データ取得（全てユーザに紐づくデータ取得のためDynamic Rendering）///////////////////////////////////
 
 // Sessionの取得
-export const getSession = cache(async () => {
-  return auth()
-})
+export const getSession = async () => {
+  return await auth()
+}
 
 // UserIDの取得
-export const getSessionAndUserId = cache(async () => {
+export const getSessionAndUserId = async () => {
   try {
     const session = await getSession()
     if (!session || !session.user || !session.user.id) {
@@ -35,7 +35,7 @@ export const getSessionAndUserId = cache(async () => {
     console.error(error)
     throw new Error('認証が必要です。')
   }
-})
+}
 
 // Balanceレコードの取得(存在しない場合は新規作成)
 export const getBalance = cache(async (userId: string) => {
