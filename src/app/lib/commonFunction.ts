@@ -19,8 +19,8 @@ export const formattedDate = (date: Date): string => {
 // データ取得（全てユーザに紐づくデータ取得のためDynamic Rendering）///////////////////////////////////
 
 // Sessionの取得
-export const getSession = async () => {
-  return await auth()
+export const getSession = () => {
+  return auth()
 }
 
 // UserIDの取得
