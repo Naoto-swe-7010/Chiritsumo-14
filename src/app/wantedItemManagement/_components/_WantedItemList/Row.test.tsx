@@ -15,7 +15,7 @@ describe('Row Component', () => {
   it('商品名/値段/詳細リンクのレンダリング確認', () => {
     render(<Row item={mockWantedItem} />)
     expect(screen.getByText('ワイドモニター')).toBeInTheDocument()
-    expect(screen.getByText('Price: ¥60000')).toBeInTheDocument()
+    expect(screen.getByText('¥60,000')).toBeInTheDocument()
     const detailLink = screen.getByRole('link', { name: '詳細を見る' })
     expect(detailLink).toBeInTheDocument()
     expect(detailLink).toHaveAttribute(
