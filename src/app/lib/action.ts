@@ -1,5 +1,5 @@
 'use server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { prisma } from '../../../prisma'
@@ -16,6 +16,7 @@ import {
   UpdateWantedItemFormState,
 } from './formState'
 import { getSessionAndUserId } from './commonFunction'
+import OpenAI from 'openai'
 
 // 残高追加（ログ作成）////////////////////////////////////////////////////
 export const addBalance = async (
@@ -227,4 +228,32 @@ export const deleteWantedItem = async (id: string) => {
     return { message: 'データベースにてアイテムの削除に失敗しました。' }
   }
   redirect('/wantedItemManagement')
+}
+
+// AI節約アドバイス ////////////////////////////////////////////////////
+export const getAIAdvice = async (
+  prevState: string,
+  formData?: FormData,
+) => {
+  const openai = new OpenAI({
+    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  })
+  const keyword = formData?.get('keyword')
+  try {
+    const prompt = `あなたは賢明な節約アドバイザーです。
+        ${keyword}に関する節約アドバイスを提供してください。
+        ・アドバイス口調で出力してください。
+        ・必ず70文字以内で出力してください。`
+
+    const response = await openai.chat.completions.create({
+      messages: [{ role: 'user', content: `${prompt}` }],
+      model: 'gpt-3.5-turbo',
+      max_tokens: 2000,
+    })
+    const advice = response.choices[0].message.content!
+    return advice
+  } catch (error) {
+    console.error('OpenAI Text Generation Error:', error)
+    return 'AIから返答がありませんでした。再度お試しください。'
+  }
 }

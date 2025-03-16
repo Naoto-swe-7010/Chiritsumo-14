@@ -53,7 +53,7 @@ export const getBalance = cache(async (userId: string) => {
   return balance
 })
 
-// ログの取得
+// ログの取得（ページネーションごと）
 export const getLog = cache(
   async (userId: string, pageNumber: number, pageSize: number) => {
     return prisma.log.findMany({
@@ -64,6 +64,14 @@ export const getLog = cache(
     })
   },
 )
+
+// ログの取得（全件）
+export const getAllLog = cache(async (userId: string) => {
+  return prisma.log.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+  })
+})
 
 // 欲しい物リストの取得
 export const getWantedItemList = cache(async (userId: string) => {
