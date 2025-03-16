@@ -14,9 +14,7 @@ const AIAdvice = () => {
   return (
     <div className="mt-10 flex justify-center p-4">
       <div className="w-full max-w-lg space-y-6">
-        {/* 入力フォーム */}
-        <div className="overflow-hidden rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10 py-8 px-4 sm:px-8 shadow-lg">
-          {/* タイトル部分 */}
+        <div className="overflow-hidden rounded-lg bg-gradient-to-r from-indigo-950 to-indigo-950 py-8 px-4 sm:px-8 shadow-lg">
           <div className="mb-6 flex items-center justify-center space-x-2">
             <WiStars className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-400" />
             <h2 className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-lg sm:text-xl font-bold text-transparent">
