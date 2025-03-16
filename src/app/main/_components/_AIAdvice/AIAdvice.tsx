@@ -36,7 +36,7 @@ const AIAdvice = () => {
               className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-3 h-[40px] font-bold text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg active:scale-95 "
               disabled={isPending}>
               {isPending ?
-                <LoadingSpinner size={20} color="white" />
+                <LoadingSpinner size={28} color="white" />
               : '送信'}
             </Button>
           </form>
