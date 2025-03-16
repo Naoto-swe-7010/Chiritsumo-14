@@ -41,7 +41,7 @@ const AIAdvice = () => {
             </Button>
           </form>
           {advice && (
-            <div className="mt-4 rounded-lg bg-gray-800/50 p-4 shadow-inner">
+            <div className="mt-4 rounded-lg bg-gray-950/50 p-4 shadow-inner">
               <h3 className="text-md font-semibold text-purple-400">
                 AIからの返答:
               </h3>
