@@ -30,6 +30,7 @@ const AIAdvice = () => {
               type="text"
               name="keyword"
               placeholder="キーワードを入力"
+              required
               className="flex-1 rounded-lg bg-gray-800/50 px-4 py-2 text-white placeholder-gray-400 shadow-inner transition-all focus:bg-gray-800/70 focus:outline-none focus:ring-2 focus:ring-purple-400 border-2 border-purple-400"
             />
             <Button
@@ -40,14 +41,12 @@ const AIAdvice = () => {
               : '送信'}
             </Button>
           </form>
-          {advice && (
-            <div className="mt-4 rounded-lg bg-gray-950/50 p-4 shadow-inner">
-              <h3 className="text-md font-semibold text-purple-400">
-                AIからの返答
-              </h3>
-              <p className="mt-2 text-sm text-white">{advice}</p>
-            </div>
-          )}
+          <div className="mt-4 rounded-lg bg-gray-950/50 p-4 shadow-inner">
+            <h3 className="text-md font-semibold text-purple-400">
+              AIからの返答
+            </h3>
+            <p className="mt-2 text-sm text-white">{advice}</p>
+          </div>
         </div>
       </div>
     </div>

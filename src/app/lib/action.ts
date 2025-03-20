@@ -6,6 +6,7 @@ import { prisma } from '../../../prisma'
 import {
   AddBalanceSchema,
   AddWantedItemSchema,
+  AIAdviceSchema,
   UpdateLogSchema,
   UpdateWantedItemSchema,
 } from './schema'
@@ -238,7 +239,14 @@ export const getAIAdvice = async (
   const openai = new OpenAI({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   })
-  const keyword = formData?.get('keyword')
+  const validatedFields = AIAdviceSchema.safeParse({
+    keyword: formData?.get('keyword'),
+  })
+  if (!validatedFields.success) {
+    return ''
+  }
+  const { keyword } = validatedFields.data
+
   try {
     const prompt = `あなたは賢明な節約アドバイザーです。
         ${keyword}に関する節約アドバイスを提供してください。

@@ -1,7 +1,7 @@
-import CtaSection from './_components/_signIn/CtaSection'
-import Features from './_components/_signIn/Features'
-import HowToUse from './_components/_signIn/HowToUse'
-import Main from './_components/_signIn/Main'
+import CtaSection from "./_components/_signIn/CtaSection";
+import Features from "./_components/_signIn/Features";
+import HowToUse from "./_components/_signIn/HowToUse";
+import Main from "./_components/_signIn/Main";
 const SignIn = async () => {
   return (
     <div>
@@ -10,6 +10,6 @@ const SignIn = async () => {
       <HowToUse />
       <CtaSection />
     </div>
-  )
-}
-export default SignIn
+  );
+};
+export default SignIn;

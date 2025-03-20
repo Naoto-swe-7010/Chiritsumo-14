@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test'
 import { prisma } from '../prisma'
 import { describe } from 'node:test'
 
-// あらかじめSessionテーブルにテストユーザと紐づくレコードを作成しておく
+// // あらかじめSessionテーブルにテストユーザと紐づくレコードを作成しておく
 // await prisma.session.create({
 //   data: {
 //     sessionToken: 'dummy',
-//     userId: 'cm5nvvavn0000u5jqdeqvsi5l',
+//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
 //     expires: new Date(new Date().getTime() + 86400),
 //   },
 // })
@@ -18,14 +18,14 @@ let page: any // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
+      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
       data: { balance: 0 },
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
+      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm6npti6z0000u5dctdbljjxi' },
+      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
     }),
   ])
 }
@@ -139,7 +139,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
@@ -191,7 +191,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
@@ -229,7 +229,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: null,
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
@@ -269,7 +269,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
@@ -313,7 +313,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
@@ -359,7 +359,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm6npti6z0000u5dctdbljjxi',
+          userId: 'cm8d1l5cq0000u5ddbbrto25t',
         },
       })
       // ページ遷移
