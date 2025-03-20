@@ -6,8 +6,7 @@ const AddBalance = () => {
     <section className="flex justify-center p-4 text-gray-300 sm:p-6">
       <div className="w-full max-w-lg">
         <h1 className="mb-6 text-center text-xl font-bold text-gray-100 sm:text-2xl">
-          <span className="block">無駄づかいを我慢して</span>
-          <span className="block">欲しい物を手に入れよう！</span>
+          <span className="block">無駄づかいを我慢できたら入力</span>
         </h1>
         <AddBalanceForm />
       </div>
