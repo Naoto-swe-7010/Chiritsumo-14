@@ -9,7 +9,7 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 underline underline-offset-8 decoration-slate-500">
           <span className="text-pink-400">ちりつも</span>
-          <span className="text-white">の特徴！</span>
+          <span className="text-white">の特徴</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-gray-900 p-8 rounded-2xl">
