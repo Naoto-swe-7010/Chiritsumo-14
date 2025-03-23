@@ -1,7 +1,8 @@
-import React from 'react'
-import AddWantedItemForm from './AddWantedItemForm'
+import React from 'react';
 
-const AddWantedItem = () => {
+import { AddWantedItemForm } from './AddWantedItemForm';
+
+export const AddWantedItem = () => {
   return (
     <div>
       <h1 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
@@ -9,7 +10,5 @@ const AddWantedItem = () => {
       </h1>
       <AddWantedItemForm />
     </div>
-  )
-}
-
-export default AddWantedItem
+  );
+};

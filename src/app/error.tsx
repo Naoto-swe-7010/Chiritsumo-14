@@ -1,28 +1,32 @@
-'use client'
-import React from 'react'
-import { useRouter } from 'next/navigation'
+'use client';
+
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const Error = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b text-white">
       {/* エラーメッセージ */}
-      <h1 className="text-5xl font-bold mb-6">エラーが発生しました</h1>
-      <p className="text-lg mb-8">
+      <h1 className="mb-6 text-5xl font-bold">エラーが発生しました</h1>
+      <p className="mb-8 text-lg">
         予期しない問題が発生しました。もう一度操作をお試しください。
       </p>
       {/* ボタン群 */}
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row">
         {/* ホームページに戻るボタン */}
         <button
-          onClick={() => router.push('/')}
-          className="px-6 py-3 bg-blue-500 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+          onClick={() => {
+            router.push('/');
+          }}
+          className="rounded-lg bg-blue-500 px-6 py-3 font-bold transition duration-300 hover:bg-blue-700"
+        >
           ホームに戻る
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;

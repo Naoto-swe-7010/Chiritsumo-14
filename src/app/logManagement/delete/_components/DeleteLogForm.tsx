@@ -1,29 +1,28 @@
-'use client'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Log } from '@prisma/client'
-import { useActionStateCompat } from '@strozw/use-action-state-compat'
+'use client';
 
-import LoadingSpinner from '@/app/_components/LoadingSpinner'
-import { deleteLog } from '@/app/lib/action'
+import { useRouter } from 'next/navigation';
+import { Log } from '@prisma/client';
+import { useActionStateCompat } from '@strozw/use-action-state-compat';
 
-const DeleteLogForm = ({ log }: { log: Log }) => {
+import { LoadingSpinner } from '@/app/_components/LoadingSpinner';
+import { deleteLog } from '@/app/lib/action';
+import { Button } from '@/components/ui/button';
+
+export const DeleteLogForm = ({ log }: { log: Log }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
-  const deleteLogWithId = deleteLog.bind(null, log.id)
+  const deleteLogWithId = deleteLog.bind(null, log.id);
   const [state, formAction, isPending] = useActionStateCompat(
     deleteLogWithId,
-    null,
-  )
+    null
+  );
 
   // キャンセルボタン用のルーター
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <form action={formAction}>
-      <h3 className="mb-4 text-gray-400">
-        本当にこのデータを削除しますか？
-      </h3>
+      <h3 className="mb-4 text-gray-400">本当にこのデータを削除しますか？</h3>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
           {state.message}
@@ -32,24 +31,22 @@ const DeleteLogForm = ({ log }: { log: Log }) => {
       <div className="flex justify-end gap-2">
         <Button
           type="submit"
-          className="bg-red-500 hover:bg-red-700 font-bold"
-          disabled={isPending}>
-          {isPending ?
-            <LoadingSpinner size={18} color="white" />
-          : 'はい'}
+          className="bg-red-500 font-bold hover:bg-red-700"
+          disabled={isPending}
+        >
+          {isPending ? <LoadingSpinner size={18} color="white" /> : 'はい'}
         </Button>
         <Button
-          onClick={e => {
-            e.preventDefault()
-            router.back()
+          onClick={(e) => {
+            e.preventDefault();
+            router.back();
           }}
-          className="bg-gray-500 hover:bg-gray-700 font-bold"
-          disabled={isPending}>
+          className="bg-gray-500 font-bold hover:bg-gray-700"
+          disabled={isPending}
+        >
           いいえ
         </Button>
       </div>
     </form>
-  )
-}
-
-export default DeleteLogForm
+  );
+};
