@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import AccountInfo from './AccountInfo'
-import { getSession } from '@/app/lib/commonFunction'
-import Title from './Title'
-import Menu from './Menu'
+import { getSession } from '@/app/lib/commonFunction';
+import { AccountInfo } from './AccountInfo';
+import { Menu } from './Menu';
+import { Title } from './Title';
 
-const Header = async () => {
-  const session = await getSession()
+export const Header = async () => {
+  const session = await getSession();
 
   return (
     <header className="fixed left-0 top-0 z-10 w-full bg-gray-900 px-[4%] text-white">
@@ -21,7 +21,5 @@ const Header = async () => {
         {session && <AccountInfo session={session} />}
       </nav>
     </header>
-  )
-}
-
-export default Header
+  );
+};

@@ -1,7 +1,8 @@
-import React from 'react'
-import AddBalanceForm from './AddBalanceForm'
+import React from 'react';
 
-const AddBalance = () => {
+import { AddBalanceForm } from './AddBalanceForm';
+
+export const AddBalance = () => {
   return (
     <section className="flex justify-center p-4 text-gray-300 sm:p-6">
       <div className="w-full max-w-lg">
@@ -11,7 +12,5 @@ const AddBalance = () => {
         <AddBalanceForm />
       </div>
     </section>
-  )
-}
-
-export default AddBalance
+  );
+};

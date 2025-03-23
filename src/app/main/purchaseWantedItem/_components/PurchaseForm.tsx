@@ -1,13 +1,14 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { WantedItem } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import { useActionStateCompat } from "@strozw/use-action-state-compat";
+'use client';
 
-import { purchaseWantedItem } from "@/app/lib/action";
-import LoadingSpinner from "@/app/_components/LoadingSpinner";
+import { useRouter } from 'next/navigation';
+import { WantedItem } from '@prisma/client';
+import { useActionStateCompat } from '@strozw/use-action-state-compat';
 
-const PurchaseForm = ({ item }: { item: WantedItem }) => {
+import { LoadingSpinner } from '@/app/_components/LoadingSpinner';
+import { purchaseWantedItem } from '@/app/lib/action';
+import { Button } from '@/components/ui/button';
+
+export const PurchaseForm = ({ item }: { item: WantedItem }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
   const purchaseWantedItemWithId = purchaseWantedItem.bind(null, item.id);
@@ -30,17 +31,17 @@ const PurchaseForm = ({ item }: { item: WantedItem }) => {
       <div className="flex justify-end gap-2">
         <Button
           type="submit"
-          className="bg-pink-500 hover:bg-pink-700 font-bold"
+          className="bg-pink-500 font-bold hover:bg-pink-700"
           disabled={isPending}
         >
-          {isPending ? <LoadingSpinner /> : "はい"}
+          {isPending ? <LoadingSpinner /> : 'はい'}
         </Button>
         <Button
           onClick={(e) => {
             e.preventDefault();
             router.back();
           }}
-          className="bg-gray-500 hover:bg-gray-700 font-bold"
+          className="bg-gray-500 font-bold hover:bg-gray-700"
           disabled={isPending}
         >
           いいえ
@@ -49,5 +50,3 @@ const PurchaseForm = ({ item }: { item: WantedItem }) => {
     </form>
   );
 };
-
-export default PurchaseForm;

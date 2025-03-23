@@ -1,13 +1,13 @@
-import React, { Suspense } from "react";
+import React, { Suspense } from 'react';
 
+import { Loading } from '@/app/_components/Loading';
 import {
   getSessionAndUserId,
-  getWantedItemList,
-} from "@/app/lib/commonFunction";
-import BalanceProgressItem from "./BalanceProgressItem";
-import Loading from "@/app/_components/Loading";
+  getWantedItemList
+} from '@/app/lib/commonFunction';
+import { BalanceProgressItem } from './BalanceProgressItem';
 
-const BalanceProgress = async () => {
+export const BalanceProgress = async () => {
   try {
     // UserID取得
     const userId = await getSessionAndUserId();
@@ -23,7 +23,7 @@ const BalanceProgress = async () => {
             </span>
           </h2>
           <Suspense fallback={<Loading />}>
-            {wantedItemList && wantedItemList.length > 0 ? (
+            {wantedItemList.length > 0 ? (
               wantedItemList.map((item) => (
                 <BalanceProgressItem key={item.id} item={item} />
               ))
@@ -37,8 +37,7 @@ const BalanceProgress = async () => {
         </div>
       </div>
     );
-  } catch (error) {
-    console.error("欲しい物リストの取得中にエラーが発生しました:", error);
+  } catch {
     return (
       <div className="text-center text-red-500">
         <p>エラーが発生しました。再度お試しください。</p>
@@ -46,5 +45,3 @@ const BalanceProgress = async () => {
     );
   }
 };
-
-export default BalanceProgress;

@@ -1,8 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-import './globals.css'
-import Header from './_components/_header/Header'
-import Footer from './_components/_footer/Footer'
+import './globals.css';
+
+import { Footer } from './_components/_footer/Footer';
+import { Header } from './_components/_header/Header';
 
 export const metadata: Metadata = {
   title: 'ちりつも',
@@ -20,27 +21,27 @@ export const metadata: Metadata = {
         url: 'https://chiritsumo-14.vercel.app/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: 'ちりつも',
-      },
-    ],
+        alt: 'ちりつも'
+      }
+    ]
   },
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-icon.ico',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/apple-icon.ico',
-    },
+      url: '/apple-icon.ico'
+    }
   },
-  appleWebApp: true,
-}
-;<meta name="apple-mobile-web-app-capable" content="yes"></meta>
+  appleWebApp: true
+};
+<meta name="apple-mobile-web-app-capable" content="yes"></meta>;
 
-export default function RootLayout({
-  children,
+const RootLayout = ({
+  children
 }: Readonly<{
-  children: React.ReactNode
-}>) {
+  children: React.ReactNode;
+}>) => {
   return (
     <html lang="ja">
       <body className="min-h-[calc(100vh-132px)] bg-gradient-to-b from-[#0a004a] to-[#010115] text-white">
@@ -49,5 +50,7 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  )
-}
+  );
+};
+
+export default RootLayout;
