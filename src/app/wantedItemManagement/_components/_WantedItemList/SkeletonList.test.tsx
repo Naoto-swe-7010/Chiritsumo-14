@@ -1,12 +1,14 @@
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
-import SkeletonList from './SkeletonList'
+import { render, screen } from '@testing-library/react';
+
+import '@testing-library/jest-dom';
+
+import SkeletonList from './SkeletonList';
 
 describe('SkeletonList Component', () => {
   test('スケルトンUIのレンダリング確認', () => {
-    render(<SkeletonList />)
+    render(<SkeletonList />);
     // articleタグが5つレンダリングされているか
-    const skeletonItems = screen.getAllByRole('article')
-    expect(skeletonItems).toHaveLength(5)
-  })
-})
+    const skeletonItems = screen.getAllByRole('article');
+    expect(skeletonItems).toHaveLength(5);
+  });
+});

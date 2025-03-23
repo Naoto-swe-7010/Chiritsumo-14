@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-const SkeletonList = () => {
+export const SkeletonList = () => {
   return (
     <section className="space-y-4">
-      {Array.from({ length: 5 }).map((_, index) => (
+      {Array.from({ length: 5 }).map((dummy, index) => (
         <article
           key={index}
-          className="mb-4 flex items-center justify-between gap-4 rounded border border-gray-500 bg-gray-900 p-5 shadow-xl">
+          className="mb-4 flex items-center justify-between gap-4 rounded border border-gray-500 bg-gray-900 p-5 shadow-xl"
+        >
           <div className="w-full flex-1">
             <div>
               <div className="flex items-end gap-3">
@@ -25,7 +26,5 @@ const SkeletonList = () => {
         </article>
       ))}
     </section>
-  )
-}
-
-export default SkeletonList
+  );
+};

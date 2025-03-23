@@ -1,13 +1,14 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { WantedItem } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import { useActionStateCompat } from "@strozw/use-action-state-compat";
+'use client';
 
-import LoadingSpinner from "@/app/_components/LoadingSpinner";
-import { deleteWantedItem } from "@/app/lib/action";
+import { useRouter } from 'next/navigation';
+import { WantedItem } from '@prisma/client';
+import { useActionStateCompat } from '@strozw/use-action-state-compat';
 
-const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
+import { LoadingSpinner } from '@/app/_components/LoadingSpinner';
+import { deleteWantedItem } from '@/app/lib/action';
+import { Button } from '@/components/ui/button';
+
+export const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
@@ -30,17 +31,17 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
       <div className="flex justify-end gap-2">
         <Button
           type="submit"
-          className="bg-red-500 hover:bg-red-700 font-bold"
+          className="bg-red-500 font-bold hover:bg-red-700"
           disabled={isPending}
         >
-          {isPending ? <LoadingSpinner size={18} color="white" /> : "はい"}
+          {isPending ? <LoadingSpinner size={18} color="white" /> : 'はい'}
         </Button>
         <Button
           onClick={(e) => {
             e.preventDefault();
             router.back();
           }}
-          className="bg-gray-500 hover:bg-gray-700 font-bold"
+          className="bg-gray-500 font-bold hover:bg-gray-700"
           disabled={isPending}
         >
           いいえ
@@ -49,5 +50,3 @@ const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
     </form>
   );
 };
-
-export default DeleteWantedItemForm;

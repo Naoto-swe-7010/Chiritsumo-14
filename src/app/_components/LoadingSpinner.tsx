@@ -1,22 +1,22 @@
-import React from 'react'
+import React from 'react';
 
 // SuspenseのFallbackUI
-const LoadingSpinner = ({
+export const LoadingSpinner = ({
   size = 20,
-  color = 'border-white',
+  color = 'border-white'
 }: {
-  size?: number
-  color?: string
+  size?: number;
+  color?: string;
 }) => {
+  const sizeStr = size.toString();
   return (
     <div
-      className={`border-4 border-t-transparent border-solid rounded-full animate-spin ${color}`}
+      className={`animate-spin rounded-full border-4 border-solid border-t-transparent ${color}`}
       style={{
-        width: `${size}px`,
-        height: `${size}px`,
+        width: `${sizeStr}px`,
+        height: `${sizeStr}px`
       }}
-      role="loading"></div>
-  )
-}
-
-export default LoadingSpinner
+      role="loading"
+    ></div>
+  );
+};
