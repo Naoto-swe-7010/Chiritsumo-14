@@ -1,0 +1,17 @@
+name: Lint and Test
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Linter実行"
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test実行"
