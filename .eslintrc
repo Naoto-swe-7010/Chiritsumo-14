@@ -95,7 +95,5 @@
       }
     }
   ],
-  "include": [
-    "src/app/**/*" // src/appディレクトリ以下の全てのファイルを対象とする
-  ]
+  "ignorePatterns": ["*", "!src/app/**/*"]
 }
