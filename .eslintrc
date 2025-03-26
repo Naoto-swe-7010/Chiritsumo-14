@@ -94,5 +94,8 @@
         "import/prefer-default-export": "error"
       }
     }
+  ],
+  "include": [
+    "src/app/**/*" // src/appディレクトリ以下の全てのファイルを対象とする
   ]
 }

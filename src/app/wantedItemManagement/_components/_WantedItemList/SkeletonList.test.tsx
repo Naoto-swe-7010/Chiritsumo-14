@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
 
-import SkeletonList from './SkeletonList';
+import { SkeletonList } from './SkeletonList';
 
 describe('SkeletonList Component', () => {
   test('スケルトンUIのレンダリング確認', () => {

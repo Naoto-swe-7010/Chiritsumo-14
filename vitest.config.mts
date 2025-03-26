@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    setupFiles: ['./vitest-setup.ts']
+    setupFiles: ['./vitest-setup.ts'],
+    exclude: ['**/e2e/**', '**/playwright/**', 'e2e/**', 'node_modules/**']
   }
 });

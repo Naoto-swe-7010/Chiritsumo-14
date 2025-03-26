@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { Session } from 'next-auth';
 
-import AccountInfo from './AccountInfo';
+import { AccountInfo } from './AccountInfo';
 
 const mockSession: Session = {
   user: {
