@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import CopyRight from './CopyRight';
+import { CopyRight } from './CopyRight';
 
 describe('CopyRight Component', () => {
   it('コピーライトが正しい年でレンダリングされているか確認', () => {

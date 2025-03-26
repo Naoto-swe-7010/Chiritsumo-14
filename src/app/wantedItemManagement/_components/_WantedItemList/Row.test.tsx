@@ -1,7 +1,7 @@
 import { WantedItem } from '@prisma/client';
 import { render, screen } from '@testing-library/react';
 
-import Row from './Row';
+import { Row } from './Row';
 
 describe('Row Component', () => {
   const mockWantedItem: WantedItem = {
@@ -10,7 +10,9 @@ describe('Row Component', () => {
     userId: 'user1',
     price: 60000,
     url: 'https://example.com/monitor',
-    createdAt: new Date()
+    createdAt: new Date(),
+    favorite: false,
+    purchased: false
   };
 
   it('商品名/値段/詳細リンクのレンダリング確認', () => {

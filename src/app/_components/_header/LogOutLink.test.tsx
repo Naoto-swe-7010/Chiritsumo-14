@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import LogOutLink from './LogOutLink';
+import { LogOutLink } from './LogOutLink';
 
 describe('LogOutLink', () => {
   it('ログアウトリンクのレンダリング確認 ', () => {

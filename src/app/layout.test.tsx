@@ -4,10 +4,10 @@ import RootLayout, { metadata } from './layout';
 
 // ヘッダーとフッターをモック
 vi.mock('./_components/_header/Header', () => ({
-  default: () => <header data-testid="header">Mock Header</header>
+  Header: () => <header data-testid="header">Mock Header</header>
 }));
 vi.mock('./_components/_footer/Footer', () => ({
-  default: () => <footer data-testid="footer">Mock Footer</footer>
+  Footer: () => <footer data-testid="footer">Mock Footer</footer>
 }));
 
 describe('RootLayout Component', () => {

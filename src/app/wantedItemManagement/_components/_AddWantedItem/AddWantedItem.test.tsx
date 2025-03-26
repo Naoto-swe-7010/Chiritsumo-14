@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 
-import AddWantedItem from './AddWantedItem';
+import { AddWantedItem } from './AddWantedItem';
 
 // AddWantedItemFormコンポーネントのモック化
 vi.mock('./AddWantedItemForm', () => ({
-  default: () => <div data-testid="add-wanted-item-form" />
+  AddWantedItemForm: () => <div data-testid="add-wanted-item-form" />
 }));
 
 describe('AddWantedItem', () => {

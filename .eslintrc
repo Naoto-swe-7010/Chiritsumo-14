@@ -94,5 +94,6 @@
         "import/prefer-default-export": "error"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["*", "!src/app/**/*"]
 }

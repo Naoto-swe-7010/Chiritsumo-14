@@ -1,7 +1,7 @@
 import { Balance, WantedItem } from '@prisma/client';
 import { render, screen } from '@testing-library/react';
 
-import ProgressBar from './ProgressBar';
+import { ProgressBar } from './ProgressBar';
 
 describe('ProgressBar Component', () => {
   const mockWantedItem: WantedItem = {
@@ -10,7 +10,9 @@ describe('ProgressBar Component', () => {
     userId: 'user1',
     price: 50000,
     url: 'https://example.com',
-    createdAt: new Date()
+    createdAt: new Date(),
+    favorite: false,
+    purchased: false
   };
 
   const mockBalance: Balance = {
