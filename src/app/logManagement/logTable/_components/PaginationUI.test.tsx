@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import PaginationUI from './PaginationUI';
+import { PaginationUI } from './PaginationUI';
 
 describe('PaginationUI Component', () => {
   it('リンクの数がtotalPage＋2（前ページ＋次ページ）になることを確認', () => {

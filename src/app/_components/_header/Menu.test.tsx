@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Menu from './Menu';
+import { Menu } from './Menu';
 
 describe('Menu', () => {
   it('ナビゲーションメニューのレンダリング確認', () => {

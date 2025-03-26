@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import Features from './Features';
+import { Features } from './Features';
 
 describe('Features', () => {
   it('タイトルが正しく表示される', () => {

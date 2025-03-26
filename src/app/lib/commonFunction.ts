@@ -79,7 +79,3 @@ export const getWantedItemList = cache(async (userId: string) => {
     orderBy: { createdAt: 'desc' }
   });
 });
-
-export function add(a: number, b: number) {
-  return a + b;
-}
