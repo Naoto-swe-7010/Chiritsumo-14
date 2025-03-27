@@ -91,7 +91,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // 欲しい物アイテムの進捗率が正しく増える（5000 / 20000 * 100)
       await expect(page.getByText('25%')).toBeVisible();
       // もう１件送信
@@ -108,7 +108,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5350');
+      ).toHaveText('5,350');
       await expect(page.getByText('27%')).toBeVisible();
       // ログページにログが作成される
       // ページ遷移
@@ -125,7 +125,7 @@ describe('メインページ', () => {
         page.locator(
           `table > tbody > tr:nth-of-type(${rowCount}) > td:nth-of-type(2)`
         )
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ２件目のログが最終行の一つ上にあるか
       await expect(
         page.locator(
@@ -247,7 +247,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('30000');
+      ).toHaveText('30,000');
     });
   });
 });

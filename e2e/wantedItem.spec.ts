@@ -78,7 +78,7 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -100,7 +100,7 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -176,7 +176,7 @@ describe('欲しい物リストページ', () => {
         'Panasonicドライヤー'
       );
       // 価格が変更されているか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥20000');
+      await expect(firstArticle.locator('p')).toHaveText('¥20,000');
       // 詳細リンクが変更されているか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -304,7 +304,7 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -350,7 +350,7 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')

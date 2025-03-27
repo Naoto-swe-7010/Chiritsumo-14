@@ -102,7 +102,7 @@ describe('ログページ', () => {
       // 金額が変更されているか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('3000');
+      ).toHaveText('3,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が正しく変更されているか（差額の-2000円されているか）
@@ -110,7 +110,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('3000');
+      ).toHaveText('3,000');
     });
     test('編集失敗（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -142,7 +142,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -150,7 +150,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
     test('編集失敗（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
@@ -182,7 +182,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -190,7 +190,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
     test('編集失敗（金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -222,7 +222,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -230,7 +230,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
   });
   describe('ログ削除', () => {
