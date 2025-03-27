@@ -18,6 +18,7 @@ jobs:
       - name: Run TypeCheck
         run: npm run typecheck
   Build:
+    needs: TypeCheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +31,7 @@ jobs:
       - name: Run Build
         run: npm run build
   UnitTest:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,6 +44,7 @@ jobs:
       - name: Run Unit Test
         run: npm run test
   E2ETest:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +53,8 @@ jobs:
         with:
           node-version: '20'
       - name: Install dependencies
+      - name: Install Playwright
+        run: npx playwright install --with-deps
         run: npm install
       - name: Run E2E Test
         run: npm run playwright
