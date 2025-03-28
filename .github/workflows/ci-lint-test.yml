@@ -47,7 +47,7 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     env:
-    DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
     services:
       postgres:
         image: postgres:16
