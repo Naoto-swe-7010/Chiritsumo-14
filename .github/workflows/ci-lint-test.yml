@@ -46,6 +46,22 @@ jobs:
   E2ETest:
     needs: Build
     runs-on: ubuntu-latest
+    env:
+    DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -56,5 +72,9 @@ jobs:
         run: npm install
       - name: Install Playwright
         run: npx playwright install --with-deps
+      - name: Run Prisma migrate
+        run: npx prisma migrate deploy
+      - name: Seed test data
+        run: npx ts-node ./prisma/seed.ts
       - name: Run E2E Test
         run: npm run playwright
