@@ -75,6 +75,6 @@ jobs:
       - name: Run Prisma migrate
         run: npx prisma migrate deploy
       - name: Seed test data
-        run: npx ts-node ./prisma/seed.ts
+        run: npx ts-node --loader ts-node/esm ./prisma/seed.ts
       - name: Run E2E Test
         run: npm run playwright
