@@ -39,6 +39,12 @@ const seed = async () => {
       updatedAt: new Date()
     }
   });
+  await prisma.balance.create({
+    data: {
+      userId: 'cm8sql6kt0000u5nygrbdb9ko',
+      balance: 0
+    }
+  });
 };
 
 seed();

@@ -58,3 +58,13 @@ INSERT INTO "Account" (
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP
 );
+
+-- balance テーブルにデータ挿入
+INSERT INTO "Balance" (
+  "userId",
+  "balance"
+) VALUES (
+  'cm8sql6kt0000u5nygrbdb9ko',
+  0
+);
+
