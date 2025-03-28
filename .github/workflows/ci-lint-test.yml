@@ -75,6 +75,8 @@ jobs:
       - name: Run Prisma migrate
         run: npx prisma migrate deploy
       - name: Seed test data
-        run: node --loader ts-node/esm ./prisma/seed.ts
+        run: psql -h localhost -U postgres -d postgres -f ./scripts/seed.sql
+        env:
+          PGPASSWORD: postgres
       - name: Run E2E Test
         run: npm run playwright

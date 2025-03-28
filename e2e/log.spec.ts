@@ -3,15 +3,6 @@ import { expect, test } from '@playwright/test';
 
 import { prisma } from '../prisma';
 
-// あらかじめSessionテーブルに以下レコードを手動で作成しておく。
-// await prisma.session.create({
-//   data: {
-//     sessionToken: 'dummy',
-//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
-//     expires: new Date(new Date().getTime() + 86400),
-//   },
-// })
-
 let context: any; // 各テストで共有するブラウザコンテキスト
 let page: any; // 各テストで共有するページ
 
@@ -19,14 +10,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
     })
   ]);
 };
@@ -53,13 +44,13 @@ describe('ログページ', () => {
     // 欲しい物リスト：0件
     await dbReset();
     await prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' },
       data: { balance: 5000 }
     });
     await prisma.log.create({
       data: {
         id: 'testId',
-        userId: 'cm8d1l5cq0000u5ddbbrto25t',
+        userId: 'cm8sql6kt0000u5nygrbdb9ko',
         title: '飲み会',
         price: 5000,
         createdAt: new Date()

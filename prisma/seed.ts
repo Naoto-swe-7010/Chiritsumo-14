@@ -4,7 +4,7 @@ const seed = async () => {
   await prisma.session.create({
     data: {
       sessionToken: 'dummy',
-      userId: 'cm8d1l5cq0000u5ddbbrto25t',
+      userId: 'cm8sql6kt0000u5nygrbdb9ko',
       expires: new Date(new Date().getTime() + 86400)
     }
   });
@@ -12,7 +12,7 @@ const seed = async () => {
     data: {
       provider: 'google',
       providerAccountId: '115734172502700840099',
-      userId: 'cm8d1l5cq0000u5ddbbrto25t',
+      userId: 'cm8sql6kt0000u5nygrbdb9ko',
       type: 'oidc',
       refresh_token: null,
       access_token:
@@ -30,7 +30,7 @@ const seed = async () => {
   });
   await prisma.user.create({
     data: {
-      id: 'cm8d1l5cq0000u5ddbbrto25t',
+      id: 'cm8sql6kt0000u5nygrbdb9ko',
       name: 'test',
       email: 'test@gmail.com',
       image: 'https://example.com/image.png',

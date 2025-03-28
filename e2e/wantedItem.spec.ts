@@ -7,7 +7,7 @@ import { prisma } from '../prisma';
 // await prisma.session.create({
 //   data: {
 //     sessionToken: 'dummy',
-//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
+//     userId: 'cm8sql6kt0000u5nygrbdb9ko',
 //     expires: new Date(new Date().getTime() + 86400),
 //   },
 // })
@@ -19,14 +19,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
     })
   ]);
 };
@@ -136,7 +136,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
@@ -190,7 +190,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
@@ -230,7 +230,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: null,
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
@@ -272,7 +272,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
@@ -318,7 +318,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
@@ -366,7 +366,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'cm8sql6kt0000u5nygrbdb9ko'
         }
       });
       // ページ遷移
