@@ -23,7 +23,7 @@ jobs:
   # 型チェック
   TypeCheck:
     needs: slackStartNotification
-    runs-on: ubuntu-latest
+    runs-on: ubuntus-latest
     steps:
       # ブランチを取得
       - uses: actions/checkout@v4
@@ -152,7 +152,7 @@ jobs:
     services:
       # データベースのコンテナを起動
       postgres:
-        image: postgrjes:16
+        image: postgres:16
         # データベースのユーザー名、パスワード、データベース名の設定
         env:
           POSTGRES_USER: postgres
@@ -233,10 +233,14 @@ jobs:
       SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     steps:
+      - uses: technote-space/workflow-conclusion-action@v1
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ env.WORKFLOW_CONCLUSION }}
       # 成功
       - name: Slack Notification on Success
         uses: rtCamp/action-slack-notify@v2
-        if: ${{ success() }}
+        if: ${{ env.WORKFLOW_CONCLUSION == 'success' }}
         env:
           SLACK_TITLE: Deploy / Success
           SLACK_COLOR: good
@@ -245,7 +249,7 @@ jobs:
       # 失敗
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2
-        if: ${{ failure() }}
+        if: ${{ env.WORKFLOW_CONCLUSION != 'success' }}
         env:
           SLACK_TITLE: Deploy / Failure
           SLACK_COLOR: danger
