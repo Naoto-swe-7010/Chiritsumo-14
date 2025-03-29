@@ -48,6 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
     services:
       postgres:
         image: postgres:16
@@ -82,7 +83,6 @@ jobs:
         run: |
           psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"User\" WHERE id = 'testId';"
           psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Session\" WHERE \"userId\" = 'testId';"
-          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Account\" WHERE \"userId\" = 'testId';"
           psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Balance\" WHERE \"userId\" = 'testId';"
         env:
           PGPASSWORD: postgres
