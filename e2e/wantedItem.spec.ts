@@ -6,8 +6,8 @@ import { prisma } from '../prisma';
 // // あらかじめSessionテーブルにテストユーザと紐づくレコードを作成しておく
 // await prisma.session.create({
 //   data: {
-//     sessionToken: 'dummy',
-//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
+//     sessionToken: 'testToken',
+//     userId: 'testId',
 //     expires: new Date(new Date().getTime() + 86400),
 //   },
 // })
@@ -19,14 +19,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'testId' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     })
   ]);
 };
@@ -40,7 +40,7 @@ describe('欲しい物リストページ', () => {
     await context.addCookies([
       {
         name: 'authjs.session-token',
-        value: 'dummy',
+        value: 'testToken',
         domain: 'localhost',
         path: '/'
       }
@@ -78,7 +78,7 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -100,7 +100,7 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -136,7 +136,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移
@@ -176,7 +176,7 @@ describe('欲しい物リストページ', () => {
         'Panasonicドライヤー'
       );
       // 価格が変更されているか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥20000');
+      await expect(firstArticle.locator('p')).toHaveText('¥20,000');
       // 詳細リンクが変更されているか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -190,7 +190,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移
@@ -230,7 +230,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: null,
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移
@@ -272,7 +272,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移
@@ -304,7 +304,7 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -318,7 +318,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移
@@ -350,7 +350,7 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('Price: ¥30000');
+      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -366,7 +366,7 @@ describe('欲しい物リストページ', () => {
           name: 'Refaドライヤー',
           price: 30000,
           url: 'https://example.com',
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         }
       });
       // ページ遷移

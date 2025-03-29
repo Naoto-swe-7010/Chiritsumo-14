@@ -1,0 +1,120 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  # 型チェック
+  TypeCheck:
+    runs-on: ubuntu-latest
+    steps:
+      # ブランチを取得
+      - uses: actions/checkout@v4
+      # Node.jsをセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 依存パッケージをインストール
+      - name: Install dependencies
+        run: npm install
+      # 型チェックを実行
+      - name: Run TypeCheck
+        run: npm run typecheck
+  # ビルドチェック
+  Build:
+    needs: TypeCheck
+    runs-on: ubuntu-latest
+    steps:
+      # ブランチを取得
+      - uses: actions/checkout@v4
+      # Node.jsをセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 依存パッケージをインストール
+      - name: Install dependencies
+        run: npm install
+      # ビルドを実行
+      - name: Run Build
+        run: npm run build
+  # ユニットテスト
+  UnitTest:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      # ブランチを取得
+      - uses: actions/checkout@v4
+      # Node.jsをセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 依存パッケージをインストール
+      - name: Install dependencies
+        run: npm install
+      # ユニットテストを実行
+      - name: Run Unit Test
+        run: npm run test
+  # E2Eテスト
+  E2ETest:
+    needs: Build
+    runs-on: ubuntu-latest
+    env:
+      # データベースの設定
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+      # Auth.jsのシークレットキーの設定
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+    services:
+      # データベースのコンテナを起動
+      postgres:
+        image: postgres:16
+        # データベースのユーザー名、パスワード、データベース名の設定
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        # データベースのヘルスチェックの設定
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        # データベースのポートの設定
+        ports:
+          - 5432:5432
+    steps:
+      # ブランチを取得
+      - uses: actions/checkout@v4
+      # Node.jsをセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 依存パッケージをインストール
+      - name: Install dependencies
+        run: npm install
+      # Playwrightをインストール
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      # Prismaのマイグレーションを実行
+      - name: Run Prisma migrate
+        run: npx prisma migrate deploy
+      # 自動でOAuth認証（Google）するためのテストデータをシード
+      - name: Seed test data
+        run: psql -h localhost -U postgres -d postgres -f ./prisma/seed.sql
+        env:
+          PGPASSWORD: postgres
+      # シードしたテストデータの確認
+      - name: Verify Seed Data
+        run: |
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"User\" WHERE id = 'testId';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Session\" WHERE \"userId\" = 'testId';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Balance\" WHERE \"userId\" = 'testId';"
+        env:
+          PGPASSWORD: postgres
+      # E2Eテストを実行
+      - name: Run E2E Test
+        run: npm run playwright

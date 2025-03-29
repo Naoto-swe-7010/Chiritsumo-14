@@ -15,7 +15,8 @@
     "playwright": "playwright test",
     "playwright:ui": "playwright test --ui",
     "playwright:report": "playwright show-report",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",

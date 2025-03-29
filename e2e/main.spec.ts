@@ -6,8 +6,8 @@ import { prisma } from '../prisma';
 // あらかじめSessionテーブルにテストユーザと紐づくレコードを作成しておく
 // await prisma.session.create({
 //   data: {
-//     sessionToken: 'dummy',
-//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
+//     sessionToken: 'testToken',
+//     userId: 'testId',
 //     expires: new Date(new Date().getTime() + 86400),
 //   },
 // })
@@ -19,14 +19,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'testId' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     })
   ]);
 };
@@ -40,7 +40,7 @@ describe('メインページ', () => {
     await context.addCookies([
       {
         name: 'authjs.session-token',
-        value: 'dummy',
+        value: 'testToken',
         domain: 'localhost',
         path: '/'
       }
@@ -60,7 +60,7 @@ describe('メインページ', () => {
         price: 20000,
         name: 'Nintendo Switch',
         url: 'https://example.com',
-        userId: 'cm8d1l5cq0000u5ddbbrto25t'
+        userId: 'testId'
       }
     });
     //////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // 欲しい物アイテムの進捗率が正しく増える（5000 / 20000 * 100)
       await expect(page.getByText('25%')).toBeVisible();
       // もう１件送信
@@ -108,7 +108,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5350');
+      ).toHaveText('5,350');
       await expect(page.getByText('27%')).toBeVisible();
       // ログページにログが作成される
       // ページ遷移
@@ -125,7 +125,7 @@ describe('メインページ', () => {
         page.locator(
           `table > tbody > tr:nth-of-type(${rowCount}) > td:nth-of-type(2)`
         )
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ２件目のログが最終行の一つ上にあるか
       await expect(
         page.locator(
@@ -208,7 +208,7 @@ describe('メインページ', () => {
       // 残高に50000追加
       await prisma.balance.update({
         where: {
-          userId: 'cm8d1l5cq0000u5ddbbrto25t'
+          userId: 'testId'
         },
         data: { balance: 50000 }
       });
@@ -239,7 +239,7 @@ describe('メインページ', () => {
         })
         .click();
       // ホームに遷移したか
-      await page.goto('http://localhost:3000/main');
+      await expect(page).toHaveURL('http://localhost:3000/main');
       // 欲しい物リストにアイテムがないか
       await expect(page.getByText('Nintendo Switch')).not.toBeVisible();
       // 残高が元の50000から購入アイテム代20000を引いた、30000になっているか
@@ -247,7 +247,7 @@ describe('メインページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('30000');
+      ).toHaveText('30,000');
     });
   });
 });

@@ -3,15 +3,6 @@ import { expect, test } from '@playwright/test';
 
 import { prisma } from '../prisma';
 
-// あらかじめSessionテーブルに以下レコードを手動で作成しておく。
-// await prisma.session.create({
-//   data: {
-//     sessionToken: 'dummy',
-//     userId: 'cm8d1l5cq0000u5ddbbrto25t',
-//     expires: new Date(new Date().getTime() + 86400),
-//   },
-// })
-
 let context: any; // 各テストで共有するブラウザコンテキスト
 let page: any; // 各テストで共有するページ
 
@@ -19,14 +10,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'testId' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' }
+      where: { userId: 'testId' }
     })
   ]);
 };
@@ -40,7 +31,7 @@ describe('ログページ', () => {
     await context.addCookies([
       {
         name: 'authjs.session-token',
-        value: 'dummy',
+        value: 'testToken',
         domain: 'localhost',
         path: '/'
       }
@@ -53,13 +44,13 @@ describe('ログページ', () => {
     // 欲しい物リスト：0件
     await dbReset();
     await prisma.balance.update({
-      where: { userId: 'cm8d1l5cq0000u5ddbbrto25t' },
+      where: { userId: 'testId' },
       data: { balance: 5000 }
     });
     await prisma.log.create({
       data: {
         id: 'testId',
-        userId: 'cm8d1l5cq0000u5ddbbrto25t',
+        userId: 'testId',
         title: '飲み会',
         price: 5000,
         createdAt: new Date()
@@ -102,7 +93,7 @@ describe('ログページ', () => {
       // 金額が変更されているか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('3000');
+      ).toHaveText('3,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が正しく変更されているか（差額の-2000円されているか）
@@ -110,7 +101,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('3000');
+      ).toHaveText('3,000');
     });
     test('編集失敗（タイトル＋金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -142,7 +133,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -150,7 +141,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
     test('編集失敗（タイトル→バリデーションエラー）', async () => {
       // ページ遷移
@@ -182,7 +173,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -190,7 +181,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
     test('編集失敗（金額→バリデーションエラー）', async () => {
       // ページ遷移
@@ -222,7 +213,7 @@ describe('ログページ', () => {
       // 金額が変更されていないか
       await expect(
         page.locator('table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)')
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
       // ホームに遷移
       await page.goto('http://localhost:3000/main');
       // 残高が変更されていないか
@@ -230,7 +221,7 @@ describe('ログページ', () => {
         page.getByRole('heading', {
           name: 'balance'
         })
-      ).toHaveText('5000');
+      ).toHaveText('5,000');
     });
   });
   describe('ログ削除', () => {
