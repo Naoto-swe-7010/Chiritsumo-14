@@ -3,7 +3,6 @@ INSERT INTO "User" (
   "id",
   "name",
   "email",
-  "image",
   "emailVerified",
   "createdAt",
   "updatedAt"
@@ -11,7 +10,6 @@ INSERT INTO "User" (
   'testId',
   'test',
   'test@gmail.com',
-  'https://example.com/image.png',
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP
