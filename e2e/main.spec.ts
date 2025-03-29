@@ -239,7 +239,7 @@ describe('メインページ', () => {
         })
         .click();
       // ホームに遷移したか
-      await page.goto('http://localhost:3000/main');
+      await expect(page).toHaveURL('http://localhost:3000/main');
       // 欲しい物リストにアイテムがないか
       await expect(page.getByText('Nintendo Switch')).not.toBeVisible();
       // 残高が元の50000から購入アイテム代20000を引いた、30000になっているか
