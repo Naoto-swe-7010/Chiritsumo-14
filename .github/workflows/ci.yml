@@ -19,7 +19,7 @@ jobs:
         env:
           SLACK_TITLE: Deploy / Start
           SLACK_COLOR: warning
-          SLACK_MESSAGE: ${{ github.ref_name }} ブランチのCIを開始します🛠️
+          SLACK_MESSAGE: @here CIを開始します🎭
   # 型チェック
   TypeCheck:
     needs: slackStartNotification
@@ -239,7 +239,7 @@ jobs:
         env:
           SLACK_TITLE: Deploy / Success
           SLACK_COLOR: good
-          SLACK_MESSAGE: ${{ github.ref_name }}ブランチのCIが成功しました🚀
+          SLACK_MESSAGE: @here CIが成功しました🚀
 
       # 失敗
       - name: Slack Notification on Failure
@@ -248,4 +248,4 @@ jobs:
         env:
           SLACK_TITLE: Deploy / Failure
           SLACK_COLOR: danger
-          SLACK_MESSAGE: ${{ github.ref_name }}ブランチのCIが失敗しました😢
+          SLACK_MESSAGE: @here CIが失敗しました👿
