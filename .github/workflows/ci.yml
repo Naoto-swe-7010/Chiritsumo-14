@@ -234,7 +234,6 @@ jobs:
       SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     steps:
       - uses: technote-space/workflow-conclusion-action@v1
-      - uses: 8398a7/action-slack@v2
         with:
           status: ${{ env.WORKFLOW_CONCLUSION }}
       # 成功
