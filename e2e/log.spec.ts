@@ -10,14 +10,14 @@ let page: any; // 各テストで共有するページ
 const dbReset = async () => {
   await prisma.$transaction([
     prisma.balance.update({
-      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' },
+      where: { userId: 'testId' },
       data: { balance: 0 }
     }),
     prisma.wantedItem.deleteMany({
-      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
+      where: { userId: 'testId' }
     }),
     prisma.log.deleteMany({
-      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' }
+      where: { userId: 'testId' }
     })
   ]);
 };
@@ -31,7 +31,7 @@ describe('ログページ', () => {
     await context.addCookies([
       {
         name: 'authjs.session-token',
-        value: 'dummy',
+        value: 'testToken',
         domain: 'localhost',
         path: '/'
       }
@@ -44,13 +44,13 @@ describe('ログページ', () => {
     // 欲しい物リスト：0件
     await dbReset();
     await prisma.balance.update({
-      where: { userId: 'cm8sql6kt0000u5nygrbdb9ko' },
+      where: { userId: 'testId' },
       data: { balance: 5000 }
     });
     await prisma.log.create({
       data: {
         id: 'testId',
-        userId: 'cm8sql6kt0000u5nygrbdb9ko',
+        userId: 'testId',
         title: '飲み会',
         price: 5000,
         createdAt: new Date()

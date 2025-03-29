@@ -3,8 +3,8 @@ import { prisma } from '../prisma';
 const seed = async () => {
   await prisma.session.create({
     data: {
-      sessionToken: 'dummy',
-      userId: 'cm8sql6kt0000u5nygrbdb9ko',
+      sessionToken: 'testToken',
+      userId: 'testId',
       expires: new Date(new Date().getTime() + 86400)
     }
   });
@@ -12,7 +12,7 @@ const seed = async () => {
     data: {
       provider: 'google',
       providerAccountId: '115734172502700840099',
-      userId: 'cm8sql6kt0000u5nygrbdb9ko',
+      userId: 'testId',
       type: 'oidc',
       refresh_token: null,
       access_token:
@@ -30,7 +30,7 @@ const seed = async () => {
   });
   await prisma.user.create({
     data: {
-      id: 'cm8sql6kt0000u5nygrbdb9ko',
+      id: 'testId',
       name: 'test',
       email: 'test@gmail.com',
       image: 'https://example.com/image.png',
@@ -41,7 +41,7 @@ const seed = async () => {
   });
   await prisma.balance.create({
     data: {
-      userId: 'cm8sql6kt0000u5nygrbdb9ko',
+      userId: 'testId',
       balance: 0
     }
   });

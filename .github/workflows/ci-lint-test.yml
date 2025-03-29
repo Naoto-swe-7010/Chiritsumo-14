@@ -80,10 +80,10 @@ jobs:
           PGPASSWORD: postgres
       - name: Verify Seed Data
         run: |
-          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"User\" WHERE id = 'cm8sql6kt0000u5nygrbdb9ko';"
-          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Session\" WHERE \"userId\" = 'cm8sql6kt0000u5nygrbdb9ko';"
-          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Account\" WHERE \"userId\" = 'cm8sql6kt0000u5nygrbdb9ko';"
-          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Balance\" WHERE \"userId\" = 'cm8sql6kt0000u5nygrbdb9ko';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"User\" WHERE id = 'testId';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Session\" WHERE \"userId\" = 'testId';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Account\" WHERE \"userId\" = 'testId';"
+          psql -h localhost -U postgres -d postgres -c "SELECT * FROM \"Balance\" WHERE \"userId\" = 'testId';"
         env:
           PGPASSWORD: postgres
       - name: Run E2E Test
