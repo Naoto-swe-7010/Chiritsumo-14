@@ -12,7 +12,7 @@ jobs:
     env:
       SLACK_USERNAME: Github Actions
       SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     steps:
       - name: Notify Start of CI
         uses: rtCamp/action-slack-notify@v2
@@ -230,7 +230,7 @@ jobs:
     env:
       SLACK_USERNAME: Github Actions
       SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     steps:
       # 成功
       - name: Slack Notification on Success
