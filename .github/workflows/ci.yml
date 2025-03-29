@@ -5,8 +5,24 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Slack開始通知
+  slackStartNotification:
+    name: Slack-Start-Notification
+    runs-on: ubuntu-latest
+    env:
+      SLACK_USERNAME: Github Actions
+      SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Notify Start of CI
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy / Start
+          SLACK_COLOR: warning
+          SLACK_MESSAGE: ${{ github.ref_name }} ブランチのCIを開始します🛠️
   # 型チェック
   TypeCheck:
+    needs: slackStartNotification
     runs-on: ubuntu-latest
     steps:
       # ブランチを取得
@@ -205,3 +221,31 @@ jobs:
       # E2Eテストを実行
       - name: Run E2E Test
         run: npm run playwright
+
+  # Slack通知
+  SlackEndNotification:
+    name: Slack-End-Notification
+    runs-on: ubuntu-latest
+    needs: [TypeCheck, Build, UnitTest, E2ETest]
+    env:
+      SLACK_USERNAME: Github Actions
+      SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      # 成功
+      - name: Slack Notification on Success
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ success() }}
+        env:
+          SLACK_TITLE: Deploy / Success
+          SLACK_COLOR: good
+          SLACK_MESSAGE: ${{ github.ref_name }}ブランチのCIが成功しました🚀
+
+      # 失敗
+      - name: Slack Notification on Failure
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ failure() }}
+        env:
+          SLACK_TITLE: Deploy / Failure
+          SLACK_COLOR: danger
+          SLACK_MESSAGE: ${{ github.ref_name }}ブランチのCIが失敗しました😢
