@@ -152,7 +152,7 @@ jobs:
     services:
       # データベースのコンテナを起動
       postgres:
-        image: postgres:16
+        image: postgrjes:16
         # データベースのユーザー名、パスワード、データベース名の設定
         env:
           POSTGRES_USER: postgres
@@ -227,6 +227,7 @@ jobs:
     name: Slack-End-Notification
     runs-on: ubuntu-latest
     needs: [TypeCheck, Build, UnitTest, E2ETest]
+    if: always()
     env:
       SLACK_USERNAME: Github Actions
       SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
