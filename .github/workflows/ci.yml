@@ -18,14 +18,14 @@ jobs:
           node-version: '20'
           # キャッシュを有効化
           cache: 'npm'
-      # node_modulesのキャッシュ設定
+      # npmのキャッシュ設定
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -58,14 +58,14 @@ jobs:
           node-version: '20'
           # キャッシュを有効化
           cache: 'npm'
-      # node_modulesのキャッシュ設定
+      # npmのキャッシュ設定
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -98,14 +98,14 @@ jobs:
           node-version: '20'
           # キャッシュを有効化
           cache: 'npm'
-      # node_modulesのキャッシュ設定
+      # npmのキャッシュ設定
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -161,14 +161,14 @@ jobs:
           node-version: '20'
           # キャッシュを有効化
           cache: 'npm'
-      # node_modulesのキャッシュ設定
+      # npmのキャッシュ設定
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
