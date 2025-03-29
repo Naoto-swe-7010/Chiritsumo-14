@@ -16,12 +16,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # キャッシュを有効化
+          cache: 'npm'
+      # npmのキャッシュ設定
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      # キャッシュがヒットしなかった場合、node_modulesの状態を表示
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # 型チェックを実行
       - name: Run TypeCheck
         run: npm run typecheck
+
   # ビルドチェック
   Build:
     needs: TypeCheck
@@ -34,12 +56,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # キャッシュを有効化
+          cache: 'npm'
+      # npmのキャッシュ設定
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      # キャッシュがヒットしなかった場合、node_modulesの状態を表示
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # ビルドを実行
       - name: Run Build
         run: npm run build
+
   # ユニットテスト
   UnitTest:
     needs: Build
@@ -52,12 +96,34 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # キャッシュを有効化
+          cache: 'npm'
+      # npmのキャッシュ設定
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      # キャッシュがヒットしなかった場合、node_modulesの状態を表示
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # ユニットテストを実行
       - name: Run Unit Test
         run: npm run test
+
   # E2Eテスト
   E2ETest:
     needs: Build
@@ -93,9 +159,30 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # キャッシュを有効化
+          cache: 'npm'
+      # npmのキャッシュ設定
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npmのキャッシュファイルはLinux/macOSでは`~/.npm`に保存される
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      # キャッシュがヒットしなかった場合、node_modulesの状態を表示
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # Playwrightをインストール
       - name: Install Playwright
         run: npx playwright install --with-deps
