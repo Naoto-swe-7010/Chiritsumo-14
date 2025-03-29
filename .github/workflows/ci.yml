@@ -23,7 +23,7 @@ jobs:
   # 型チェック
   TypeCheck:
     needs: slackStartNotification
-    runs-on: ubuntus-latest
+    runs-on: ubuntu-latest
     steps:
       # ブランチを取得
       - uses: actions/checkout@v4
@@ -220,7 +220,7 @@ jobs:
           PGPASSWORD: postgres
       # E2Eテストを実行
       - name: Run E2E Test
-        run: npm run playwright
+        run: npm run playwrigh
 
   # Slack通知
   SlackEndNotification:
