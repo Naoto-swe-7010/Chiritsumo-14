@@ -18,11 +18,11 @@ jobs:
           node-version: '20'
       # 依存パッケージをインストール
       - name: Install dependencies
-      run: npm install
+        run: npm install
       # 型チェックを実行
       - name: Run TypeCheck
         run: npm run typecheck
-  # ビルドチェック  
+  # ビルドチェック
   Build:
     needs: TypeCheck
     runs-on: ubuntu-latest
