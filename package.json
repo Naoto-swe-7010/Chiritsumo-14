@@ -17,10 +17,10 @@
     "playwright:report": "playwright show-report",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
-    "./src/**/*.{jsx,js,tsx,ts}": [
+    "src/**/*.{jsx,js,tsx,ts}": [
       "prettier --write",
       "eslint --fix"
     ]
