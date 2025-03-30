@@ -7,6 +7,7 @@ on:
 jobs:
   # Slack開始通知
   SlackStartNotification:
+    timeout-minutes: 10
     name: Slack-Start-Notification
     runs-on: ubuntu-latest
     env:
@@ -23,6 +24,7 @@ jobs:
 
   # 型チェック
   TypeCheck:
+    timeout-minutes: 30
     needs: SlackStartNotification
     runs-on: ubuntu-latest
     steps:
@@ -56,13 +58,14 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       # 型チェックを実行
       - name: Run TypeCheck
         run: npm run typecheck
 
   # ビルドチェック
   BuildCheck:
+    timeout-minutes: 30
     needs: TypeCheck
     runs-on: ubuntu-latest
     steps:
@@ -96,13 +99,14 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       # ビルドを実行
       - name: Run Build
         run: npm run build
 
   # ユニットテスト
   UnitTest:
+    timeout-minutes: 30
     needs: BuildCheck
     runs-on: ubuntu-latest
     steps:
@@ -136,13 +140,14 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       # ユニットテストを実行
       - name: Run Unit Test
         run: npm run test
 
   # E2Eテスト
   E2ETest:
+    timeout-minutes: 30
     needs: BuildCheck
     runs-on: ubuntu-latest
     env:
@@ -199,7 +204,7 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       # Playwrightをインストール
       - name: Install Playwright
         run: npx playwright install --with-deps
@@ -225,6 +230,7 @@ jobs:
 
   # Slack終了通知
   SlackEndNotification:
+    timeout-minutes: 10
     name: Slack-End-Notification
     runs-on: ubuntu-latest
     # すべてのジョブが完了したら実行
