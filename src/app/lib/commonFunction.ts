@@ -41,17 +41,14 @@ export const getBalance = cache(async (userId: string) => {
   let balance = await prisma.balance.findUnique({
     where: { userId }
   });
-  if (!balance) {
-    balance = await prisma.balance.create({
-      data: {
-        userId,
-        balance: 0
-      }
-    });
-  }
+  balance ??= await prisma.balance.create({
+    data: {
+      userId,
+      balance: 0
+    }
+  });
   return balance;
 });
-
 // ログの取得（ページネーションごと）
 export const getLog = cache(
   async (userId: string, pageNumber: number, pageSize: number) => {
