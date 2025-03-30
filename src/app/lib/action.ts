@@ -295,3 +295,7 @@ export const getAIAdvice = async (prevState: string, formData?: FormData) => {
     return 'AIから返答がありませんでした。再度お試しください。';
   }
 };
+
+function add(a: number, b: number) {
+  return a + b;
+}
