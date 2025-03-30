@@ -296,6 +296,6 @@ export const getAIAdvice = async (prevState: string, formData?: FormData) => {
   }
 };
 
-function add(a: number, b: number) {
+function add(a: any, b: number) {
   return a + b;
 }
