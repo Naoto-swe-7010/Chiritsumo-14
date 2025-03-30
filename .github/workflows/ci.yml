@@ -7,6 +7,7 @@ on:
 jobs:
   # Slack開始通知
   SlackStartNotification:
+    timeout-minutes: 10
     name: Slack-Start-Notification
     runs-on: ubuntu-latest
     env:
@@ -23,6 +24,7 @@ jobs:
 
   # 型チェック
   TypeCheck:
+    timeout-minutes: 30
     needs: SlackStartNotification
     runs-on: ubuntu-latest
     steps:
@@ -63,6 +65,7 @@ jobs:
 
   # ビルドチェック
   BuildCheck:
+    timeout-minutes: 30
     needs: TypeCheck
     runs-on: ubuntu-latest
     steps:
@@ -103,6 +106,7 @@ jobs:
 
   # ユニットテスト
   UnitTest:
+    timeout-minutes: 30
     needs: BuildCheck
     runs-on: ubuntu-latest
     steps:
@@ -143,6 +147,7 @@ jobs:
 
   # E2Eテスト
   E2ETest:
+    timeout-minutes: 30
     needs: BuildCheck
     runs-on: ubuntu-latest
     env:
@@ -225,6 +230,7 @@ jobs:
 
   # Slack終了通知
   SlackEndNotification:
+    timeout-minutes: 10
     name: Slack-End-Notification
     runs-on: ubuntu-latest
     # すべてのジョブが完了したら実行
