@@ -58,7 +58,7 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # 型チェックを実行
       - name: Run TypeCheck
         run: npm run typecheck
@@ -99,7 +99,7 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # ビルドを実行
       - name: Run Build
         run: npm run build
@@ -140,7 +140,7 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # ユニットテストを実行
       - name: Run Unit Test
         run: npm run test
@@ -204,7 +204,7 @@ jobs:
         run: npm list
       # 依存パッケージをインストール
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       # Playwrightをインストール
       - name: Install Playwright
         run: npx playwright install --with-deps
