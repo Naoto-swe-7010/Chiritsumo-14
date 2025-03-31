@@ -4,22 +4,22 @@ import { Log, WantedItem } from '@prisma/client';
 type ErrorMessages<T> = Partial<Record<keyof T, string[]>>;
 
 // 各フォームステートの型定義
-export interface AddBalanceFormState {
+export type AddBalanceFormState = {
   errors?: ErrorMessages<Pick<Log, 'title' | 'price'>>;
   message?: string | null;
-}
+};
 
-export interface UpdateLogFormState {
+export type UpdateLogFormState = {
   errors?: ErrorMessages<Pick<Log, 'id' | 'title' | 'price'>>;
   message?: string | null;
-}
+};
 
-export interface AddWantedItemFormState {
+export type AddWantedItemFormState = {
   errors?: ErrorMessages<Pick<WantedItem, 'name' | 'price' | 'url'>>;
   message?: string | null;
-}
+};
 
-export interface UpdateWantedItemFormState {
+export type UpdateWantedItemFormState = {
   errors?: ErrorMessages<Pick<WantedItem, 'id' | 'name' | 'price' | 'url'>>;
   message?: string | null;
-}
+};
