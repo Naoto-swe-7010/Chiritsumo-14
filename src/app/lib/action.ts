@@ -228,15 +228,16 @@ export const purchaseWantedItem = async (id: string) => {
   // DB処理
   try {
     await prisma.$transaction(async (tx) => {
-      const buyWantedItem = await tx.wantedItem.delete({
+      const purchaseWantedItem = await tx.wantedItem.update({
         where: { id },
+        data: { purchased: true },
         select: { price: true }
       });
       await tx.balance.update({
         where: { userId },
         data: {
           balance: {
-            decrement: buyWantedItem.price
+            decrement: purchaseWantedItem.price
           }
         }
       });
@@ -247,6 +248,36 @@ export const purchaseWantedItem = async (id: string) => {
     };
   }
   redirect('/main/purchaseWantedItem/postPurchase');
+};
+
+// 欲しい物リスト購入取消 ////////////////////////////////////////////////////
+export const cancelPurchased = async (id: string) => {
+  // DB処理
+  const userId = await getSessionAndUserId();
+
+  // DB処理
+  try {
+    await prisma.$transaction(async (tx) => {
+      const cancelPurchaseItem = await tx.wantedItem.update({
+        where: { id },
+        data: { purchased: false },
+        select: { price: true }
+      });
+      await tx.balance.update({
+        where: { userId },
+        data: {
+          balance: {
+            increment: cancelPurchaseItem.price
+          }
+        }
+      });
+    });
+  } catch {
+    return {
+      message: 'データベースにてアイテムの購入取消に失敗しました。'
+    };
+  }
+  redirect('/wantedItemManagement');
 };
 
 // 欲しい物リスト削除 ////////////////////////////////////////////////////

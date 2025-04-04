@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { Loading } from '@/app/_components/Loading';
 import {
   getSessionAndUserId,
-  getWantedItemList
+  getWantedItemListWithoutPurchased
 } from '@/app/lib/commonFunction';
 import { BalanceProgressItem } from './BalanceProgressItem';
 
@@ -11,8 +11,8 @@ export const BalanceProgress = async () => {
   try {
     // UserID取得
     const userId = await getSessionAndUserId();
-    // 欲しい物リスト取得
-    const wantedItemList = await getWantedItemList(userId);
+    // 欲しい物リスト取得（未購入）
+    const wantedItemList = await getWantedItemListWithoutPurchased(userId);
 
     return (
       <div className="flex justify-center p-4 sm:p-6">
