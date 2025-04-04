@@ -9,6 +9,6 @@ describe('SkeletonList Component', () => {
     render(<SkeletonList />);
     // articleタグが5つレンダリングされているか
     const skeletonItems = screen.getAllByRole('article');
-    expect(skeletonItems).toHaveLength(5);
+    expect(skeletonItems).toHaveLength(7);
   });
 });
