@@ -76,3 +76,21 @@ export const getWantedItemList = cache(async (userId: string) => {
     orderBy: { createdAt: 'desc' }
   });
 });
+
+// 欲しいものリストの取得（未購入）
+export const getWantedItemListWithoutPurchased = cache(
+  async (userId: string) => {
+    return prisma.wantedItem.findMany({
+      where: { userId, purchased: false },
+      orderBy: { createdAt: 'desc' }
+    });
+  }
+);
+
+// 購入済みリストの取得
+export const getPurchaseItemList = cache(async (userId: string) => {
+  return prisma.wantedItem.findMany({
+    where: { userId, purchased: true },
+    orderBy: { createdAt: 'desc' }
+  });
+});

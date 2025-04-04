@@ -29,7 +29,10 @@ export const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
                     ¥{item.price.toLocaleString()}{' '}
                     <span className="text-xs">
                       (残り
-                      {(item.price - balance.balance).toLocaleString()}
+                      {Math.max(
+                        0,
+                        item.price - balance.balance
+                      ).toLocaleString()}
                       円)
                     </span>
                   </p>

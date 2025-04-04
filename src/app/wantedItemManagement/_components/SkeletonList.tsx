@@ -3,7 +3,7 @@ import React from 'react';
 export const SkeletonList = () => {
   return (
     <section className="space-y-4">
-      {Array.from({ length: 5 }).map((dummy, index) => (
+      {Array.from({ length: 7 }).map((dummy, index) => (
         <article
           key={index}
           className="mb-4 flex items-center justify-between gap-4 rounded border border-gray-500 bg-gray-900 p-5 shadow-xl"

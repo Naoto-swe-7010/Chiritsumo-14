@@ -35,7 +35,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col items-end space-y-2">
         <Link
           href={`/wantedItemManagement/edit/${item.id}`}
           aria-label={`Edit ${item.name}`}
@@ -47,17 +47,30 @@ export const Row = ({ item }: { item: WantedItem }) => {
             編集
           </Button>
         </Link>
-        <Link
-          href={`/wantedItemManagement/delete/${item.id}`}
-          aria-label={`Delete ${item.name}`}
-        >
-          <Button
-            aria-label={`Delete ${item.name}`}
-            className="bg-gray-500 hover:bg-gray-700"
+        <div className="flex space-x-2">
+          <Link
+            href={`/wantedItemManagement/cancelPurchased/${item.id}`}
+            aria-label={`Cancel Purchase ${item.name}`}
           >
-            削除
-          </Button>
-        </Link>
+            <Button
+              aria-label={`Cancel Purchase ${item.name}`}
+              className="bg-blue-500 hover:bg-blue-700"
+            >
+              購入取消
+            </Button>
+          </Link>
+          <Link
+            href={`/wantedItemManagement/delete/${item.id}`}
+            aria-label={`Delete ${item.name}`}
+          >
+            <Button
+              aria-label={`Delete ${item.name}`}
+              className="bg-gray-500 hover:bg-gray-700"
+            >
+              削除
+            </Button>
+          </Link>
+        </div>
       </div>
     </article>
   );

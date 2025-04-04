@@ -18,12 +18,12 @@ export const Row = ({ log }: { log: Log }) => {
         <div className="flex flex-col gap-1">
           <Link href={`/logManagement/edit/${log.id}`}>
             <Button className="bg-pink-500 hover:bg-pink-700" aria-label="編集">
-              ✏️
+              編集
             </Button>
           </Link>
           <Link href={`/logManagement/delete/${log.id}`}>
-            <Button className="bg-gray-300 hover:bg-gray-400" aria-label="削除">
-              🗑️
+            <Button className="bg-gray-500 hover:bg-gray-700" aria-label="削除">
+              削除
             </Button>
           </Link>
         </div>
