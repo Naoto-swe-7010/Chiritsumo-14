@@ -221,6 +221,25 @@ export const updateWantedItem = async (
   redirect('/wantedItemManagement');
 };
 
+// 欲しい物リストお気に入り ////////////////////////////////////////////////////
+export const favoriteWantedItem = async (id: string) => {
+  // DB処理
+  try {
+    const isFavorite = await prisma.wantedItem.findUnique({
+      where: { id },
+      select: { favorite: true }
+    });
+    if (!isFavorite) throw new Error('指定されたアイテムが見つかりません。');
+    await prisma.wantedItem.update({
+      where: { id },
+      data: { favorite: !isFavorite.favorite }
+    });
+  } catch {
+    throw new Error('データベースにてお気に入りの更新に失敗しました。');
+  }
+  revalidatePath('/wantedItemManagement');
+};
+
 // 欲しい物リスト購入 ////////////////////////////////////////////////////
 export const purchaseWantedItem = async (id: string) => {
   const userId = await getSessionAndUserId();

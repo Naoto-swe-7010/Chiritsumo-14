@@ -42,7 +42,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         >
           <Button
             aria-label={`Edit ${item.name}`}
-            className="bg-pink-500 hover:bg-pink-700"
+            className="bg-pink-500 font-bold hover:bg-pink-700"
           >
             編集
           </Button>
@@ -54,7 +54,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
           >
             <Button
               aria-label={`Cancel Purchase ${item.name}`}
-              className="bg-blue-500 hover:bg-blue-700"
+              className="bg-blue-500 font-bold hover:bg-blue-700"
             >
               購入取消
             </Button>
@@ -65,7 +65,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
           >
             <Button
               aria-label={`Delete ${item.name}`}
-              className="bg-gray-500 hover:bg-gray-700"
+              className="bg-gray-500 font-bold hover:bg-gray-700"
             >
               削除
             </Button>

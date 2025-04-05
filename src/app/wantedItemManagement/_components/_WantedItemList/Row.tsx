@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { WantedItem } from '@prisma/client';
 
 import { Button } from '@/components/ui/button';
+import { FavoriteButton } from './FavoriteButton';
 
 export const Row = ({ item }: { item: WantedItem }) => {
   return (
@@ -12,13 +13,18 @@ export const Row = ({ item }: { item: WantedItem }) => {
     >
       <div className="flex-1">
         <div>
-          <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-end sm:gap-3">
-            <h3
-              id={`wanted-item-${item.id}`}
-              className="text-lg font-semibold text-gray-100"
-            >
-              {item.name}
-            </h3>
+          <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-3">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center">
+                <FavoriteButton item={item} />
+              </div>
+              <h3
+                id={`wanted-item-${item.id}`}
+                className="text-lg font-semibold text-gray-100"
+              >
+                {item.name}
+              </h3>
+            </div>
             <p className="text-sm text-gray-300 sm:text-base">
               ¥{item.price.toLocaleString()}
             </p>
@@ -42,7 +48,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         >
           <Button
             aria-label={`Edit ${item.name}`}
-            className="bg-pink-500 hover:bg-pink-700"
+            className="bg-pink-500 font-bold hover:bg-pink-700"
           >
             編集
           </Button>
@@ -53,7 +59,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         >
           <Button
             aria-label={`Delete ${item.name}`}
-            className="bg-gray-500 hover:bg-gray-700"
+            className="bg-gray-500 font-bold hover:bg-gray-700"
           >
             削除
           </Button>
