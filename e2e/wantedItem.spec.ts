@@ -12,7 +12,9 @@ import { prisma } from '../prisma';
 //   },
 // })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let context: any; // 各テストで共有するブラウザコンテキスト
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let page: any; // 各テストで共有するページ
 
 // DBの各テーブルをリセット
@@ -387,6 +389,8 @@ describe('欲しい物リストページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement'
       );
+      // 3秒待機（スケルトンUIを取得してしまうため）
+      await page.waitForTimeout(3000);
       // ほしい物リストからアイテムが削除されていることをarticleの有無で確認
       await expect(page.locator('article:nth-of-type(1)')).not.toBeVisible();
     });

@@ -4,6 +4,11 @@ import { render, screen } from '@testing-library/react';
 import { Row } from './Row';
 
 describe('Row Component', () => {
+  // FavoriteButtonコンポーネントのモック化
+  vi.mock('./FavoriteButton', () => ({
+    FavoriteButton: () => <div data-testid="favorite-button" />
+  }));
+
   const mockWantedItem: WantedItem = {
     name: 'ワイドモニター',
     id: '1',

@@ -3,7 +3,9 @@ import { expect, test } from '@playwright/test';
 
 import { prisma } from '../prisma';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let context: any; // 各テストで共有するブラウザコンテキスト
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let page: any; // 各テストで共有するページ
 
 // DBの各テーブルをリセット

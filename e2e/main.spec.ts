@@ -12,7 +12,9 @@ import { prisma } from '../prisma';
 //   },
 // })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let context: any; // 各テストで共有するブラウザコンテキスト
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let page: any; // 各テストで共有するページ
 
 // DBの各テーブルをリセット
@@ -60,7 +62,9 @@ describe('メインページ', () => {
         price: 20000,
         name: 'Nintendo Switch',
         url: 'https://example.com',
-        userId: 'testId'
+        userId: 'testId',
+        purchased: false,
+        favorite: true
       }
     });
     //////////////////////////////////////////////////////////////
