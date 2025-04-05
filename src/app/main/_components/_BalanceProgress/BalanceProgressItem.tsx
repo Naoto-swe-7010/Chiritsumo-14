@@ -28,12 +28,12 @@ export const BalanceProgressItem = async ({ item }: { item: WantedItem }) => {
                   <p className="text-sm text-gray-500 sm:text-base">
                     ¥{item.price.toLocaleString()}{' '}
                     <span className="text-xs">
-                      (残り
+                      （残り
                       {Math.max(
                         0,
                         item.price - balance.balance
                       ).toLocaleString()}
-                      円)
+                      円）
                     </span>
                   </p>
                 </div>
