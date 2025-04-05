@@ -18,7 +18,7 @@ export const Row = ({ log }: { log: Log }) => {
         <div className="flex flex-col gap-1">
           <Link href={`/logManagement/edit/${log.id}`}>
             <Button
-              className="bg-pink-500 font-bold hover:bg-pink-700"
+              className="bg-green-500 font-bold hover:bg-green-700"
               aria-label="編集"
             >
               編集

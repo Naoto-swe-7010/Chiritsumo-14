@@ -2,10 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import { WantedItem } from '@prisma/client';
 
+import { getBalance, getSessionAndUserId } from '@/app/lib/commonFunction';
 import { Button } from '@/components/ui/button';
 import { FavoriteButton } from './FavoriteButton';
 
-export const Row = ({ item }: { item: WantedItem }) => {
+export const Row = async ({ item }: { item: WantedItem }) => {
+  // UserID取得
+  const userId = await getSessionAndUserId();
+  // 残高情報取得
+  const balance = await getBalance(userId);
+
   return (
     <article
       className="mb-4 flex items-center justify-between gap-4 rounded border border-gray-500 bg-gray-900 p-4 shadow-xl"
@@ -26,7 +32,12 @@ export const Row = ({ item }: { item: WantedItem }) => {
               </h3>
             </div>
             <p className="text-sm text-gray-300 sm:text-base">
-              ¥{item.price.toLocaleString()}
+              ¥{item.price.toLocaleString()}{' '}
+              <span className="text-xs">
+                （残り
+                {Math.max(0, item.price - balance.balance).toLocaleString()}
+                円）
+              </span>
             </p>
           </div>
           {item.url && (
@@ -41,29 +52,45 @@ export const Row = ({ item }: { item: WantedItem }) => {
           )}
         </div>
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col items-end space-y-2">
         <Link
           href={`/wantedItemManagement/edit/${item.id}`}
           aria-label={`Edit ${item.name}`}
         >
           <Button
             aria-label={`Edit ${item.name}`}
-            className="bg-pink-500 font-bold hover:bg-pink-700"
+            className="bg-green-500 font-bold hover:bg-green-700"
           >
             編集
           </Button>
         </Link>
-        <Link
-          href={`/wantedItemManagement/delete/${item.id}`}
-          aria-label={`Delete ${item.name}`}
-        >
-          <Button
+        <div className="flex space-x-2">
+          {/* 値段に対する残高の進捗が100％以上の時のみ、購入ボタンを表示 */}
+          {balance.balance / item.price >= 1 && (
+            <Link
+              href={`/main/purchaseWantedItem/${item.id}`}
+              aria-label={`Cancel Purchase ${item.name}`}
+            >
+              <Button
+                aria-label={`Cancel Purchase ${item.name}`}
+                className="bg-pink-500 font-bold hover:bg-pink-700"
+              >
+                購入
+              </Button>
+            </Link>
+          )}
+          <Link
+            href={`/wantedItemManagement/delete/${item.id}`}
             aria-label={`Delete ${item.name}`}
-            className="bg-gray-500 font-bold hover:bg-gray-700"
           >
-            削除
-          </Button>
-        </Link>
+            <Button
+              aria-label={`Delete ${item.name}`}
+              className="bg-gray-500 font-bold hover:bg-gray-700"
+            >
+              削除
+            </Button>
+          </Link>
+        </div>
       </div>
     </article>
   );

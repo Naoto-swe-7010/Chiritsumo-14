@@ -30,7 +30,9 @@ export const BalanceProgress = async () => {
               ))
             ) : (
               <div className="text-center text-gray-500">
-                <p>欲しい物リストからお気に入りを登録してください。</p>
+                <p>
+                  欲しい物リストでお気に入りに登録したアイテムがここに表示されます。
+                </p>
               </div>
             )}
           </Suspense>

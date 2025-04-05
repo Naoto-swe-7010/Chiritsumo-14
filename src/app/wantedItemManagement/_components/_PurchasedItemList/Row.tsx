@@ -42,7 +42,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         >
           <Button
             aria-label={`Edit ${item.name}`}
-            className="bg-pink-500 font-bold hover:bg-pink-700"
+            className="bg-green-500 font-bold hover:bg-green-700"
           >
             編集
           </Button>
