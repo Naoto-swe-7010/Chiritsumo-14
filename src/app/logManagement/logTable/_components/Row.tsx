@@ -17,12 +17,18 @@ export const Row = ({ log }: { log: Log }) => {
       <td className="p-3 py-2">
         <div className="flex flex-col gap-1">
           <Link href={`/logManagement/edit/${log.id}`}>
-            <Button className="bg-pink-500 hover:bg-pink-700" aria-label="編集">
+            <Button
+              className="bg-green-500 font-bold hover:bg-green-700"
+              aria-label="編集"
+            >
               編集
             </Button>
           </Link>
           <Link href={`/logManagement/delete/${log.id}`}>
-            <Button className="bg-gray-500 hover:bg-gray-700" aria-label="削除">
+            <Button
+              className="bg-gray-500 font-bold hover:bg-gray-700"
+              aria-label="削除"
+            >
               削除
             </Button>
           </Link>

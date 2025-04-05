@@ -12,7 +12,9 @@ import { prisma } from '../prisma';
 //   },
 // })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let context: any; // 各テストで共有するブラウザコンテキスト
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let page: any; // 各テストで共有するページ
 
 // DBの各テーブルをリセット
@@ -78,7 +80,9 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
+      await expect(firstArticle.locator('p')).toHaveText(
+        '¥30,000 （残り30,000円）'
+      );
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -100,7 +104,9 @@ describe('欲しい物リストページ', () => {
       // 商品名の確認
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格の確認
-      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
+      await expect(firstArticle.locator('p')).toHaveText(
+        '¥30,000 （残り30,000円）'
+      );
       // 詳細リンクの確認
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -176,7 +182,9 @@ describe('欲しい物リストページ', () => {
         'Panasonicドライヤー'
       );
       // 価格が変更されているか
-      await expect(firstArticle.locator('p')).toHaveText('¥20,000');
+      await expect(firstArticle.locator('p')).toHaveText(
+        '¥20,000 （残り20,000円）'
+      );
       // 詳細リンクが変更されているか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -304,7 +312,9 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
+      await expect(firstArticle.locator('p')).toHaveText(
+        '¥30,000 （残り30,000円）'
+      );
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -350,7 +360,9 @@ describe('欲しい物リストページ', () => {
       // 商品名が変更されていないか
       await expect(firstArticle.locator('h3')).toHaveText('Refaドライヤー');
       // 価格が変更されていないか
-      await expect(firstArticle.locator('p')).toHaveText('¥30,000');
+      await expect(firstArticle.locator('p')).toHaveText(
+        '¥30,000 （残り30,000円）'
+      );
       // 詳細リンクが変更されていないか
       await expect(
         firstArticle.locator('a:has-text("詳細を見る")')
@@ -387,6 +399,8 @@ describe('欲しい物リストページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/wantedItemManagement'
       );
+      // 3秒待機（スケルトンUIを取得してしまうため）
+      await page.waitForTimeout(3000);
       // ほしい物リストからアイテムが削除されていることをarticleの有無で確認
       await expect(page.locator('article:nth-of-type(1)')).not.toBeVisible();
     });

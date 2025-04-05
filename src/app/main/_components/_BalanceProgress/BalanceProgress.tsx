@@ -2,8 +2,8 @@ import React, { Suspense } from 'react';
 
 import { Loading } from '@/app/_components/Loading';
 import {
-  getSessionAndUserId,
-  getWantedItemListWithoutPurchased
+  getFavoriteWantedItemListWithoutPurchasedAnd,
+  getSessionAndUserId
 } from '@/app/lib/commonFunction';
 import { BalanceProgressItem } from './BalanceProgressItem';
 
@@ -11,8 +11,9 @@ export const BalanceProgress = async () => {
   try {
     // UserID取得
     const userId = await getSessionAndUserId();
-    // 欲しい物リスト取得（未購入）
-    const wantedItemList = await getWantedItemListWithoutPurchased(userId);
+    // 欲しい物リスト取得（未購入かつお気に入り）
+    const wantedItemList =
+      await getFavoriteWantedItemListWithoutPurchasedAnd(userId);
 
     return (
       <div className="flex justify-center p-4 sm:p-6">
@@ -29,8 +30,9 @@ export const BalanceProgress = async () => {
               ))
             ) : (
               <div className="text-center text-gray-500">
-                <p>欲しい物リストが空です。</p>
-                <p>欲しい物ページからアイテムを追加してください。</p>
+                <p>
+                  欲しい物リストでお気に入りに登録したアイテムがここに表示されます。
+                </p>
               </div>
             )}
           </Suspense>
