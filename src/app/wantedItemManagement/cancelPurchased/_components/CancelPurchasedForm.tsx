@@ -24,8 +24,8 @@ export const CancelPurchasedForm = ({ item }: { item: WantedItem }) => {
     <form action={formAction}>
       <p className="mb-4 text-gray-400">
         本当にこのアイテムの購入を取消しますか？ <br />
-        取消すると、{item.price}
-        円が節約合計額に戻ります。
+        取消すると、<span className="font-bold">{item.price}</span>円
+        が節約合計額に戻ります。
       </p>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">

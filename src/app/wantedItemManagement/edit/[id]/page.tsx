@@ -28,10 +28,12 @@ const page = async ({ params }: { params: { id: string } }) => {
     throw new Error('欲しい物リストの取得中にエラーが発生しました。');
   }
   return (
-    <Modal>
-      <h2 className="mb-4 text-lg font-bold">編集</h2>
-      <EditWantedItemForm item={item} />
-    </Modal>
+    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)]">
+      <Modal>
+        <h2 className="mb-4 text-lg font-bold">編集</h2>
+        <EditWantedItemForm item={item} />
+      </Modal>
+    </div>
   );
 };
 

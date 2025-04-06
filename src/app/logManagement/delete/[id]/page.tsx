@@ -29,10 +29,12 @@ const page = async ({ params }: { params: { id: string } }) => {
     throw new Error('ログが見つかりません。');
   }
   return (
-    <Modal>
-      <h2 className="mb-4 text-lg font-bold">削除</h2>
-      <DeleteLogForm log={log} />
-    </Modal>
+    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)]">
+      <Modal>
+        <h2 className="mb-4 text-lg font-bold">削除</h2>
+        <DeleteLogForm log={log} />
+      </Modal>
+    </div>
   );
 };
 
