@@ -36,17 +36,6 @@ export const Row = ({ item }: { item: WantedItem }) => {
         </div>
       </div>
       <div className="flex flex-col items-end space-y-2">
-        <Link
-          href={`/wantedItemManagement/edit/${item.id}`}
-          aria-label={`Edit ${item.name}`}
-        >
-          <Button
-            aria-label={`Edit ${item.name}`}
-            className="bg-green-500 font-bold hover:bg-green-700"
-          >
-            編集
-          </Button>
-        </Link>
         <div className="flex space-x-2">
           <Link
             href={`/wantedItemManagement/cancelPurchased/${item.id}`}
@@ -60,17 +49,28 @@ export const Row = ({ item }: { item: WantedItem }) => {
             </Button>
           </Link>
           <Link
-            href={`/wantedItemManagement/delete/${item.id}`}
-            aria-label={`Delete ${item.name}`}
+            href={`/wantedItemManagement/edit/${item.id}`}
+            aria-label={`Edit ${item.name}`}
           >
             <Button
-              aria-label={`Delete ${item.name}`}
-              className="bg-gray-500 font-bold hover:bg-gray-700"
+              aria-label={`Edit ${item.name}`}
+              className="bg-green-500 font-bold hover:bg-green-700"
             >
-              削除
+              編集
             </Button>
           </Link>
         </div>
+        <Link
+          href={`/wantedItemManagement/delete/${item.id}`}
+          aria-label={`Delete ${item.name}`}
+        >
+          <Button
+            aria-label={`Delete ${item.name}`}
+            className="bg-gray-500 font-bold hover:bg-gray-700"
+          >
+            削除
+          </Button>
+        </Link>
       </div>
     </article>
   );

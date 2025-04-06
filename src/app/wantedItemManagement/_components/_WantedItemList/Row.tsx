@@ -53,17 +53,6 @@ export const Row = async ({ item }: { item: WantedItem }) => {
         </div>
       </div>
       <div className="flex flex-col items-end space-y-2">
-        <Link
-          href={`/wantedItemManagement/edit/${item.id}`}
-          aria-label={`Edit ${item.name}`}
-        >
-          <Button
-            aria-label={`Edit ${item.name}`}
-            className="bg-green-500 font-bold hover:bg-green-700"
-          >
-            編集
-          </Button>
-        </Link>
         <div className="flex space-x-2">
           {/* 値段に対する残高の進捗が100％以上の時のみ、購入ボタンを表示 */}
           {balance.balance / item.price >= 1 && (
@@ -80,17 +69,28 @@ export const Row = async ({ item }: { item: WantedItem }) => {
             </Link>
           )}
           <Link
-            href={`/wantedItemManagement/delete/${item.id}`}
-            aria-label={`Delete ${item.name}`}
+            href={`/wantedItemManagement/edit/${item.id}`}
+            aria-label={`Edit ${item.name}`}
           >
             <Button
-              aria-label={`Delete ${item.name}`}
-              className="bg-gray-500 font-bold hover:bg-gray-700"
+              aria-label={`Edit ${item.name}`}
+              className="bg-green-500 font-bold hover:bg-green-700"
             >
-              削除
+              編集
             </Button>
           </Link>
         </div>
+        <Link
+          href={`/wantedItemManagement/delete/${item.id}`}
+          aria-label={`Delete ${item.name}`}
+        >
+          <Button
+            aria-label={`Delete ${item.name}`}
+            className="bg-gray-500 font-bold hover:bg-gray-700"
+          >
+            削除
+          </Button>
+        </Link>
       </div>
     </article>
   );
