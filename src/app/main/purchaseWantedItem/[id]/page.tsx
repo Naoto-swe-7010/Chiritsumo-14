@@ -36,32 +36,36 @@ const page = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <Modal>
-      <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">購入</h2>
-      <div className="rounded border border-gray-300 bg-gray-900 p-4 shadow-md">
-        <div className="flex items-start gap-3">
-          <div>
-            <h3 className="text-xl font-semibold text-gray-100">{item.name}</h3>
-            <p className="text-sm text-gray-500 sm:text-base">
-              Price: ¥{item.price.toLocaleString()}
-            </p>
+    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)]">
+      <Modal>
+        <h2 className="mb-4 text-lg font-bold text-white sm:text-xl">購入</h2>
+        <div className="rounded border border-gray-300 bg-gray-900 p-4 shadow-md">
+          <div className="flex items-start gap-3">
+            <div>
+              <h3 className="text-xl font-semibold text-gray-100">
+                {item.name}
+              </h3>
+              <p className="text-sm text-gray-500 sm:text-base">
+                Price: ¥{item.price.toLocaleString()}
+              </p>
+            </div>
+            {item.url && (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto text-sm text-blue-500 underline hover:text-blue-700"
+              >
+                詳細を見る
+              </a>
+            )}
           </div>
-          {item.url && (
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-auto text-sm text-blue-500 underline hover:text-blue-700"
-            >
-              詳細を見る
-            </a>
-          )}
         </div>
-      </div>
-      <div className="mt-6">
-        <PurchaseForm item={item} />
-      </div>
-    </Modal>
+        <div className="mt-6">
+          <PurchaseForm item={item} />
+        </div>
+      </Modal>
+    </div>
   );
 };
 
