@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 
 import { Modal } from '@/app/_components/Modal';
 import { getSession } from '@/app/lib/commonFunction';
-import { EditLogForm } from '../../_components/EditLogForm';
-import { prisma } from '../../../../../prisma';
+import { DeleteLogForm } from '@/app/logManagement/_components/DeleteLogForm';
+import { prisma } from '../../../../../../prisma';
 
 const page = async ({ params }: { params: { id: string } }) => {
   // 認証チェック
@@ -14,7 +14,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   }
   const { id } = params;
 
-  // 編集対象のログを取得
+  // 削除対象のログを取得
   let log = null;
   try {
     log = await prisma.log.findUnique({
@@ -28,14 +28,11 @@ const page = async ({ params }: { params: { id: string } }) => {
   if (!log) {
     throw new Error('ログが見つかりません。');
   }
-
   return (
-    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)]">
-      <Modal>
-        <h2 className="mb-4 text-lg font-bold">編集</h2>
-        <EditLogForm log={log} />
-      </Modal>
-    </div>
+    <Modal>
+      <h2 className="mb-4 text-lg font-bold">削除</h2>
+      <DeleteLogForm log={log} />
+    </Modal>
   );
 };
 

@@ -158,15 +158,16 @@ describe('欲しい物リストページ', () => {
         'http://localhost:3000/wantedItemManagement/edit/testId'
       );
       // 商品名編集
-      await page.getByPlaceholder('商品名').click();
-      await page.getByPlaceholder('商品名').fill('Panasonicドライヤー');
+      await page.getByPlaceholder('商品名').nth(1).click();
+      await page.getByPlaceholder('商品名').nth(1).fill('Panasonicドライヤー');
       // 価格編集
-      await page.getByPlaceholder('値段').click();
-      await page.getByPlaceholder('値段').fill('20000');
+      await page.getByPlaceholder('価格').nth(1).click();
+      await page.getByPlaceholder('価格').nth(1).fill('20000');
       // URL編集
-      await page.getByPlaceholder('https://example.com').click();
+      await page.getByPlaceholder('https://example.com').nth(1).click();
       await page
         .getByPlaceholder('https://example.com')
+        .nth(1)
         .fill('https://example2.com');
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click();
@@ -214,8 +215,8 @@ describe('欲しい物リストページ', () => {
         'http://localhost:3000/wantedItemManagement/edit/testId'
       );
       // URLを削除
-      await page.getByPlaceholder('https://example.com').click();
-      await page.getByPlaceholder('https://example.com').fill('');
+      await page.getByPlaceholder('https://example.com').nth(1).click();
+      await page.getByPlaceholder('https://example.com').nth(1).fill('');
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click();
       // ログページに遷移したか
@@ -254,9 +255,10 @@ describe('欲しい物リストページ', () => {
         'http://localhost:3000/wantedItemManagement/edit/testId'
       );
       // URLを入力
-      await page.getByPlaceholder('https://example.com').click();
+      await page.getByPlaceholder('https://example.com').nth(1).click();
       await page
         .getByPlaceholder('https://example.com')
+        .nth(1)
         .fill('https://example.com');
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click();
@@ -296,8 +298,8 @@ describe('欲しい物リストページ', () => {
         'http://localhost:3000/wantedItemManagement/edit/testId'
       );
       // 商品名を削除
-      await page.getByPlaceholder('商品名').click();
-      await page.getByPlaceholder('商品名').fill('');
+      await page.getByPlaceholder('商品名').nth(1).click();
+      await page.getByPlaceholder('商品名').nth(1).fill('');
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click();
       // 編集ページに留まっているか
@@ -344,8 +346,8 @@ describe('欲しい物リストページ', () => {
         'http://localhost:3000/wantedItemManagement/edit/testId'
       );
       // 価格を削除
-      await page.getByPlaceholder('値段').click();
-      await page.getByPlaceholder('値段').fill('');
+      await page.getByPlaceholder('価格').nth(1).click();
+      await page.getByPlaceholder('価格').nth(1).fill('');
       // 保存ボタン押下
       await page.getByRole('button', { name: '保存' }).click();
       // 編集ページに留まっているか

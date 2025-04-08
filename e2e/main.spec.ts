@@ -224,11 +224,20 @@ describe('メインページ', () => {
       await expect(page).toHaveURL(
         'http://localhost:3000/main/purchaseWantedItem/testId'
       );
-      // 購入ページにアイテム名（Nintendo Switch）の記載があるか
+      // 購入ページにアイテム名（Nintendo Switch）の記載が2つあるか（進捗リストとモーダルタイトル）
       await expect(
-        page.getByRole('heading', {
-          name: 'Nintendo Switch'
-        })
+        page
+          .getByRole('heading', {
+            name: 'Nintendo Switch'
+          })
+          .nth(0)
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole('heading', {
+            name: 'Nintendo Switch'
+          })
+          .nth(1)
       ).toBeVisible();
       // 購入しますか？の問いに「はい」を選択
       await page.getByRole('button', { name: 'はい' }).click();
