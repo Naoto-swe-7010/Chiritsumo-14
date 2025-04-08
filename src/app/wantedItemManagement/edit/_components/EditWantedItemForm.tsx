@@ -45,13 +45,13 @@ export const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
         ))}
       </div>
       <div className="mb-4">
-        <label className="block text-gray-400">値段</label>
+        <label className="block text-gray-400">価格</label>
         <input
           type="number"
           name="price"
           defaultValue={item.price}
           className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
-          placeholder="値段"
+          placeholder="価格"
           required
         />
         {state.errors?.price?.map((error: string) => (
