@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { Modal } from '@/app/_components/Modal';
 import { getSession } from '@/app/lib/commonFunction';
-import { DeleteLogForm } from '../_components/DeleteLogForm';
+import { DeleteLogForm } from '../../_components/DeleteLogForm';
 import { prisma } from '../../../../../prisma';
 
 const page = async ({ params }: { params: { id: string } }) => {

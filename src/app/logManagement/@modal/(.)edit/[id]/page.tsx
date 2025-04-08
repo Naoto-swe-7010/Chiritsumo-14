@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 
 import { Modal } from '@/app/_components/Modal';
 import { getSession } from '@/app/lib/commonFunction';
-import { EditLogForm } from '../../_components/EditLogForm';
-import { prisma } from '../../../../../prisma';
+import { EditLogForm } from '@/app/logManagement/_components/EditLogForm';
+import { prisma } from '../../../../../../prisma';
 
 const page = async ({ params }: { params: { id: string } }) => {
   // 認証チェック
@@ -30,12 +30,10 @@ const page = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)]">
-      <Modal>
-        <h2 className="mb-4 text-lg font-bold">編集</h2>
-        <EditLogForm log={log} />
-      </Modal>
-    </div>
+    <Modal>
+      <h2 className="mb-4 text-lg font-bold">編集</h2>
+      <EditLogForm log={log} />
+    </Modal>
   );
 };
 
