@@ -13,7 +13,7 @@ const page = async () => {
     redirect('/');
   }
   return (
-    <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)] pb-10 pt-8">
+    <div>
       <AddWantedItem />
       <WantedItemList />
       <PurchasedItemList />

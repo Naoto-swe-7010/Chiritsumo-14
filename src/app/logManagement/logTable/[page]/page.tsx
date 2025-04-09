@@ -17,19 +17,15 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
 
   return (
     <div>
-      <div className="mb-20 mt-[64px] min-h-[calc(100vh-64px)] pb-10 pt-8">
-        <div>
-          <h1 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
-            ログ
-          </h1>
-          <Suspense fallback={<SkeletonTable />}>
-            <Table page={page} />
-          </Suspense>
-          <Suspense fallback={''}>
-            <Pagination page={page} />
-          </Suspense>
-        </div>
-      </div>
+      <h1 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
+        ログ
+      </h1>
+      <Suspense fallback={<SkeletonTable />}>
+        <Table page={page} />
+      </Suspense>
+      <Suspense fallback={''}>
+        <Pagination page={page} />
+      </Suspense>
     </div>
   );
 };

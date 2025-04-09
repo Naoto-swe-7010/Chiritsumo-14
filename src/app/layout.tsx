@@ -46,7 +46,9 @@ const RootLayout = ({
     <html lang="ja">
       <body className="min-h-[calc(100vh-132px)] bg-gradient-to-b from-[#0a004a] to-[#010115] text-white">
         <Header />
-        <div className="mt-[64px] px-[7%] sm:px-[5%]">{children}</div>
+        <div className="flex min-h-screen flex-col">
+          <div className="flex-grow px-[7%] py-24 sm:px-[5%]">{children}</div>
+        </div>
         <Footer />
       </body>
     </html>
