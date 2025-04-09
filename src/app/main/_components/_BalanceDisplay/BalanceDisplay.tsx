@@ -6,7 +6,7 @@ import { Balance } from './Balance';
 export const BalanceDisplay = () => {
   return (
     <section
-      className="mb-16 mt-32 flex h-[225px] flex-col items-center justify-between text-2xl sm:h-[300px]"
+      className="mb-16 mt-12 flex h-[225px] flex-col items-center justify-between text-2xl sm:h-[300px]"
       aria-labelledby="balance-title"
     >
       <h2 id="balance-title" className="text-3xl font-bold sm:text-4xl">
