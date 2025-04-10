@@ -43,6 +43,6 @@ describe('Features', () => {
 
     // アイコンを含むdiv要素が3つ存在することを確認
     const iconContainers = screen.getAllByTestId('feature-icon');
-    expect(iconContainers).toHaveLength(3);
+    expect(iconContainers).toHaveLength(4);
   });
 });
