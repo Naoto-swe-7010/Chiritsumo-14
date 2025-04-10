@@ -17,6 +17,12 @@ export const HowToUse = () => {
       description:
         '欲しい物の値段に対する節約の進捗を確認し、モチベーションを維持しましょう。',
       image: '/lp_img3.jpg'
+    },
+    {
+      title: 'AIのサポートを受ける',
+      description:
+        '送信したキーワードに関連する節約アドバイスをAIが提供します。節約が捗らないときはAIに頼ってみましょう。',
+      image: '/lp_img4.jpg'
     }
   ];
 
@@ -47,13 +53,13 @@ export const HowToUse = () => {
 
               {/* Step image */}
               <div className={`flex-1 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
-                <div className="relative mx-auto aspect-[3/5] w-full max-w-[300px]">
+                <div className="relative mx-auto aspect-[3/5] w-full max-w-[300px] transform transition-transform duration-500 lg:hover:scale-125">
                   <Image
                     src={step.image || ''}
                     alt={`${step.title}の画面`}
                     width="300"
                     height="500"
-                    className="rounded-2xl object-cover shadow-xl"
+                    className="rounded-2xl object-cover shadow-2xl"
                   />
                 </div>
               </div>
