@@ -26,7 +26,7 @@
 ### 開発環境
 
 OS：macOS<br>
-IDE：Visual Studio Code
+IDE：Visual Studio Code, Cursor
 
 ### 使用技術
 
@@ -38,9 +38,8 @@ ORM：Prisma<br>
 DB：PostgreSQL(Supabase)<br>
 テスト：Vitest, React Testing Library, Playwright<br>
 パッケージ管理：npm<br>
-ソースコード管理：GitHub<br>
 デプロイ：Vercel<br>
-その他：zod, canvas-confetti, use-action-state-compat<br>
+その他：zod, canvas-confetti, use-action-state-compat, openAI API<br>
 
 ## システム構成図
 
@@ -161,14 +160,16 @@ DB：PostgreSQL(Supabase)<br>
 
 ### **8. WantedItem（欲しい物リスト）**
 
-| フィールド名 | 型         | 制約                | 説明       |
-| ------------ | ---------- | ------------------- | ---------- |
-| `id`         | `String`   | 主キー、`cuid()`    | 欲しい物ID |
-| `userId`     | `String`   | 外部キー            | ユーザーID |
-| `name`       | `String`   | 必須                | 商品名     |
-| `price`      | `Int`      | 必須                | 金額       |
-| `url`        | `String?`  | 任意                | 商品のURL  |
-| `createdAt`  | `DateTime` | デフォルト: `now()` | 作成日時   |
+| フィールド名 | 型         | 制約                | 説明             |
+| ------------ | ---------- | ------------------- | ---------------- |
+| `id`         | `String`   | 主キー、`cuid()`    | 欲しい物ID       |
+| `userId`     | `String`   | 外部キー            | ユーザーID       |
+| `name`       | `String`   | 必須                | 商品名           |
+| `price`      | `Int`      | 必須                | 金額             |
+| `favorite`   | `Boolean`  | デフォルト: `false` | お気に入りフラグ |
+| `purchased`  | `Boolean`  | デフォルト: `false` | 購入済みフラグ   |
+| `url`        | `String?`  | 任意                | 商品のURL        |
+| `createdAt`  | `DateTime` | デフォルト: `now()` | 作成日時         |
 
 **リレーション**:
 
@@ -212,12 +213,18 @@ DB：PostgreSQL(Supabase)<br>
 
 - 欲しい物リスト進捗
 
-  - 欲しい物リストに登録した商品に対しての残高の割合をグラフで視覚化することで、進捗状況を一目で確認できます。
-  - 進捗が100%を上回ると「購入」ボタンが現れます。<br>
+  - 欲しい物リストに登録した商品に対しての残高の割合をグラフで視覚化することで、節約の進捗を一目で確認できます。 （⭐️お気に入りに登録したアイテムのみ表示されます。）
+  - 進捗が100%を上回ると「購入」ボタンが現れます。（欲しい物リストページにも購入ボタンは現れます。）<br>
 
-  ![alt text](README/image-10.png)<br>
+  ![alt text](README/image-9.png)<br>
 
 - 欲しい物を購入したら、残高が減ります。<br>
-  ![alt text](README/image-9.png)<br>
+  ![alt text](README/image-10.png)<br>
   「はい」を押下<br>
   ![alt text](README/image-11.png)
+
+### AIサポート機能
+
+- AIによる節約アドバイスを得られます。
+- キーワードを入力して送信ボタンを押下すると、キーワードに関連した節約アドバイスをAIが提供してくれます。<br>
+  ![alt text](README/image-12.png)

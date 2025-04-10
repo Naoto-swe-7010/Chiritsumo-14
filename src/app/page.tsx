@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
+import { SignIn } from './_components/_SignIn/SignIn';
 import { getSession } from './lib/commonFunction';
-import { SignIn } from './SignIn';
 
 const Home = async () => {
   const session = await getSession();

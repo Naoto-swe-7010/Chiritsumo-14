@@ -40,7 +40,7 @@ describe('HowToUse', () => {
     render(<HowToUse />);
 
     const images = screen.getAllByRole('img');
-    expect(images).toHaveLength(3);
+    expect(images).toHaveLength(4);
 
     expect(images[0]).toHaveAttribute('src');
     expect(images[0]).toHaveAttribute('alt', '節約を入力の画面');

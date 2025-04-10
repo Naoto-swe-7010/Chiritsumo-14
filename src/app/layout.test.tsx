@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import RootLayout, { metadata } from './layout';
 
 // ヘッダーとフッターをモック
-vi.mock('./_components/_header/Header', () => ({
+vi.mock('./_components/_Header/Header', () => ({
   Header: () => <header data-testid="header">Mock Header</header>
 }));
-vi.mock('./_components/_footer/Footer', () => ({
+vi.mock('./_components/_Footer/Footer', () => ({
   Footer: () => <footer data-testid="footer">Mock Footer</footer>
 }));
 

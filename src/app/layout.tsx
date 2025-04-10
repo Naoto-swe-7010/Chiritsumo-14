@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 
-import { Footer } from './_components/_footer/Footer';
-import { Header } from './_components/_header/Header';
+import { Footer } from './_components/_Footer/Footer';
+import { Header } from './_components/_Header/Header';
 
 export const metadata: Metadata = {
   title: 'ちりつも',
