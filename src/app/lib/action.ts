@@ -47,8 +47,7 @@ export const addBalance = async (
         data: {
           userId,
           title,
-          price,
-          createdAt: new Date()
+          price
         }
       });
       await tx.balance.update({
@@ -172,8 +171,7 @@ export const addWantedItem = async (
     await prisma.wantedItem.create({
       data: {
         userId,
-        ...validatedFields.data,
-        createdAt: new Date()
+        ...validatedFields.data
       }
     });
   } catch {
