@@ -11,10 +11,10 @@ model User {
   id            String          @id @default(cuid())
   name          String?
   email         String          @unique
-  emailVerified DateTime?
+  emailVerified DateTime?       @db.Timestamptz()
   image         String?
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime        @default(now()) @db.Timestamptz()
+  updatedAt     DateTime        @updatedAt @db.Timestamptz()
   accounts      Account[]
   Authenticator Authenticator[]
   Balance       Balance?
@@ -35,8 +35,8 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now()) @db.Timestamptz()
+  updatedAt         DateTime @updatedAt @db.Timestamptz()
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
@@ -45,16 +45,16 @@ model Account {
 model Session {
   sessionToken String   @unique
   userId       String
-  expires      DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  expires      DateTime @db.Timestamptz()
+  createdAt    DateTime @default(now()) @db.Timestamptz()
+  updatedAt    DateTime @updatedAt @db.Timestamptz()
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
   identifier String
   token      String
-  expires    DateTime
+  expires    DateTime @db.Timestamptz()
 
   @@id([identifier, token])
 }
@@ -85,7 +85,7 @@ model Log {
   userId    String
   title     String
   price     Int
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz()
   user      User     @relation(fields: [userId], references: [id])
 }
 
@@ -97,6 +97,6 @@ model WantedItem {
   url       String?
   favorite  Boolean  @default(false)
   purchased Boolean  @default(false)
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz()  
   user      User     @relation(fields: [userId], references: [id])
 }
