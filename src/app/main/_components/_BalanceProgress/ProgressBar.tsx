@@ -9,13 +9,18 @@ export const ProgressBar = ({
   item: WantedItem;
   balance: Balance;
 }) => {
+  const progress = Math.max(
+    0,
+    Math.min((balance.balance / item.price) * 100, 100)
+  );
   return (
     <div className="mt-2 flex items-center gap-2">
-      <progress
-        max="1"
-        value={balance.balance / item.price}
-        className="w-full"
-      ></progress>
+      <div className="relative h-2 w-full rounded bg-gray-300">
+        <div
+          className={`absolute left-0 top-0 h-2 rounded bg-green-400`}
+          style={{ width: `${progress.toString()}%` }}
+        ></div>
+      </div>
       <p className="text-xs sm:text-base">
         {Math.max(
           0,

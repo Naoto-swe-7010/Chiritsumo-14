@@ -6,7 +6,7 @@ export const LogOutLink = () => {
   return (
     <Link
       href="/api/auth/signout"
-      className="hover:text-pink-300"
+      className="hover:text-cyan-500"
       aria-label="ログアウト"
     >
       <IoIosLogOut size={25} data-testid="icon" />

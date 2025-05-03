@@ -8,10 +8,10 @@ export const CtaSection = () => {
     <section className="pb-52 pt-20">
       <div className="container mx-auto flex flex-col items-center justify-center px-4">
         <h2 className="mb-6 text-3xl font-bold md:text-5xl">
-          <span className="text-white">さあ、</span>
-          <span className="text-pink-400">始めましょう</span>
+          <span className="text-gray-700">さあ、</span>
+          <span className="text-cyan-500">始めましょう</span>
         </h2>
-        <h3 className="mb-12 mt-8 text-center text-xl text-gray-300 md:text-3xl">
+        <h3 className="mb-12 mt-8 text-center text-xl font-bold text-gray-500 md:text-3xl">
           <div className="inline-block">無駄づかいを我慢して</div>
           <div className="inline-block">欲しい物を手に入れよう！</div>
         </h3>
@@ -20,11 +20,11 @@ export const CtaSection = () => {
             'use server';
             await signIn('google');
           }}
-          className="flex justify-center rounded-full bg-white/10 px-6 py-3 text-base font-semibold no-underline transition hover:bg-white/20 sm:w-[70%] sm:text-lg md:w-[40%] md:text-xl lg:w-[25%]"
+          className="flex justify-center rounded-full bg-white px-6 py-3 text-base font-semibold no-underline transition hover:bg-white/50 sm:w-[70%] sm:text-lg md:w-[40%] md:text-xl lg:w-[25%]"
         >
           <button className="flex max-w-md flex-nowrap items-center justify-center gap-3">
             <FcGoogle className="size-6 sm:size-7 md:size-8" />
-            <p>Sign in with Google！</p>
+            <p className="text-cyan-500">Sign in with Google！</p>
           </button>
         </form>
       </div>

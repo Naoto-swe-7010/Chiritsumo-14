@@ -29,12 +29,12 @@ export const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   return (
     <form action={formAction}>
       <div className="mb-4">
-        <label className="block text-gray-400">タイトル</label>
+        <label className="block text-gray-700">タイトル</label>
         <input
           type="text"
           name="name"
           defaultValue={item.name}
-          className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
+          className="w-full rounded border bg-gray-200 bg-opacity-30 p-2 text-gray-600"
           placeholder="商品名"
           required
         />
@@ -45,12 +45,12 @@ export const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
         ))}
       </div>
       <div className="mb-4">
-        <label className="block text-gray-400">価格</label>
+        <label className="block text-gray-700">価格</label>
         <input
           type="number"
           name="price"
           defaultValue={item.price}
-          className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
+          className="w-full rounded border bg-gray-200 bg-opacity-30 p-2 text-gray-600"
           placeholder="価格"
           required
         />
@@ -61,12 +61,12 @@ export const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
         ))}
       </div>
       <div className="mb-4">
-        <label className="block text-gray-400">URL</label>
+        <label className="block text-gray-700">URL</label>
         <input
           type="url"
           name="url"
           defaultValue={item.url?.toString()}
-          className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
+          className="w-full rounded border bg-gray-200 bg-opacity-30 p-2 text-gray-600"
           placeholder="https://example.com"
         />
         {state.errors?.url?.map((error: string) => (

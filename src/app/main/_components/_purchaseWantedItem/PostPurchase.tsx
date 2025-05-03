@@ -18,16 +18,16 @@ export const PostPurchase = async () => {
     <Modal>
       <div className="text-center">
         <FaCheckCircle className="mx-auto mb-4 text-6xl text-green-500" />
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="text-2xl font-bold text-gray-700 sm:text-3xl">
           残高を消費しました！
         </h2>
-        <p className="mt-2 text-gray-300">
+        <p className="mt-2 text-gray-600">
           他のアイテムの購入を目指して、引き続き無駄づかいを我慢しましょう！
         </p>
 
         <div className="mt-6">
           <Link href={'/main'}>
-            <button className="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
+            <button className="rounded bg-cyan-500 px-4 py-2 font-semibold text-white hover:bg-cyan-600">
               ホームに戻る
             </button>
           </Link>

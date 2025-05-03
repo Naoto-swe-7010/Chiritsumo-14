@@ -7,19 +7,16 @@ import { Button } from '@/components/ui/button';
 export const Row = ({ item }: { item: WantedItem }) => {
   return (
     <article
-      className="mb-4 flex items-center justify-between gap-4 rounded border border-gray-500 bg-gray-900 p-4 shadow-xl"
+      className="mb-4 flex items-center justify-between gap-4 rounded bg-gray-100 p-4 shadow-lg"
       aria-labelledby={`wanted-item-${item.id}`}
     >
       <div className="flex-1">
         <div>
-          <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-end sm:gap-3">
-            <h3
-              id={`wanted-item-${item.id}`}
-              className="text-lg font-semibold text-gray-100"
-            >
+          <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-3">
+            <h3 id={`wanted-item-${item.id}`} className="text-lg font-semibold">
               {item.name}
             </h3>
-            <p className="text-sm text-gray-300 sm:text-base">
+            <p className="text-sm text-gray-600 sm:text-base">
               ¥{item.price.toLocaleString()}
             </p>
           </div>
@@ -28,7 +25,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 underline"
+              className="text-cyan-600 underline"
             >
               詳細を見る
             </a>
@@ -43,7 +40,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
           >
             <Button
               aria-label={`Cancel Purchase ${item.name}`}
-              className="bg-blue-500 font-bold hover:bg-blue-700"
+              className="bg-cyan-500 font-bold hover:bg-cyan-700"
             >
               購入取消
             </Button>
