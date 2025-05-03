@@ -15,7 +15,7 @@ describe('PaginationUI Component', () => {
 
     // Backボタンが無効化されているか確認
     const backButton = screen.getByText('< Back');
-    expect(backButton).toHaveClass('opacity-50');
+    expect(backButton).toHaveClass('text-gray-200');
     expect(backButton).toHaveClass('pointer-events-none');
   });
 
@@ -26,7 +26,7 @@ describe('PaginationUI Component', () => {
 
     // Nextボタンが無効化されているか確認
     const nextButton = screen.getByText('Next >');
-    expect(nextButton).toHaveClass('opacity-50');
+    expect(nextButton).toHaveClass('text-gray-200');
     expect(nextButton).toHaveClass('pointer-events-none');
   });
 
@@ -39,14 +39,14 @@ describe('PaginationUI Component', () => {
   it('現在のページのリンクが強調表示されていることを確認', () => {
     render(<PaginationUI totalPages={5} page="3" />);
     const activePageElement = screen.getByText('3');
-    expect(activePageElement).toHaveClass('bg-pink-500'); // 現在のページはピンク背景
+    expect(activePageElement).toHaveClass('bg-cyan-500'); // 現在のページはピンク背景
     expect(activePageElement).toHaveClass('text-white'); // 現在のページは白文字
   });
 
   it('現在のページのリンク以外は強調表示されていないことを確認', () => {
     render(<PaginationUI totalPages={5} page="3" />);
     const activePageElement = screen.getByText('2');
-    expect(activePageElement).not.toHaveClass('bg-pink-500'); // 現在のページ以外はピンク背景になっていない
+    expect(activePageElement).not.toHaveClass('bg-cyan-500'); // 現在のページ以外はピンク背景になっていない
     expect(activePageElement).not.toHaveClass('text-white'); // 現在のページ以外は白文字になっていない
   });
 
