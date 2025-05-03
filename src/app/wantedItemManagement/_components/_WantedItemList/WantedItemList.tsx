@@ -7,10 +7,10 @@ import { List } from './List';
 export const WantedItemList = () => {
   return (
     <div>
-      <h1 className="mb-4 flex items-center pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
+      <h1 className="mb-4 flex items-center pl-1 text-xl font-bold text-gray-600 sm:text-2xl">
         欲しい物リスト
-        <span className="ml-4 flex items-center text-sm text-gray-400">
-          <FaStar className="text-md mr-1 text-yellow-500" />
+        <span className="ml-4 flex items-center text-sm text-gray-500">
+          <FaStar className="mb-[2px] mr-1 text-yellow-400" />
           ホームに表示
         </span>
       </h1>

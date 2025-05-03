@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 
-import { Loading } from '@/app/_components/Loading';
 import {
   getFavoriteWantedItemListWithoutPurchasedAnd,
   getSessionAndUserId
 } from '@/app/lib/commonFunction';
+import { SkeletonTable } from '@/app/logManagement/logTable/_components/SkeletonTable';
 import { BalanceProgressItem } from './BalanceProgressItem';
 
 export const BalanceProgress = async () => {
@@ -19,11 +19,11 @@ export const BalanceProgress = async () => {
       <div className="flex justify-center p-4 sm:p-6">
         <div className="w-full max-w-2xl">
           <h2 className="mb-4 mt-12 text-center text-xl font-bold sm:text-2xl">
-            <span className="border-b-2 border-pink-500">
+            <span className="border-b-2 border-cyan-500">
               欲しい物リスト進捗
             </span>
           </h2>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<SkeletonTable />}>
             {wantedItemList.length > 0 ? (
               wantedItemList.map((item) => (
                 <BalanceProgressItem key={item.id} item={item} />

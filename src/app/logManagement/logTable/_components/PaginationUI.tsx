@@ -23,8 +23,8 @@ export const PaginationUI = ({
           href={`/logManagement/logTable/${pageStr}`}
           className={`rounded px-3 py-1 ${
             isActive
-              ? 'bg-pink-500 text-white' // 現在のページはピンク背景＋白文字
-              : 'text-gray-400 hover:bg-gray-600 hover:text-white'
+              ? 'bg-cyan-500 text-white' // 現在のページ
+              : 'text-gray-400 hover:text-cyan-500'
           }`}
         >
           {page}
@@ -41,12 +41,12 @@ export const PaginationUI = ({
           {currentPage > 1 ? (
             <Link
               href={`/logManagement/logTable/${(currentPage - 1).toString()}`}
-              className="rounded px-3 py-1 text-gray-400 hover:bg-gray-600 hover:text-white"
+              className="rounded px-3 py-1 text-gray-400 hover:text-cyan-500"
             >
               &lt; Back
             </Link>
           ) : (
-            <span className="pointer-events-none rounded px-3 py-1 text-gray-500 opacity-50">
+            <span className="pointer-events-none rounded px-3 py-1 text-gray-200">
               &lt; Back
             </span>
           )}
@@ -60,12 +60,12 @@ export const PaginationUI = ({
           {currentPage < totalPages ? (
             <Link
               href={`/logManagement/logTable/${(currentPage + 1).toString()}`}
-              className="rounded px-3 py-1 text-gray-400 hover:bg-gray-600 hover:text-white"
+              className="rounded px-3 py-1 text-gray-400 hover:text-cyan-500"
             >
               Next &gt;
             </Link>
           ) : (
-            <span className="pointer-events-none rounded px-3 py-1 text-gray-500 opacity-50">
+            <span className="pointer-events-none rounded px-3 py-1 text-gray-200">
               Next &gt;
             </span>
           )}

@@ -22,7 +22,7 @@ export const PurchaseForm = ({ item }: { item: WantedItem }) => {
 
   return (
     <form action={formAction}>
-      <p className="mb-4 text-gray-400">この商品を購入しますか？</p>
+      <p className="mb-4 text-gray-600">この商品を購入しますか？</p>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
           {state.message}
@@ -31,7 +31,7 @@ export const PurchaseForm = ({ item }: { item: WantedItem }) => {
       <div className="flex justify-end gap-2">
         <Button
           type="submit"
-          className="bg-pink-500 font-bold hover:bg-pink-700"
+          className="bg-cyan-500 font-bold hover:bg-cyan-700"
           disabled={isPending}
         >
           {isPending ? <LoadingSpinner /> : 'はい'}

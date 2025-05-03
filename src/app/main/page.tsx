@@ -11,7 +11,7 @@ const page = async () => {
   // 認証チェック
   const session = await getSession();
   if (!session) {
-    redirect('/');
+    redirect('/signIn');
   }
 
   return (

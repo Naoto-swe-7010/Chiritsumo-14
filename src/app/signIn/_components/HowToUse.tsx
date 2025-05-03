@@ -29,9 +29,9 @@ export const HowToUse = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="mb-20 text-center text-3xl font-bold underline decoration-slate-500 underline-offset-8 md:text-4xl">
-          <span className="text-pink-400">ちりつも</span>
-          <span className="text-white">の使い方</span>
+        <h2 className="mb-20 text-center text-3xl font-bold md:text-5xl">
+          <span className="text-cyan-500">ちりつも</span>
+          <span className="text-gray-700">の使い方</span>
         </h2>
         <div className="space-y-32 md:space-y-20">
           {steps.map((step, index) => (
@@ -42,10 +42,10 @@ export const HowToUse = () => {
               {/* Step content */}
               <div className={`flex-1 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                 <div className="mx-auto max-w-xl">
-                  <h3 className="mb-4 text-2xl font-bold text-white md:text-3xl">
+                  <h3 className="mb-6 text-2xl font-bold text-gray-700 md:text-4xl">
                     Step {index + 1}：{step.title}
                   </h3>
-                  <p className="text-lg leading-relaxed text-gray-300 md:text-xl">
+                  <p className="text-lg leading-relaxed text-gray-600 md:text-2xl">
                     {step.description}
                   </p>
                 </div>

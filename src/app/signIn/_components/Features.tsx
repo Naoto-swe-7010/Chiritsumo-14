@@ -35,26 +35,26 @@ export const Features = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-center text-3xl font-bold underline decoration-slate-500 underline-offset-8 md:text-4xl">
-          <span className="text-pink-400">ちりつも</span>
-          <span className="text-white">の特徴</span>
+        <h2 className="mb-12 text-center text-3xl font-bold md:text-5xl">
+          <span className="text-cyan-500">ちりつも</span>
+          <span className="text-gray-700">の特徴</span>
         </h2>
         <div className="grid gap-8 lg:grid-cols-4">
           {featuresData.map((feature, index) => (
             <div
               key={index}
-              className="rounded-2xl bg-gray-900 p-8 transition-all duration-300 lg:hover:scale-110"
+              className="rounded-2xl bg-white p-8 transition-all duration-300 lg:hover:scale-110"
             >
               <div
                 data-testid="feature-icon"
-                className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-pink-500"
+                className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-500"
               >
                 {feature.icon}
               </div>
-              <h3 className="mb-4 text-xl font-bold text-white">
+              <h3 className="mb-4 text-xl font-bold text-gray-700">
                 {feature.title}
               </h3>
-              <p className="text-gray-300">{feature.description}</p>
+              <p className="text-gray-600">{feature.description}</p>
             </div>
           ))}
         </div>

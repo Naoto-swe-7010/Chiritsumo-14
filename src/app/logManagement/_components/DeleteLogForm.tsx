@@ -22,7 +22,7 @@ export const DeleteLogForm = ({ log }: { log: Log }) => {
 
   return (
     <form action={formAction}>
-      <h3 className="mb-4 text-gray-400">本当にこのデータを削除しますか？</h3>
+      <h3 className="mb-4 text-gray-600">本当にこのデータを削除しますか？</h3>
       {state && (
         <p className="mt-2 text-sm text-red-500" id="title-error">
           {state.message}

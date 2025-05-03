@@ -6,7 +6,7 @@ const page = async () => {
   // 認証チェック
   const session = await getSession();
   if (!session) {
-    redirect('/');
+    redirect('/signIn');
   }
   redirect('/logManagement/logTable/1');
 };

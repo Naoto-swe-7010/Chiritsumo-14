@@ -20,13 +20,13 @@ export const Table = async ({ page }: { page: string }) => {
         <div>
           <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="bg-black bg-opacity-50">
-                <th className="w-3/5 p-2 font-semibold text-gray-200 sm:w-1/2">
+              <tr className="bg-cyan-900 bg-opacity-10">
+                <th className="w-3/5 p-2 font-semibold text-gray-600 sm:w-1/2">
                   タイトル
                 </th>
-                <th className="w-1/6 p-2 font-semibold text-gray-200">値段</th>
-                <th className="w-1/5 p-2 font-semibold text-gray-200">日時</th>
-                <th className="w-1/6 p-2 text-[10px] font-semibold text-gray-200 sm:text-sm">
+                <th className="w-1/6 p-2 font-semibold text-gray-600">値段</th>
+                <th className="w-1/5 p-2 font-semibold text-gray-600">日時</th>
+                <th className="w-1/6 p-2 text-[10px] font-semibold text-gray-600 sm:text-sm">
                   アクション
                 </th>
               </tr>

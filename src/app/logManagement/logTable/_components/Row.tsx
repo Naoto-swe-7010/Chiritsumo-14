@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 // テーブルの各ログ（各レコード）
 export const Row = ({ log }: { log: Log }) => {
   return (
-    <tr className="border-b border-gray-500 bg-black bg-opacity-30">
+    <tr className="border-b border-gray-200 bg-gray-100 bg-opacity-50">
       <td className="max-w-xs break-words px-3 py-2 text-base sm:max-w-full">
         {log.title}
       </td>
