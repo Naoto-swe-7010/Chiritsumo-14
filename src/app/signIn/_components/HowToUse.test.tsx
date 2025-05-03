@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { HowToUse } from '../../_components/_SignIn/HowToUse';
+import { HowToUse } from './HowToUse';
 
 describe('HowToUse', () => {
   it('タイトルが正しく表示される', () => {
