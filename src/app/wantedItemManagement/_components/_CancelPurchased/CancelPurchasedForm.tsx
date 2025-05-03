@@ -22,9 +22,10 @@ export const CancelPurchasedForm = ({ item }: { item: WantedItem }) => {
 
   return (
     <form action={formAction}>
-      <p className="mb-4 text-gray-400">
+      <p className="mb-4 text-gray-600">
         本当にこのアイテムの購入を取消しますか？ <br />
-        取消すると、<span className="font-bold">{item.price}</span>円
+        取消すると、
+        <span className="font-bold text-cyan-500">{item.price}円</span>
         が節約合計額に戻ります。
       </p>
       {state && (
@@ -35,7 +36,7 @@ export const CancelPurchasedForm = ({ item }: { item: WantedItem }) => {
       <div className="flex justify-end gap-2">
         <Button
           type="submit"
-          className="bg-blue-500 font-bold hover:bg-blue-700"
+          className="bg-cyan-500 font-bold hover:bg-cyan-700"
           disabled={isPending}
         >
           {isPending ? <LoadingSpinner size={18} color="white" /> : 'はい'}

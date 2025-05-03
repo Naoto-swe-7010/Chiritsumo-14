@@ -7,7 +7,7 @@ const NotFound = () => {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b text-gray-600">
       {/* メッセージ */}
       <h1 className="mb-6 text-5xl font-bold">ページが見つかりません</h1>
       <p className="mb-8 text-lg">
@@ -21,7 +21,7 @@ const NotFound = () => {
           onClick={() => {
             router.push('/');
           }}
-          className="rounded-lg bg-blue-500 px-6 py-3 font-bold transition duration-300 hover:bg-blue-700"
+          className="rounded-lg bg-cyan-500 px-6 py-3 font-bold text-white transition duration-300 hover:bg-cyan-700"
         >
           ホームに戻る
         </button>
@@ -31,7 +31,7 @@ const NotFound = () => {
           onClick={() => {
             router.back();
           }}
-          className="rounded-lg bg-gray-500 px-6 py-3 font-bold transition duration-300 hover:bg-gray-700"
+          className="rounded-lg bg-gray-500 px-6 py-3 font-bold text-white transition duration-300 hover:bg-gray-700"
         >
           前のページに戻る
         </button>

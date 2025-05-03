@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
 
-import { SignIn } from './_components/_SignIn/SignIn';
 import { getSession } from './lib/commonFunction';
 
 const Home = async () => {
@@ -9,7 +8,7 @@ const Home = async () => {
   if (session) {
     redirect('/main');
   }
-  return <SignIn />;
+  redirect('/signIn');
 };
 
 export default Home;

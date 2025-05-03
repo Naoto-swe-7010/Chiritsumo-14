@@ -11,7 +11,7 @@ export const Title = () => {
         aria-label="メインページに移動"
       >
         <TbMountain size={35} data-testid="icon" />
-        <h1 className="text-3xl font-bold text-pink-500">ちりつも</h1>
+        <h1 className="pt-[3px] text-3xl font-bold text-gray-800">ちりつも</h1>
       </Link>
     </header>
   );

@@ -17,7 +17,7 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
 
   return (
     <div>
-      <h1 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
+      <h1 className="mb-4 pl-1 text-xl font-bold text-gray-600 sm:text-2xl">
         ログ
       </h1>
       <Suspense fallback={<SkeletonTable />}>

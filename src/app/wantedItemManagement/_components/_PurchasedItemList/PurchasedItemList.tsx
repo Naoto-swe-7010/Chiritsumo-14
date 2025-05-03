@@ -6,7 +6,7 @@ import { List } from './List';
 export const PurchasedItemList = () => {
   return (
     <div>
-      <h1 className="mb-4 pl-1 text-xl font-bold text-gray-100 sm:text-2xl">
+      <h1 className="mb-4 pl-1 text-xl font-bold text-gray-600 sm:text-2xl">
         購入済みリスト
       </h1>
       <Suspense fallback={<SkeletonList />}>

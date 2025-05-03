@@ -10,7 +10,11 @@ export const Balance = async () => {
     const balance = await getBalance(userId);
 
     // 取得した残高を表示
-    return <h1 aria-label="balance">{balance.balance.toLocaleString()}</h1>;
+    return (
+      <h1 aria-label="balance" className="text-gray-700">
+        {balance.balance.toLocaleString()}
+      </h1>
+    );
   } catch {
     throw new Error('残高の取得中にエラーが発生しました。');
   }

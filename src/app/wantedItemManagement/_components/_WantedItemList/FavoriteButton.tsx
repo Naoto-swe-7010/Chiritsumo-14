@@ -24,9 +24,9 @@ export const FavoriteButton = ({ item }: { item: WantedItem }) => {
         aria-label={item.favorite ? 'お気に入りから削除' : 'お気に入りに追加'}
       >
         {isOptimisticFavorite ? (
-          <FaStar className="text-xl text-yellow-500" />
+          <FaStar className="text-xl text-yellow-400" />
         ) : (
-          <FaStar className="text-xl text-gray-500" />
+          <FaStar className="text-xl text-gray-300" />
         )}
       </button>
     </form>

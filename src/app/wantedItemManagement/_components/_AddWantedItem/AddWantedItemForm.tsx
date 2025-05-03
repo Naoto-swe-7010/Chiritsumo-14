@@ -42,7 +42,7 @@ export const AddWantedItemForm = () => {
           placeholder="商品名"
           name="name"
           required
-          className="w-full rounded-md border border-gray-600 bg-black bg-opacity-10 p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 bg-white p-3 text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
         />
       </div>
       {state.errors?.name?.map((error: string) => (
@@ -56,7 +56,7 @@ export const AddWantedItemForm = () => {
           name="price"
           placeholder="価格"
           required
-          className="w-full rounded-md border border-gray-600 bg-black bg-opacity-10 p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 bg-white p-3 text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
         />
       </div>
       {state.errors?.price?.map((error: string) => (
@@ -69,7 +69,7 @@ export const AddWantedItemForm = () => {
           type="url"
           name="url"
           placeholder="https://example.com"
-          className="w-full rounded-md border border-gray-600 bg-black bg-opacity-10 p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-md border border-gray-300 bg-white p-3 text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
         />
       </div>
       {state.errors?.url?.map((error: string) => (
@@ -79,7 +79,7 @@ export const AddWantedItemForm = () => {
       ))}
       <div className="sm:w-auto">
         <Button
-          className="h-[50px] w-full bg-pink-500 text-lg font-bold hover:bg-pink-700 sm:w-[68px]"
+          className="h-[50px] w-full bg-cyan-500 text-lg font-bold hover:bg-cyan-700 sm:w-[68px]"
           disabled={isPending}
         >
           {isPending ? <LoadingSpinner size={24} color="white" /> : '追加'}

@@ -44,7 +44,7 @@ export const AddBalanceForm = () => {
         <div className="mb-2 flex flex-col md:mb-0 md:w-1/2">
           <input
             type="text"
-            className="w-full rounded-md border border-gray-600 bg-[#2a273f] p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 bg-white p-3 text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
             name="title"
             placeholder="我慢したものを入力"
             required
@@ -62,7 +62,7 @@ export const AddBalanceForm = () => {
         <div className="flex flex-col md:w-1/2">
           <input
             type="number"
-            className="w-full rounded-md border border-gray-600 bg-[#2a273f] p-3 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 bg-white p-3 text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500"
             name="price"
             placeholder="節約できた額を入力"
             required
@@ -81,7 +81,7 @@ export const AddBalanceForm = () => {
 
       <div className="mx-auto w-[50%]">
         <Button
-          className="h-[50px] w-full bg-pink-500 text-lg font-bold hover:bg-pink-700"
+          className="h-[50px] w-full bg-cyan-500 text-lg font-bold hover:bg-cyan-700"
           disabled={isPending}
         >
           {isPending ? (

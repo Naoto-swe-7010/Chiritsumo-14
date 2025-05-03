@@ -29,12 +29,12 @@ export const EditLogForm = ({ log }: { log: Log }) => {
   return (
     <form action={formAction}>
       <div className="mb-4">
-        <label className="block text-gray-400">タイトル</label>
+        <label className="block text-gray-700">タイトル</label>
         <input
           type="text"
           name="title"
           defaultValue={log.title}
-          className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
+          className="w-full rounded border bg-gray-200 bg-opacity-30 p-2 text-gray-600"
           placeholder="タイトル"
           required
         />
@@ -45,12 +45,12 @@ export const EditLogForm = ({ log }: { log: Log }) => {
         ))}
       </div>
       <div className="mb-4">
-        <label className="block text-gray-400">値段</label>
+        <label className="block text-gray-700">値段</label>
         <input
           type="number"
           name="price"
           defaultValue={log.price}
-          className="w-full rounded border bg-black bg-opacity-10 p-2 text-gray-100"
+          className="w-full rounded border bg-gray-200 bg-opacity-30 p-2 text-gray-600"
           placeholder="値段"
           required
         />
