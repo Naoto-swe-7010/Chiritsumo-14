@@ -16,10 +16,13 @@ export const NumberLoading = () => {
   }, []);
 
   return (
-    <div className="flex h-full items-center justify-center" role="loading">
-      <div className="text-center text-gray-700">
-        <p>{randomNumber}</p>
-      </div>
+    <div
+      className="text-[100px] font-bold leading-none sm:text-[150px]"
+      aria-label="Balance Amount"
+    >
+      <h1 aria-label="balance" className="text-gray-700">
+        {randomNumber.toLocaleString()}
+      </h1>
     </div>
   );
 };
