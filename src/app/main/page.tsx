@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { redirect } from 'next/navigation';
 
+import { Loading } from '../_components/Loading';
 import { getSession } from '../lib/commonFunction';
-import { AddBalance } from './_components/_AddBalance/AddBalance';
 import { AIAdvice } from './_components/_AIAdvice/AIAdvice';
-import { BalanceDisplay } from './_components/_BalanceDisplay/BalanceDisplay';
+import { BalanceContainer } from './_components/_BalanceDisplayAndAdd/BalanceContainer';
 import { BalanceProgress } from './_components/_BalanceProgress/BalanceProgress';
 
 const page = async () => {
@@ -16,8 +16,9 @@ const page = async () => {
 
   return (
     <div>
-      <BalanceDisplay />
-      <AddBalance />
+      <Suspense fallback={<Loading />}>
+        <BalanceContainer />
+      </Suspense>
       <AIAdvice />
       <BalanceProgress />
     </div>
