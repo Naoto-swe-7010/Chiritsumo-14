@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation';
 
 import { Loading } from '../_components/Loading';
 import { getSession } from '../lib/commonFunction';
-import { SkeletonList } from '../wantedItemManagement/_components/SkeletonList';
 import { AIAdvice } from './_components/_AIAdvice/AIAdvice';
 import { BalanceContainer } from './_components/_BalanceDisplayAndAdd/BalanceContainer';
 import { BalanceProgress } from './_components/_BalanceProgress/BalanceProgress';
+import { SkeletonProgressItem } from './_components/_BalanceProgress/SkeletonProgressItem';
 
 const page = async () => {
   // 認証チェック
@@ -21,7 +21,7 @@ const page = async () => {
         <BalanceContainer />
       </Suspense>
       <AIAdvice />
-      <Suspense fallback={<SkeletonList />}>
+      <Suspense fallback={<SkeletonProgressItem />}>
         <BalanceProgress />
       </Suspense>
     </div>
