@@ -12,6 +12,7 @@ export const DeleteWantedItemForm = ({ item }: { item: WantedItem }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const deleteWantedItemWithId = deleteWantedItem.bind(null, item.id);
+  // stateでは、エラーメッセージを管理
   const [state, formAction, isPending] = useActionStateCompat(
     deleteWantedItemWithId,
     null

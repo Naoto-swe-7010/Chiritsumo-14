@@ -12,7 +12,7 @@ const page = async ({ params }: { params: Promise<{ page: string }> }) => {
   if (!session) {
     redirect('/');
   }
-  // ページ番号を取得
+  // パラメータからページ番号を取得
   const { page } = await params;
 
   return (

@@ -8,14 +8,18 @@ import { signIn } from '../../../../auth';
 export const Main = () => {
   return (
     <div className="flex min-h-[calc(100vh-132px)] translate-y-[-5%] flex-col items-center justify-center px-4 text-center">
+      {/* ロゴ */}
       <TbMountain className="size-[200px] md:size-[280px]" data-testid="icon" />
+      {/* タイトル */}
       <h1 className="mb-3 text-4xl font-bold text-gray-700 sm:text-5xl md:text-6xl">
         ちりつも
       </h1>
+      {/* サブタイトル */}
       <h3 className="mb-6 text-lg font-bold sm:text-xl md:my-10 md:text-4xl">
         <div className="inline-block text-gray-500">無駄づかいを我慢して</div>
         <div className="inline-block text-gray-500">欲しい物を手に入れよう</div>
       </h3>
+      {/* サインインボタン */}
       <form
         action={async () => {
           'use server';

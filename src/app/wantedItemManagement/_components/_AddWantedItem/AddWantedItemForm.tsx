@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 
 export const AddWantedItemForm = () => {
   // ServerActions × useActionStateCompat
+  // stateでは、エラーメッセージを管理
   const initialState: AddWantedItemFormState = {
     message: null,
     errors: {}
@@ -23,6 +24,7 @@ export const AddWantedItemForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   // 欲しい物リストへの追加成功時の処理
+  // state.messageには、エラーがなくてもランダムな値が返ってくるため、フォーム送信時にuseEffectが発火する
   useEffect(() => {
     if (state.message) {
       // Formクリア

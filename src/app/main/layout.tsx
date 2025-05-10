@@ -7,7 +7,9 @@ const Layout = ({
 }) => {
   return (
     <div>
+      {/* メインページの内容 */}
       {children}
+      {/* モーダル用のParallelRoute */}
       {modal}
     </div>
   );

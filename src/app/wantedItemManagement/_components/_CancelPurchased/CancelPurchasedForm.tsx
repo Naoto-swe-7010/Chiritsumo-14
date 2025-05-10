@@ -12,6 +12,7 @@ export const CancelPurchasedForm = ({ item }: { item: WantedItem }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const cancelPurchasedWithId = cancelPurchased.bind(null, item.id);
+  // stateでは、エラーメッセージを管理
   const [state, formAction, isPending] = useActionStateCompat(
     cancelPurchasedWithId,
     null

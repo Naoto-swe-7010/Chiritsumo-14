@@ -17,6 +17,7 @@ export const PurchaseWantedItem = async ({
     redirect('/');
   }
 
+  // パラメーター取得
   const { id } = params;
 
   // 削除対象のログを取得

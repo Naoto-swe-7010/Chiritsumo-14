@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { Loading } from '../_components/Loading';
 import { getSession } from '../lib/commonFunction';
+import { SkeletonList } from '../wantedItemManagement/_components/SkeletonList';
 import { AIAdvice } from './_components/_AIAdvice/AIAdvice';
 import { BalanceContainer } from './_components/_BalanceDisplayAndAdd/BalanceContainer';
 import { BalanceProgress } from './_components/_BalanceProgress/BalanceProgress';
@@ -20,7 +21,9 @@ const page = async () => {
         <BalanceContainer />
       </Suspense>
       <AIAdvice />
-      <BalanceProgress />
+      <Suspense fallback={<SkeletonList />}>
+        <BalanceProgress />
+      </Suspense>
     </div>
   );
 };

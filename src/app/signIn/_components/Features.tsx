@@ -40,6 +40,7 @@ export const Features = () => {
           <span className="text-gray-700">の特徴</span>
         </h2>
         <div className="grid gap-8 lg:grid-cols-4">
+          {/* 特徴の内容 */}
           {featuresData.map((feature, index) => (
             <div
               key={index}

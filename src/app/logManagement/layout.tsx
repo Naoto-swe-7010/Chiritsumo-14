@@ -8,6 +8,7 @@ const Layout = ({
   return (
     <div>
       {children}
+      {/* モーダル用のParallelRoute */}
       {modal}
     </div>
   );

@@ -14,6 +14,7 @@ export const EditLogForm = ({ log }: { log: Log }) => {
   // プロップスで渡されたログを予め引数にバインドしておく
   const updateLogWithId = updateLog.bind(null, log.id);
 
+  // stateでは、エラーメッセージを管理
   const initialState: UpdateLogFormState = {
     message: null,
     errors: {}
