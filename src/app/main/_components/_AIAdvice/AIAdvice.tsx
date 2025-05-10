@@ -21,6 +21,7 @@ export const AIAdvice = () => {
             </h2>
             <WiStars className="h-6 w-6 text-cyan-600 sm:h-8 sm:w-8" />
           </div>
+          {/* 節約アドバイスのキーワード送信フォーム */}
           <form
             action={formAction}
             name="keyword"
@@ -44,6 +45,7 @@ export const AIAdvice = () => {
             <h3 className="text-md font-semibold text-cyan-500">
               AIからの返答
             </h3>
+            {/* 節約アドバイスの返答 */}
             <p className="mt-2 text-sm text-gray-800">{advice}</p>
           </div>
         </div>

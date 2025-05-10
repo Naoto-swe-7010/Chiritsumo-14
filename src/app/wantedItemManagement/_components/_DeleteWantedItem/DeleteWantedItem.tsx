@@ -16,6 +16,7 @@ export const DeleteWantedItem = async ({
   if (!session) {
     redirect('/');
   }
+  // パラメータからアイテムIDを取得
   const { id } = params;
 
   // 削除対象のアイテムを取得

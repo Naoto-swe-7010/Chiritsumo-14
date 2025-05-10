@@ -1,10 +1,7 @@
-import React, { Suspense } from 'react';
-
 import {
   getFavoriteWantedItemListWithoutPurchasedAnd,
   getSessionAndUserId
 } from '@/app/lib/commonFunction';
-import { SkeletonTable } from '@/app/logManagement/logTable/_components/SkeletonTable';
 import { BalanceProgressItem } from './BalanceProgressItem';
 
 export const BalanceProgress = async () => {
@@ -23,19 +20,17 @@ export const BalanceProgress = async () => {
               欲しい物リスト進捗
             </span>
           </h2>
-          <Suspense fallback={<SkeletonTable />}>
-            {wantedItemList.length > 0 ? (
-              wantedItemList.map((item) => (
-                <BalanceProgressItem key={item.id} item={item} />
-              ))
-            ) : (
-              <div className="text-center text-gray-500">
-                <p>
-                  欲しい物リストでお気に入りに登録したアイテムがここに表示されます。
-                </p>
-              </div>
-            )}
-          </Suspense>
+          {wantedItemList.length > 0 ? (
+            wantedItemList.map((item) => (
+              <BalanceProgressItem key={item.id} item={item} />
+            ))
+          ) : (
+            <div className="text-center text-gray-500">
+              <p>
+                欲しい物リストでお気に入りに登録したアイテムがここに表示されます。
+              </p>
+            </div>
+          )}
         </div>
       </div>
     );

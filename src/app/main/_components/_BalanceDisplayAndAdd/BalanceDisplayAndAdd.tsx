@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 
 export const BalanceDisplayAndAdd = ({ balance }: { balance: number }) => {
   // ServerActions × useActionStateCompat
+  // stateはエラーメッセージを管理
   const initialState: AddBalanceFormState = {
     message: null,
     errors: {}
@@ -25,6 +26,7 @@ export const BalanceDisplayAndAdd = ({ balance }: { balance: number }) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   // 残高追加（ログ作成）成功時の処理
+  // state.messageには、エラーがなくてもランダムな値が返ってくるため、フォーム送信時にuseEffectが発火する
   useEffect(() => {
     if (state.message) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,7 +41,7 @@ export const BalanceDisplayAndAdd = ({ balance }: { balance: number }) => {
     }
   }, [state.message]);
 
-  // Submit時および残高更新時にトップまでスクロールする
+  // Submit時および残高更新時にトップまでスクロールする（isPendingで判断）
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [isPending]);

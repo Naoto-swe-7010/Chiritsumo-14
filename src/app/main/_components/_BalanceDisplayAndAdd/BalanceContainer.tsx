@@ -5,7 +5,9 @@ import { BalanceDisplayAndAdd } from './BalanceDisplayAndAdd';
 
 export const BalanceContainer = async () => {
   try {
+    // ユーザーID取得
     const userId = await getSessionAndUserId();
+    // 残高取得
     const balance = await getBalance(userId);
     return <BalanceDisplayAndAdd balance={balance.balance} />;
   } catch {

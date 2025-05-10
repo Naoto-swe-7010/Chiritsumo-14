@@ -16,6 +16,7 @@ export const CancelPurchased = async ({
   if (!session) {
     redirect('/');
   }
+  // パラメータからアイテムIDを取得
   const { id } = params;
 
   // 購入取消対象のアイテムを取得

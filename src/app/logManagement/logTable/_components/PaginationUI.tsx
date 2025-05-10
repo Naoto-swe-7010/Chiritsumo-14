@@ -4,7 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 
 export const PaginationUI = ({
+  // トータルページ数
   totalPages,
+  // 現在のページ番号
   page
 }: {
   totalPages: number;
@@ -52,7 +54,7 @@ export const PaginationUI = ({
           )}
         </li>
 
-        {/* ページ番号 */}
+        {/* ページネーションリンク */}
         {paginationLinks}
 
         {/* Next ボタン */}

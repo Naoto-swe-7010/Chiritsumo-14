@@ -14,6 +14,7 @@ export const EditWantedItemForm = ({ item }: { item: WantedItem }) => {
   // プロップスで渡されたアイテムを予め引数にバインドしておく
   const updateWantedItemWithId = updateWantedItem.bind(null, item.id);
 
+  // stateでは、エラーメッセージを管理
   const initialState: UpdateWantedItemFormState = {
     message: null,
     errors: {}

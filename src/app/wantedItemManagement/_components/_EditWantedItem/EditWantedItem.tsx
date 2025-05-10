@@ -16,6 +16,7 @@ export const EditWantedItem = async ({
   if (!session) {
     redirect('/');
   }
+  // パラメータからアイテムIDを取得
   const { id } = params;
   // 編集対象のアイテムを取得
   let item = null;
