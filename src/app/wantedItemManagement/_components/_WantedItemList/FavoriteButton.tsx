@@ -7,6 +7,7 @@ import { FaStar } from 'react-icons/fa';
 import { favoriteWantedItem } from '@/app/lib/action';
 
 export const FavoriteButton = ({ item }: { item: WantedItem }) => {
+  // お気に入り状態の楽観的更新
   const [isOptimisticFavorite, setIsOptimisticFavorite] = useOptimistic(
     item.favorite,
     (currentState) => !currentState

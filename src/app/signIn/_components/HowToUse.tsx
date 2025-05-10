@@ -34,12 +34,13 @@ export const HowToUse = () => {
           <span className="text-gray-700">の使い方</span>
         </h2>
         <div className="space-y-32 md:space-y-20">
+          {/* 使い方のステップ */}
           {steps.map((step, index) => (
             <div
               key={index}
               className="flex flex-col items-center gap-8 md:flex-row md:gap-16"
             >
-              {/* Step content */}
+              {/* ステップの内容 */}
               <div className={`flex-1 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
                 <div className="mx-auto max-w-xl">
                   <h3 className="mb-6 text-2xl font-bold text-gray-700 md:text-4xl">
@@ -51,7 +52,7 @@ export const HowToUse = () => {
                 </div>
               </div>
 
-              {/* Step image */}
+              {/* ステップの画像 */}
               <div className={`flex-1 ${index % 2 === 1 ? 'md:order-1' : ''}`}>
                 <div className="relative mx-auto aspect-[3/5] w-full max-w-[300px] transform transition-transform duration-500 lg:hover:scale-125">
                   <Image

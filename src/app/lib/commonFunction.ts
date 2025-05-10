@@ -50,6 +50,7 @@ export const getBalance = cache(async (userId: string) => {
   });
   return balance;
 });
+
 // ログの取得（ページネーションごと）
 export const getLog = cache(
   async (userId: string, pageNumber: number, pageSize: number) => {

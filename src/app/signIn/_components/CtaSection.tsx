@@ -15,6 +15,7 @@ export const CtaSection = () => {
           <div className="inline-block">無駄づかいを我慢して</div>
           <div className="inline-block">欲しい物を手に入れよう！</div>
         </h3>
+        {/* サインインボタン */}
         <form
           action={async () => {
             'use server';

@@ -12,6 +12,8 @@ export const DeleteLogForm = ({ log }: { log: Log }) => {
   // ServerActions × useActionStateCompat
   // プロップスで渡されたログを予め引数にバインドしておく
   const deleteLogWithId = deleteLog.bind(null, log.id);
+
+  // stateでは、エラーメッセージを管理
   const [state, formAction, isPending] = useActionStateCompat(
     deleteLogWithId,
     null
