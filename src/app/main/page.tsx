@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import { redirect } from 'next/navigation';
 
-import { Loading } from '../_components/Loading';
 import { getSession } from '../lib/commonFunction';
 import { AIAdvice } from './_components/_AIAdvice/AIAdvice';
 import { BalanceContainer } from './_components/_BalanceDisplayAndAdd/BalanceContainer';
@@ -17,9 +16,7 @@ const page = async () => {
 
   return (
     <div>
-      <Suspense fallback={<Loading />}>
-        <BalanceContainer />
-      </Suspense>
+      <BalanceContainer />
       <AIAdvice />
       <Suspense fallback={<SkeletonProgressItem />}>
         <BalanceProgress />
