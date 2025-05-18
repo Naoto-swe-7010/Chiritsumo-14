@@ -1,5 +1,5 @@
 import {
-  getFavoriteWantedItemListWithoutPurchasedAnd,
+  getFavoriteWantedItemListWithoutPurchased,
   getSessionAndUserId
 } from '@/app/lib/commonFunction';
 import { BalanceProgressItem } from './BalanceProgressItem';
@@ -10,7 +10,7 @@ export const BalanceProgress = async () => {
     const userId = await getSessionAndUserId();
     // 欲しい物リスト取得（未購入かつお気に入り）
     const wantedItemList =
-      await getFavoriteWantedItemListWithoutPurchasedAnd(userId);
+      await getFavoriteWantedItemListWithoutPurchased(userId);
 
     return (
       <div className="flex justify-center p-4 sm:p-6">

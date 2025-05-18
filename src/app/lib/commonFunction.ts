@@ -25,7 +25,7 @@ export const getSession = () => {
 };
 
 // UserIDの取得
-export const getSessionAndUserId = async () => {
+export const getSessionAndUserId = cache(async () => {
   try {
     const session = await getSession();
     if (!session?.user?.id) {
@@ -35,7 +35,7 @@ export const getSessionAndUserId = async () => {
   } catch {
     throw new Error('認証が必要です。');
   }
-};
+});
 
 // Balanceレコードの取得(存在しない場合は新規作成)
 export const getBalance = cache(async (userId: string) => {
@@ -90,7 +90,7 @@ export const getWantedItemListWithoutPurchased = cache(
 );
 
 // 欲しいものリストの取得（未購入かつお気に入り）
-export const getFavoriteWantedItemListWithoutPurchasedAnd = cache(
+export const getFavoriteWantedItemListWithoutPurchased = cache(
   async (userId: string) => {
     return prisma.wantedItem.findMany({
       where: { userId, purchased: false, favorite: true },
@@ -99,10 +99,29 @@ export const getFavoriteWantedItemListWithoutPurchasedAnd = cache(
   }
 );
 
-// 購入済みリストの取得（未購入）
-export const getPurchaseItemList = cache(async (userId: string) => {
+// 購入済みリストの取得（購入済み）
+export const getPurchasedItemList = cache(async (userId: string) => {
   return prisma.wantedItem.findMany({
     where: { userId, purchased: true },
     orderBy: { createdAt: 'desc' }
   });
 });
+
+// preload///////////////////////////////////
+
+// mainページ
+export const preloadForMainPage = async (userId: string) => {
+  await Promise.all([
+    getBalance(userId),
+    getFavoriteWantedItemListWithoutPurchased(userId)
+  ]);
+};
+
+// wantedItemManagementページ
+export const preloadForWantedItemManagementPage = async (userId: string) => {
+  await Promise.all([
+    getBalance(userId),
+    getWantedItemListWithoutPurchased(userId),
+    getPurchasedItemList(userId)
+  ]);
+};

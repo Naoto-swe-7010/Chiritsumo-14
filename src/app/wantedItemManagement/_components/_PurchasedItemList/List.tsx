@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  getPurchaseItemList,
+  getPurchasedItemList,
   getSessionAndUserId
 } from '@/app/lib/commonFunction';
 import { Row } from './Row';
@@ -11,7 +11,7 @@ export const List = async () => {
     // UserIDを取得
     const userId = await getSessionAndUserId();
     // 欲しい物リストを取得
-    const purchaseItemList = await getPurchaseItemList(userId);
+    const purchaseItemList = await getPurchasedItemList(userId);
 
     return (
       <div>
