@@ -20,7 +20,7 @@ export const PurchaseWantedItem = async ({
   // パラメーター取得
   const { id } = params;
 
-  // 削除対象のログを取得
+  // 削除対象のアイテムを取得
   let item = null;
   try {
     item = await prisma.wantedItem.findUnique({
