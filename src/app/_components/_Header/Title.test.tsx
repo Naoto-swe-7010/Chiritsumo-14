@@ -11,7 +11,7 @@ describe('Title', () => {
 
     // リンクが存在し、href属性が正しいことを確認
     const linkElement = screen.getByRole('link', {
-      name: 'メインページに移動'
+      name: 'ルートに移動'
     });
     expect(linkElement).toBeInTheDocument();
     expect(linkElement).toHaveAttribute('href', '/');
