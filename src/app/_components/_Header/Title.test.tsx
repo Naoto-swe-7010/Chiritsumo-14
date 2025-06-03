@@ -11,10 +11,10 @@ describe('Title', () => {
 
     // リンクが存在し、href属性が正しいことを確認
     const linkElement = screen.getByRole('link', {
-      name: 'メインページに移動'
+      name: 'ルートに移動'
     });
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveAttribute('href', '/main');
+    expect(linkElement).toHaveAttribute('href', '/');
 
     // テキスト「ちりつも」が正しく表示されていることを確認
     const titleText = screen.getByRole('heading', {
