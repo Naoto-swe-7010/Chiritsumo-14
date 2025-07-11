@@ -57,6 +57,7 @@ export const Row = async ({ item }: { item: WantedItem }) => {
           {/* 値段に対する残高の進捗が100％以上の時のみ、購入ボタンを表示 */}
           {balance.balance / item.price >= 1 && (
             <Link
+              tabIndex={-1}
               href={`/main/purchaseWantedItem/${item.id}`}
               aria-label={`Cancel Purchase ${item.name}`}
             >
@@ -69,6 +70,7 @@ export const Row = async ({ item }: { item: WantedItem }) => {
             </Link>
           )}
           <Link
+            tabIndex={-1}
             href={`/wantedItemManagement/edit/${item.id}`}
             aria-label={`Edit ${item.name}`}
           >
@@ -82,6 +84,7 @@ export const Row = async ({ item }: { item: WantedItem }) => {
         </div>
         <Link
           href={`/wantedItemManagement/delete/${item.id}`}
+          tabIndex={-1}
           aria-label={`Delete ${item.name}`}
         >
           <Button
