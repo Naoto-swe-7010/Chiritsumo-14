@@ -16,7 +16,7 @@ export const Row = ({ log }: { log: Log }) => {
       <td className="p-3 py-2 text-base">{formattedDate(log.createdAt)}</td>
       <td className="p-3 py-2">
         <div className="flex flex-col gap-1">
-          <Link href={`/logManagement/edit/${log.id}`}>
+          <Link href={`/logManagement/edit/${log.id}`} tabIndex={-1}>
             <Button
               className="bg-green-500 font-bold hover:bg-green-700"
               aria-label="編集"
@@ -24,7 +24,7 @@ export const Row = ({ log }: { log: Log }) => {
               編集
             </Button>
           </Link>
-          <Link href={`/logManagement/delete/${log.id}`}>
+          <Link href={`/logManagement/delete/${log.id}`} tabIndex={-1}>
             <Button
               className="bg-gray-500 font-bold hover:bg-gray-700"
               aria-label="削除"
