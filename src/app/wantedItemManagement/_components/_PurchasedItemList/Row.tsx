@@ -36,6 +36,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         <div className="flex space-x-2">
           <Link
             href={`/wantedItemManagement/cancelPurchased/${item.id}`}
+            tabIndex={-1}
             aria-label={`Cancel Purchase ${item.name}`}
           >
             <Button
@@ -47,6 +48,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
           </Link>
           <Link
             href={`/wantedItemManagement/edit/${item.id}`}
+            tabIndex={-1}
             aria-label={`Edit ${item.name}`}
           >
             <Button
@@ -59,6 +61,7 @@ export const Row = ({ item }: { item: WantedItem }) => {
         </div>
         <Link
           href={`/wantedItemManagement/delete/${item.id}`}
+          tabIndex={-1}
           aria-label={`Delete ${item.name}`}
         >
           <Button
