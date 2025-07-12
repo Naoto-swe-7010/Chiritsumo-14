@@ -5,24 +5,24 @@ export const HowToUse = () => {
     {
       title: '節約を入力',
       description: '無駄づかいを我慢できたタイミングですぐに記録しましょう。',
-      image: '/lp_img1.jpg'
+      image: '/lp_img1.webp'
     },
     {
       title: '欲しい物を登録',
       description: 'あなたが今欲しい物を登録し、節約の目的にしましょう。',
-      image: '/lp_img2.jpg'
+      image: '/lp_img2.webp'
     },
     {
       title: '進捗を確認',
       description:
         '欲しい物の値段に対する節約の進捗を確認し、モチベーションを維持しましょう。',
-      image: '/lp_img3.jpg'
+      image: '/lp_img3.webp'
     },
     {
       title: 'AIのサポートを受ける',
       description:
         '送信したキーワードに関連する節約アドバイスをAIが提供します。節約が捗らないときはAIに頼ってみましょう。',
-      image: '/lp_img4.jpg'
+      image: '/lp_img4.webp'
     }
   ];
 
